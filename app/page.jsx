@@ -1,11 +1,8 @@
 'use client'
-import ThanksForEnroll from '@/app/HomePage/ThanksForEnroll';
-import { Button, Image } from '@nextui-org/react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { Suspense } from 'react';
-import { AiOutlineArrowRight } from 'react-icons/ai';
-import Logo from '@/app/General/Logo'
-import BookingInfo from '@/app/HomePage/BookingInfo'
+import Logo from '@/app/General/Logo';
+import BookingInfo from '@/app/HomePage/BookingInfo';
+import { Button } from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   //const [showMenu, setShowMenu] = useState(false)

@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 
 export default function Home() {
   //const [showMenu, setShowMenu] = useState(false)
-  const { push } = useRouter()
 
   return (
     <div className=" border-yellow-400 border  min-h-screen bg-black w-screen overflow-hidden pb-10  font-[family-name:var(--font-geist-sans)]">

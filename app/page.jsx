@@ -2,7 +2,6 @@
 import Logo from '@/app/General/Logo';
 import BookingInfo from '@/app/HomePage/BookingInfo';
 import { Button } from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
 
 export default function Home() {
   //const [showMenu, setShowMenu] = useState(false)

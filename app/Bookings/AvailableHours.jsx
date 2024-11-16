@@ -3,7 +3,6 @@ import { CheckCircle2 } from "lucide-react"
 import { memo, useContext, useState } from "react"
 import { cn } from "../../../lib/utils"
 import { addToDatabase } from "../../MyCodes/ed5"
-import { UserContext } from "../../page"
 
 // eslint-disable-next-line react/display-name
 const AvailableHours = memo(({ freeTimes, setBookingInfo, setReload, reload }) => {

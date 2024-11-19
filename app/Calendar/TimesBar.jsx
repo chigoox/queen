@@ -6,7 +6,7 @@ import {
     startOfDay
 } from "date-fns"
 import React, { memo } from "react"
-import { cn } from "../../../lib/utils"
+import { cn } from "@/lib/utils"
 
 
 // eslint-disable-next-line react/display-name

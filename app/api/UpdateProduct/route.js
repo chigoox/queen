@@ -15,10 +15,10 @@ export async function POST(request) {
 
 
 
-    
-        console.log(productData)
-        await addToDoc('Products', productData.id, filterFalsey)
- 
+
+    console.log(productData)
+    await addToDoc('Services', productData.id, filterFalsey)
+
 
     /*  console.log(product)
      if (priceData.length >= 1) {

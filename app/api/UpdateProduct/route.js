@@ -1,5 +1,6 @@
 import { addToDoc } from "@/app/myCodes/Database";
 import { filterObject } from "@/app/myCodes/Util";
+import { NextResponse } from "next/server";
 
 
 
@@ -13,11 +14,10 @@ export async function POST(request) {
     delete filterFalsey?.id
     delete filterFalsey?.updated
 
-
-
-
     console.log(productData)
     await addToDoc('Services', productData.id, filterFalsey)
+
+    return NextResponse.json({ status: 'OK POSTED TO FIREBASE' })
 
 
     /*  console.log(product)

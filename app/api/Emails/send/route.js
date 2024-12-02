@@ -1,5 +1,5 @@
 
-import EmailOrderSuccessful from '@/app/Componets/emails/EmailOrderSuccessful';
+//import EmailOrderSuccessful from '@/app/Componets/emails/EmailOrderSuccessful';
 import { siteName } from '@/app/META';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
@@ -15,7 +15,7 @@ export async function POST(request) {
       from: `${siteName} <Vihair@resend.dev>`,
       to: [`${email}`],
       subject: subject,
-      react: JSXBody =='EmailOrderSuccessful' ? EmailOrderSuccessful({ shippinginfo: shippinginfo, emailData:emailData, orderID: orderID}) : (<div>{fail}</div>),
+      react: JSXBody =='EmailOrderSuccessful' ?  <div></div>/* EmailOrderSuccessful({ shippinginfo: shippinginfo, emailData:emailData, orderID: orderID})  */: (<div>{fail}</div>),
     });
 
     console.log(data)

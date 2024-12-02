@@ -18,6 +18,7 @@
     "framer-motion": "^11.11.1",
     "lucide-react": "^0.460.0",
     "masonry-layout": "^4.2.2",
+    "micro-cors": "^0.1.1",
     "next": "14.2.14",
     "raw-loader": "^4.0.2",
     "react": "^18",
@@ -25,6 +26,7 @@
     "react-icons": "^4.12.0",
     "react-responsive-masonry": "^2.3.0",
     "react-spinners": "^0.13.8",
+    "resend": "^4.0.1",
     "stripe": "^17.4.0",
     "tinymce": "^7.0.0"
   },

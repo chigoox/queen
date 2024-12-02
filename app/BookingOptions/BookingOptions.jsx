@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 const BookingOptions = () => {
     const [selectedCategory, setSelectedCategory] = useState('false')
-    const [options, setOptions] = useState({})
+    const [options, setOptions] = useState([])
 
     useEffect(() => {
         const getData = async () => {

@@ -1,9 +1,28 @@
 import { Button, Checkbox, Image } from '@nextui-org/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const BookingOptions = () => {
     const [selectedCategory, setSelectedCategory] = useState('false')
-    const options = [
+    const [options, setOptions] = useState({})
+
+    useEffect(() => {
+        const getData = async () => {
+            let FIREBS_PRODUCTS
+
+            await useFetchDocsPresist('Services', 'active', '!=', false, 'created', (data) => {
+                FIREBS_PRODUCTS = data.map(i => {
+                    const miliseconds = i.created.seconds * 1000 + i.created.nanoseconds / 1000000
+                    return ({ ...i, created: miliseconds })
+                })
+                console.log(FIREBS_PRODUCTS)
+                setOptions([...FIREBS_PRODUCTS])
+            })
+        }
+
+        getData()
+    }, [window])
+
+    const Options = [
         {
             Name: 'Lashes',
             desc: 'Get your lashes done',
@@ -48,7 +67,7 @@ const BookingOptions = () => {
             <div className='md:w-2/3 w-full m-auto grid grid-cols-1 p-6 md:grid-cols-4 my-8 '>
                 {options.map((item, index) => {
 
-                    if (item.category == selectedCategory?.toLowerCase())
+                    if (item.metadata.category == selectedCategory?.toLowerCase())
                         return (
                             <div key={index} className='h-24 w-full text-white  center gap-4 p-2'>
                                 <div className=' w-full h-3/4 m-auto'>

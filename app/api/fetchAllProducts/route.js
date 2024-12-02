@@ -9,7 +9,6 @@ export async function POST(request) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
   const prices = await stripe.products.list({
     limit: limit,
-
   });
   return NextResponse.json(prices.data.reverse())
 }

@@ -21,7 +21,7 @@ const BookingOptions = () => {
 
         getData()
     }, [window])
-
+console.log(options)
     const Options = [
         {
             Name: 'Lashes',

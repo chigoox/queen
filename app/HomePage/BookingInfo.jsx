@@ -5,7 +5,7 @@ const CollapsibleSection = ({ size, title, children }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="m-6" >
+        <div className="my-6" >
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`w-full h-20 border border-yellow-600 text-left ${size == 'small' ? 'text-2xl' : 'text-2xl'} font-bold text-gold-500 bg-black hover:bg-gray-900 py-2 px-4 rounded-md flex justify-between items-center`}

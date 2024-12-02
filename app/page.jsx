@@ -45,6 +45,7 @@ export default function Home() {
 
         {/* Continue to booking addons */}
         {(startBooking && !selectDate) && <Button onPress={() => { setPickAddon(true) }} on className='font-bold text-xl'>Continue</Button>}
+        {(startBooking && !selectDate) && <Button onPress={() => { setStartBooking(false) }} on className='font-bold text-xl mt-4 mb-12'>Back</Button>}
         <Addons contintue={setSelectDate} opened={pickAddon} />
 
         {selectDate && <Booking />}

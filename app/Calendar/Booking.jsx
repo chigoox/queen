@@ -165,7 +165,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
                 );
         };
-        if (validateEmail(bookingInfo.userEmail) && bookingInfo.userName && validatePhone(bookingInfo.userPhone)) {
+        if (validateEmail(bookingInfo.customer.email) && bookingInfo.customer.name && validatePhone(bookingInfo.customer.phone)) {
 
             return true
 
@@ -183,16 +183,12 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
             yellowirect: 'follow',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                price: total,// ORIGINAL (bookingInfo?.price * (bookingInfo.bundle ? 1 : 0.50) * bookingInfo.bundle ? 4 : 1) - bookingInfo.bundle ? 50 : 0, //if bundled( price * 4 - 50) else (price/2)
-                name: bookingInfo?.name,
-                userName: bookingInfo?.userName,
-                userEmail: bookingInfo?.userEmail,
-                userPhone: bookingInfo?.userPhone,
-                bundled: bookingInfo.bundle,
-                addons: bookingInfo.addOns,
-                appointment: bookingInfo.apointment,
-                uid: localStorage.getItem('LOCAL_UID'),
-                img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                price: 25,// ORIGINAL (bookingInfo?.price * (bookingInfo.bundle ? 1 : 0.50) * bookingInfo.bundle ? 4 : 1) - bookingInfo.bundle ? 50 : 0, //if bundled( price * 4 - 50) else (price/2)
+                name: bookingInfo?.customer.name,
+                userEmail: bookingInfo?.customer.email,
+                userPhone: bookingInfo?.customer.phone,
+                addons: bookingInfo.addons,
+                appointment: bookingInfo.service,
             })
         })
 
@@ -363,9 +359,9 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                     <h1 className='text-center text-yellow-700 text-5xl'>$25</h1>
                 </div>
                 <div className=" flex md:flex-row flex-col items-start justify-center gap-4 mb-8">
-                    <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Full name" type="text" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, userName: target.value }) }) }} />
-                    <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Email" type="email" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, userEmail: target.value }) }) }} />
-                    <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Phone" type="tel" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, userPhone: target.value }) }) }} />
+                    <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Full name" type="text" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, name: target.value} }) }) }} />
+                    <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Email" type="email" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, email: target.value} }) }) }} />
+                    <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Phone" type="tel" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, phone: target.value} })}) }} />
                 </div>
 
 

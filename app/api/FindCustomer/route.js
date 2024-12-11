@@ -8,7 +8,9 @@ export async function POST(request) {
   const { email, name, phone } = data
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
   console.log(email)
-  const customers = await stripe.customers.search( query: `name:"${name}" AND email:"${email}" AND phone:"${phone}"`);
+ const customers = await stripe.customers.search({
+  query: `name:"${name}" AND email:"${email}" AND phone:"${phone}"`
+});
   return NextResponse.json(customers.data.reverse())
 }
 

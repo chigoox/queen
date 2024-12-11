@@ -178,6 +178,18 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
 
     const bookNow = async () => {
         setLoading(true)
+        const customerData = await fetch('/api/FindCustomer', {
+            method: 'POST',
+            yellowirect: 'follow',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: bookingInfo?.customer.name,
+                email: bookingInfo?.customer.email,
+                phone: bookingInfo?.customer.phone,
+            })
+        })
+
+        console.log(await customerData.json())
         const data = await fetch('/api/Checkout', {
             method: 'POST',
             yellowirect: 'follow',

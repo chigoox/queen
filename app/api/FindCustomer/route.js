@@ -8,7 +8,7 @@ export async function POST(request) {
   const { email, name, phone } = data
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
  const customers = await stripe.customers.search({
-  query: `name:'${name}' AND email:'${email}' AND metadata['phone']:'${phone}'`
+  query: `name:'${name}' AND email:'${email}'`
 });
   console.log(customers)
   

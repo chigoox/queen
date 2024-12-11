@@ -28,6 +28,7 @@ import AvailableHours from "./AvailableHours"
 import TimesBar from './TimesBar'
 import { fetchDocument } from '@/UTIL/Database'
 import Loading from "@/app/Loading"
+import { Form, Input } from "@nextui-org/react"
 
 
 
@@ -355,7 +356,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 </div>
 
             }
-            {bookingInfo?.apointment && <div id="checkout" className=' mb-96  center flex-col text-white p-2'>
+            {true && <div id="checkout" className=' mb-96  center flex-col text-white p-2'>
                 <h1 className='text-xl text-center'>{`Your reservation is on ${bookingInfo?.apointment}`}</h1>
                 <h1 className='text-center text-yellow-700'>depoit half to comfirm booking</h1>
                 <div className='center gap-1'>
@@ -367,6 +368,9 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Email" type="email" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, userEmail: target.value }) }) }} />
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Phone" type="tel" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, userPhone: target.value }) }) }} />
                 </div>
+
+
+
                 {!canBook() && <button disabled className={`h-12 w-32 cursor-not-allowed rounded-full ${canBook() ? ' bg-yellow-700' : 'bg-gray-500'} `}>Book Now</button>}
                 {canBook() && <button onClick={bookNow} className={`h-12 w-32 rounded-full ${canBook() ? ' bg-yellow-700' : 'bg-gray-500'} `}>Book Now</button>}
             </div>}

@@ -1,52 +1,12 @@
+import { useFetchDocsPresist } from '@/UTIL/Database'
 import { Button, Checkbox, Image } from '@nextui-org/react'
 import React, { useEffect, useState } from 'react'
 
-const BookingOptions = () => {
+const BookingOptions = ({ options, setBookingInfo, bookingInfo }) => {
     const [selectedCategory, setSelectedCategory] = useState('false')
-    const [options, setOptions] = useState([])
 
-    useEffect(() => {
-        const getData = async () => {
-            let FIREBS_PRODUCTS
+    console.log(options)
 
-            await useFetchDocsPresist('Services', 'active', '!=', false, 'created', (data) => {
-                FIREBS_PRODUCTS = data.map(i => {
-                    const miliseconds = i.created.seconds * 1000 + i.created.nanoseconds / 1000000
-                    return ({ ...i, created: miliseconds })
-                })
-                console.log(FIREBS_PRODUCTS)
-                setOptions([...FIREBS_PRODUCTS])
-            })
-        }
-
-        getData()
-    }, [window])
-console.log(options)
-    const Options = [
-        {
-            Name: 'Lashes',
-            desc: 'Get your lashes done',
-            price: 140,
-            category: 'lashes',
-            time: 60,
-            images: [
-                'https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                'https://plus.unsplash.com/premium_photo-1661502931069-1d0078d82f4d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            ]
-        },
-
-        {
-            Name: 'Brows',
-            desc: 'Get your lashes done',
-            price: 140,
-            category: 'brows',
-            time: 30,
-            images: [
-                'https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                'https://plus.unsplash.com/premium_photo-1661502931069-1d0078d82f4d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            ]
-        }
-    ]
     return (
         <div>
 
@@ -67,14 +27,14 @@ console.log(options)
             <div className='md:w-2/3 w-full m-auto grid grid-cols-1 p-6 md:grid-cols-4 my-8 '>
                 {options.map((item, index) => {
 
-                    if (item.metadata.category == selectedCategory?.toLowerCase())
+                    if (item.metadata.category?.toLowerCase() == selectedCategory?.toLowerCase())
                         return (
                             <div key={index} className='h-24 w-full text-white  center gap-4 p-2'>
                                 <div className=' w-full h-3/4 m-auto'>
-                                    <h1 className='text-3xl text-yellow-600 font-bold'>{item.Name}</h1>
-                                    <div className='text-gray-400 font-semibold'>{item.price} -  {(item.time)} Minutes</div>
+                                    <h1 className='text-3xl text-yellow-600 font-bold'>{item.name}</h1>
+                                    <div className='text-gray-400 font-semibold'>${item.metadata.price} -  {(item.metadata.time)} Minutes</div>
                                 </div>
-                                <Checkbox radius='none' size='lg' className='rounded-none h-24 w-24' />
+                                <Checkbox isSelected={bookingInfo.service} onValueChange={(v) => { setBookingInfo((old) => { return ({ ...old, service: { name: item.name, price: item.metadata.price, time: item.metadata.time } })}) }} radius='none' size='lg' className='rounded-none h-24 w-24' />
 
                             </div>
                         )

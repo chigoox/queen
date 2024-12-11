@@ -198,8 +198,8 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
             body: JSON.stringify({
                 price: 25,// ORIGINAL (bookingInfo?.price * (bookingInfo.bundle ? 1 : 0.50) * bookingInfo.bundle ? 4 : 1) - bookingInfo.bundle ? 50 : 0, //if bundled( price * 4 - 50) else (price/2)
                 name: bookingInfo?.customer.name,
-                userEmail: bookingInfo?.customer.email,
-                userPhone: bookingInfo?.customer.phone,
+                email: bookingInfo?.customer.email,
+                phone: bookingInfo?.customer.phone,
                 addons: bookingInfo.addons,
                 customer: customerID,
                 appointment: bookingInfo.service,

@@ -19,8 +19,7 @@ export async function POST(request) {
         amount: 2500,
         currency: 'usd',  // Add a currency (e.g., 'usd')
         quantity: 1,  // Add a quantity, default is 1 if not specified
-       },
-  ],
+         }],
         customer: customer || null,
         mode: 'payment',
         success_url: `http://${!isDev() ? siteName?.replace(/\s/g, '').replace(/\'/g, '') + '.com' : 'localhost:3000'}/Checkout/success`,

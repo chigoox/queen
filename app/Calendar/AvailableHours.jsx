@@ -79,7 +79,7 @@ const AvailableHours = memo(({ freeTimes, setBookingInfo, setReload, reload }) =
                         {format(selectedTime, "MM-dd-yy hh:mm aaaaa'm'")}
                     </h1>
                     <div className="center w-full">
-                        <button onClick={bookTime} className="h-1                  2 w-full bg-yellow-500">Select time</button>
+                        <button onClick={bookTime} className="h-12 w-full bg-yellow-500">Select time</button>
                     </div>
                 </div>
             )}

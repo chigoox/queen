@@ -358,10 +358,9 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
             }
             {true && <div id="checkout" className=' mb-96  center flex-col text-white p-2'>
                 <h1 className='text-xl text-center'>{`Your reservation is on ${bookingInfo?.apointment}`}</h1>
-                <h1 className='text-center text-yellow-700'>depoit half to comfirm booking</h1>
+                <h1 className='text-center text-yellow-700'>depoit $25 to comfirm booking</h1>
                 <div className='center gap-1'>
-                    <h1 className='text-center text-yellow-700 text-5xl'>{'$' + total}</h1>
-                    <h1>+ Tax</h1>
+                    <h1 className='text-center text-yellow-700 text-5xl'>$25</h1>
                 </div>
                 <div className=" flex md:flex-row flex-col items-start justify-center gap-4 mb-8">
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Full name" type="text" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, userName: target.value }) }) }} />

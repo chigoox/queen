@@ -165,7 +165,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
                 );
         };
-        if (validateEmail(bookingInfo.customer.email) && bookingInfo.customer.name && validatePhone(bookingInfo.customer.phone)) {
+        if (validateEmail(bookingInfo?.customer?.email) && bookingInfo?.customer?.name && validatePhone(bookingInfo?.customer?.phone)) {
 
             return true
 

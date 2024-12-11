@@ -69,8 +69,8 @@ export default function Home() {
         {(startBooking && !selectDate) && <BookingOptions bookingInfo={bookingInfo} setBookingInfo={setBookingInfo} options={options} />}
 
         {/* Continue to booking addons */}
-        {(startBooking && !selectDate) && <Button onPress={() => { setPickAddon(!pickAddon) }} on className='font-bold text-xl'>Continue</Button>}
-        {(startBooking && !selectDate) && <Button onPress={() => { setStartBooking(false) }} on className='font-bold text-xl mt-4 mb-12'>Back</Button>}
+        {(startBooking && !selectDate && bookingInfo?.service) && <Button onPress={() => { setPickAddon(!pickAddon) }} on className='font-bold text-xl'>Continue</Button>}
+        {(startBooking && !selectDate ) && <Button onPress={() => { setStartBooking(false) }} on className='font-bold text-xl mt-4 mb-12'>Back</Button>}
         <Addons setBookingInfo={setBookingInfo} options={options} contintue={setSelectDate} setIsOpened={setPickAddon} opened={pickAddon} />
 
         {selectDate && <Booking bookingInfo={bookingInfo} setBookingInfo={setBookingInfo}/>}

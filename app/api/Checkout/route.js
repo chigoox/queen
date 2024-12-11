@@ -8,7 +8,14 @@ import Stripe from "stripe";
 export async function POST(request) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     let data = await request.json();
-    let { customer, service, addons, name, phone, email } = data
+    let { 
+        customer = {}, 
+        service = {}, 
+        addons, 
+        name = '', 
+        phone = '', 
+        email = '' 
+    } = data;
     console.log( customer, service, addons, customerInfo, name, phone, email)
     const session = await stripe.checkout.sessions.create({
         line_items: [{

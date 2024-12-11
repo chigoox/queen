@@ -11,6 +11,7 @@ export async function POST(request) {
     let { customer, service, addons } = data
     const session = await stripe.checkout.sessions.create({
         line_items: cart,
+        customer: customer || null,
         mode: 'payment',
         success_url: `http://${!isDev() ? siteName?.replace(/\s/g, '').replace(/\'/g, '') + '.com' : 'localhost:3000'}/Checkout/success`,
         cancel_url: `http://${!isDev() ? siteName?.replace(/\s/g, '').replace(/\'/g, '') + '.com' : 'localhost:3000'}/Checkout/canceled`,

@@ -180,7 +180,6 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
         setLoading(true)
         const customerData = await fetch('/api/FindCustomer', {
             method: 'POST',
-            yellowirect: 'follow',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 name: bookingInfo?.customer.name,
@@ -193,7 +192,6 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
         const customerID = StripeCustomer[0].id
         const data = await fetch('/api/Checkout', {
             method: 'POST',
-            yellowirect: 'follow',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 price: 25,// ORIGINAL (bookingInfo?.price * (bookingInfo.bundle ? 1 : 0.50) * bookingInfo.bundle ? 4 : 1) - bookingInfo.bundle ? 50 : 0, //if bundled( price * 4 - 50) else (price/2)

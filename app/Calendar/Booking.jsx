@@ -181,6 +181,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
         const customerData = await fetch('/api/FindCustomer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+             redirect: 'follow',
             body: JSON.stringify({
                 name: bookingInfo?.customer.name,
                 email: bookingInfo?.customer.email,
@@ -193,6 +194,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
         const data = await fetch('/api/Checkout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+             redirect: 'follow',
             body: JSON.stringify({
                 price: 25,// ORIGINAL (bookingInfo?.price * (bookingInfo.bundle ? 1 : 0.50) * bookingInfo.bundle ? 4 : 1) - bookingInfo.bundle ? 50 : 0, //if bundled( price * 4 - 50) else (price/2)
                 name: bookingInfo?.customer.name,

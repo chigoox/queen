@@ -16,7 +16,7 @@ export async function POST(request) {
         phone = '', 
         email = '' 
     } = data;
-    console.log( customer, service, addons, customerInfo, name, phone, email)
+    console.log( customer, service, addons,  name, phone, email)
     const session = await stripe.checkout.sessions.create({
         line_items: [{
                 name: 'Crowned Brows & Lashes Deposit',

@@ -24,77 +24,11 @@ export async function POST(request) {
         safeLog('Request method:', request.method);
         safeLog('Request headers:', Object.fromEntries(request.headers));
 
-        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); 
-        
-        // Attempt to parse JSON, with explicit error handling
-        let data;
-        try {
-            data = await request.json();
-        } catch (parseError) {
-            safeLog('JSON parsing error:', parseError);
-            return NextResponse.json(
-                { error: 'Invalid JSON', details: parseError.message }, 
-                { status: 400 }
-            );
-        }
-
-        // Log parsed data
-        safeLog('Parsed data:', JSON.stringify(data, null, 2));
-
-        // Defensive destructuring with default empty objects
-        const { 
-            customer = {}, 
-            service = {}, 
-            addons = [], 
-            name = '', 
-            phone = '', 
-            email = '' 
-        } = data;
-
-        // Additional logging
-        safeLog('Customer:', JSON.stringify(customer));
-        safeLog('Service:', JSON.stringify(service));
-
-        // Additional null checks
-        const serviceName = service?.name || 'Unnamed Service';
-        const servicePrice = service?.price || 0;
-        const serviceTime = service?.time || '';
-        const customerID = customer?.ID || null;
-
-        // More logging
-        safeLog('Service Name:', serviceName);
-        safeLog('Service Price:', servicePrice);
-
-        const session = await stripe.checkout.sessions.create({ 
-            line_items: [{ 
-                price_data: {
-                    currency: 'usd',
-                    product_data: {
-                        name: 'Crowned Brows & Lashes Deposit',
-                    },
-                    unit_amount: 2500, // Stripe expects amount in cents
-                },
-                quantity: 1,
-            }], 
-            mode: 'payment', 
-            success_url: `http://${!isDev() ? siteName?.replace(/\s/g, '').replace(/\'/g, '') + '.com' : 'localhost:3000'}/Checkout/success`, 
-            cancel_url: `http://${!isDev() ? siteName?.replace(/\s/g, '').replace(/\'/g, '') + '.com' : 'localhost:3000'}/Checkout/canceled`, 
-            metadata: { 
-                customerID: customerID, 
-                customerName: name, 
-                customerEmail: email, 
-                customerPhone: phone, 
-                serviceName: serviceName, 
-                servicePrice: servicePrice, 
-                serviceTime: serviceTime, 
-                type: 'checkout' 
-            }, 
-        });
-    
+       
         // Log successful session creation
-        safeLog('Checkout session created:', session.id);
+        safeLog('Checkout session created:', '');
 
-        return NextResponse.json(session.url);
+        return NextResponse.json('');
     } catch (error) {
         // Comprehensive error logging
         safeLog('Error in Checkout route:', error);

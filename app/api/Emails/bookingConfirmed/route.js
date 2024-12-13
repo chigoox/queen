@@ -3,13 +3,25 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST() {
+export async function POST(request) {
+
+  let data = await request.json();
+    let { 
+        toAdmin = false,
+        customer = {}, 
+        service = {}, 
+        addons, 
+        name = '', 
+        phone = '', 
+        email = '' 
+    } = data;
+  
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>',
-      to: ['delivered@resend.dev'],
-      subject: 'Hello world',
-      react: AppointmentBooked({ firstName: 'John' }),
+      from: 'Crowned Brows & Lashes <onboarding@resend.dev>',
+      to: [email],
+      subject: toAdmin ?  'Booking Confirmed' : 'New Appointment Booked',
+      react: AppointmentBooked({ name: name, phone: phone, addons:addons, service:service, customer:customer }),
     });
 
     if (error) {

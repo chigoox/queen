@@ -25,46 +25,11 @@ export async function POST(request) {
       const { type } = event.data.object.metadata
       console.log(type)
       if (type == 'checkout') {
+        
+        
         const { uid, cart, total, cartID, } = event.data.object.metadata
-        const { orderID } = await fetchDocument('Admin', 'Orders')
-        const { ShippingInfo } = await fetchDocument('User', uid)
-
-        const CART = await FetchTheseDocs('Carts', 'cartID', '==', cartID, 'cartID') //Object.values(JSON.parse(fullCart))
-        const CurrentOrder = Object.values(CART[0].cart)
-
-        //const cart = CurrentOrder?.lineItems ? CurrentOrder?.lineItems : {}
-        const addArray = (array) => {
-          const mainArray = Array.isArray(array) ? array : Object.values(array ? array : {})
-          const sum = mainArray.reduce((partialSum, a) => partialSum + a, 0)
-          return sum
-        }
-
-        const getArrayToAddQTY = async () => {
-          const total = CurrentOrder.map((orderInfo) => {
-            return orderInfo.Qty
-          })
-          return total
-        }
-        const getArrayToAddPrice = async () => {
-          const total = CurrentOrder.map((orderInfo) => {
-            return Number(orderInfo.price)
-          })
-          return total
-        }
-
-        const getArrayToAddImages = async () => {
-          const total = CurrentOrder.map((orderInfo) => {
-            return orderInfo.images[0]
-          })
-          return total
-        }
-
-        const arrayQTY = await getArrayToAddQTY()
-        const arrayPrice = await getArrayToAddPrice()
-        const arrayImages = await getArrayToAddImages()
-        const orderQTY = addArray(arrayQTY)
-        const orderPrice = addArray(arrayPrice)
-
+      
+      
         const order = {
           orderInfo: ShippingInfo,
           orderedItems: CurrentOrder,//CurrentOrder.lineItems,
@@ -91,16 +56,8 @@ export async function POST(request) {
         }
 
         await addToDatabase('User', uid, 'currentOrder', ORDERID)
-
-
-        await deleteDocument('Carts', cartID)
-
       }
 
-      if (type == 'medical') {
-        const { formData } = event.data.object.metadata
-
-      }
 
 
     }

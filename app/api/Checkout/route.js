@@ -17,7 +17,7 @@ export async function POST(request) {
         email = '' 
     } = data;
 
-    console.log( customer, service, addons,  name, phone, email)
+
     const session = await stripe.checkout.sessions.create({
         line_items: [
             {
@@ -47,7 +47,7 @@ export async function POST(request) {
         },
 
     })
-console.log(session)
+console.log(session.url)
     return NextResponse.json(session.url)
 }
 

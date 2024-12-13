@@ -1,4 +1,4 @@
-import { FetchTheseDocs, addToDatabase, addToDoc, deleteDocument, fetchDocument, fetchInOrder, updateDatabaseItem } from "@/app/myCodes/Database";
+import { FetchTheseDocs, addToDatabase, addToDoc} from "@/app/myCodes/Database";
 import { format } from "date-fns";
 import { serverTimestamp } from "firebase/firestore";
 import Cors from "micro-cors";
@@ -25,7 +25,7 @@ export async function POST(request) {
      
       
        
-        const { uid, cart, total, cartID, } = event.data.object.metadata
+        const { uid='', cart={}, total='', cartID='', } = event.data.object.metadata
       
       
         const order = {

@@ -22,11 +22,10 @@ export async function POST(request) {
     const event = stripe.webhooks.constructEvent(body, signature, secret);
 
     if (event.type === "checkout.session.completed") {
-      const { type } = event.data.object.metadata
-      console.log(type)
-      if (type == 'checkout') {
-        
-        
+      console.log(event.data.object.metadata)
+     
+      
+       
         const { uid, cart, total, cartID, } = event.data.object.metadata
       
       
@@ -43,7 +42,7 @@ export async function POST(request) {
           dateServer: serverTimestamp(),
           dateReal: new Date().toLocaleString()
         }
-        ''
+
 
         const ORDERID = order.id
         await addToDoc('Orders', ORDERID, order)
@@ -58,9 +57,6 @@ export async function POST(request) {
         await addToDatabase('User', uid, 'currentOrder', ORDERID)
       }
 
-
-
-    }
 
     return NextResponse.json({ result: event, ok: true });
   } catch (error) {

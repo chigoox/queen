@@ -19,12 +19,18 @@ export async function POST(request) {
 
     console.log( customer, service, addons,  name, phone, email)
     const session = await stripe.checkout.sessions.create({
-        line_items: [{
-                name: 'Crowned Brows & Lashes Deposit',
-                amount: 2500,
-                currency: 'usd',  // Add a currency (e.g., 'usd')
-                quantity: 1,  // Add a quantity, default is 1 if not specified
-         }],
+        line_items: [
+            {
+      price_data: {
+      currency: "usd",
+     product_data: {
+          name: "Crowned Brows & Lashes Deposit"
+        },
+        unit_amount: 2500
+      },
+      quantity: 1
+    }
+        ],
         customer: customer || null,
         mode: 'payment',
         success_url: `http://${!isDev() ? siteName?.replace(/\s/g, '').replace(/\'/g, '') + '.com' : 'localhost:3000'}/Checkout/success`,

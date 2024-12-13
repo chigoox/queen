@@ -47,7 +47,7 @@ export async function POST(request) {
         },
 
     })
-
+console.log(session)
     return NextResponse.json(session.url)
 }
 

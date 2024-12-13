@@ -3,15 +3,14 @@ import axios from "axios"
 
 
 
-export const sendMail = async (shippinginfo, email, subject, JSXBody, emailData, orderID) => {
+export const OrderConfirmationMail = async (cusomterInfo, service, addons, time) => {
    
-    const { data } = await axios.post('/api/Emails/send', {
-      shippinginfo: shippinginfo,
-      email: email,
-      subject: subject,
-      JSXBody: JSXBody,
-      emailData: emailData,
-      orderID: orderID,
+    const { data } = await axios.post('/api/Emails/BookingConfirmed', {
+      cusomterInfo: cusomterInfo,
+      service: service,
+      addons: addons,
+       time:time,
+     
     },
       {
         headers: {

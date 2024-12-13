@@ -206,9 +206,8 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 stripeCustomerInfo: JSON.stringify(StripeCustomer)
             })
         })
-
         let URL = await data.json()
-        URL = URL.url
+
         window.location.href = URL
 
     }

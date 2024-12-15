@@ -45,7 +45,7 @@ export async function POST(request) {
           await updateDatabaseItem('Admin', 'Orders', 'orderID', orderID + 1)
         }
 
-        await addToDatabase('User', uid, 'currentOrder', ORDERID)
+        await addToDatabase('User', 'uid', 'currentOrder', ORDERID)
       }
 
 

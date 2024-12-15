@@ -35,8 +35,8 @@ console.log(data)
         ],
         customer: customer || null,
         mode: 'payment',
-        success_url: `https://${!isDev() ? 'crownedbl'.replace(/\s/g, '').replace(/\'/g, '') + '.vercel.app' : 'localhost:3000'}/Checkout/success`,
-        cancel_url: `https://${!isDev() ? 'crownedbl'.replace(/\s/g, '').replace(/\'/g, '') + '.vercel.app' : 'localhost:3000'}/Checkout/canceled`,
+        success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/success`,
+        cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/canceled`,
         metadata: {
             customerID: customer?.ID,
             customerName: name,
@@ -50,7 +50,7 @@ console.log(data)
         },
 
     })
-console.log(session.url)
+    console.log(session.url)
     return NextResponse.json(session.url)
 }
 

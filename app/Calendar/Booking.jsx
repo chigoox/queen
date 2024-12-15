@@ -200,9 +200,11 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 name: bookingInfo?.customer.name,
                 email: bookingInfo?.customer.email,
                 phone: bookingInfo?.customer.phone,
-                addons: bookingInfo.addons,
+                addons: JSON.stringify(bookingInfo.addons),
                 customer: customerID,
-                appointment: bookingInfo.service,
+                service: JSON.stringify(bookingInfo.service),
+                apointmentDate: bookingInfo?.apointment,
+                apointmentTime: bookingInfo?.time12
                 stripeCustomerInfo: JSON.stringify(StripeCustomer)
             })
         })

@@ -205,7 +205,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 service: JSON.stringify(bookingInfo.service),
                 apointmentDate: bookingInfo?.apointment,
                 apointmentTime: bookingInfo?.time12
-                stripeCustomerInfo: JSON.stringify(StripeCustomer)
+              
             })
         })
         let URL = await data.json()

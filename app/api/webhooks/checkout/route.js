@@ -28,16 +28,9 @@ export async function POST(request) {
         const { uid='', cart={}, total='', cartID='', } = event.data.object.metadata
       
       
-        const order = {
-          orderInfo: ShippingInfo,
-          orderedItems: CurrentOrder,//CurrentOrder.lineItems,
-          id: `${orderNumberPrefix}-${orderID}`,
-          qty: orderQTY,
-          total: orderPrice,
-          images: arrayImages,
-          user: uid,
-          status: 'not started',
-          driverLocationWhenComplete: [],
+        const appointment = {
+          
+       
           dateServer: serverTimestamp(),
           dateReal: new Date().toLocaleString()
         }

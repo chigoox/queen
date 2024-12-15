@@ -1,4 +1,4 @@
-import { siteName } from "@/app/META";
+eimport { siteName } from "@/app/META";
 import { isDev } from "@/app/myCodes/Util";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -35,8 +35,8 @@ console.log(data)
         ],
         customer: customer || null,
         mode: 'payment',
-        success_url: `http://${!isDev() ? siteName?.replace(/\s/g, '').replace(/\'/g, '') + '.com' : 'localhost:3000'}/Checkout/success`,
-        cancel_url: `http://${!isDev() ? siteName?.replace(/\s/g, '').replace(/\'/g, '') + '.com' : 'localhost:3000'}/Checkout/canceled`,
+        success_url: `https://${!isDev() ? 'crownedbl'.replace(/\s/g, '').replace(/\'/g, '') + '.vercel.app' : 'localhost:3000'}/Checkout/success`,
+        cancel_url: `https://${!isDev() ? 'crownedbl'.replace(/\s/g, '').replace(/\'/g, '') + '.vercel.app' : 'localhost:3000'}/Checkout/canceled`,
         metadata: {
             customerID: customer?.ID,
             customerName: name,

@@ -25,8 +25,7 @@ export async function POST(request) {
      
       
        
-        const { uid='', cart={}, total='', cartID='', } = event.data.object.metadata
-      
+       
       
         const appointment = {
           
@@ -41,7 +40,7 @@ export async function POST(request) {
 
         const ORDERS = await FetchTheseDocs('Orders', 'id', '==', ORDERID, 'id') //Object.values(JSON.parse(fullCart))
 
-        if (ORDERS[0].id == ORDERID) {
+        if (ORDERS[0]?.id == ORDERID) {
 
           await updateDatabaseItem('Admin', 'Orders', 'orderID', orderID + 1)
         }

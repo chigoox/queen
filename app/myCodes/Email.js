@@ -3,13 +3,14 @@ import axios from "axios"
 
 
 
-export const OrderConfirmationMail = async (cusomterInfo, service, addons, time) => {
+export const OrderConfirmationMail = async (cusomterInfo, service, addons, apointmentTime, apointmentDate) => {
    
     const { data } = await axios.post('/api/Emails/BookingConfirmed', {
       cusomterInfo: cusomterInfo,
       service: service,
       addons: addons,
-       time:time,
+       apointmentTime:apointmentTime,
+       apointmentDate:apointmentDate,
      
     },
       {

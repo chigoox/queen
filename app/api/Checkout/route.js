@@ -14,7 +14,9 @@ export async function POST(request) {
         addons, 
         name = '', 
         phone = '', 
-        email = '' 
+        email = '' ,
+        apointmentDate='',
+        apointmentTime='',
     } = data;
 
 console.log(data)
@@ -40,10 +42,11 @@ console.log(data)
             customerName: name,
             customerEmail: email,
             customerPhone: phone,
-            serviceName: service?.name,
-            servicePrice: service?.price,
-            serviceTime: service?.time,
-            type: 'checkout x'
+            service: service,
+            addons: addons,
+            apointmentDate:apointmentDate,
+            apointmentTime:apointmentTime,
+            type: 'checkout',
         },
 
     })

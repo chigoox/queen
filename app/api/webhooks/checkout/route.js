@@ -37,7 +37,7 @@ export async function POST(request) {
 
 
         const ORDERID = 0
-        await addToDoc('Orders', ORDERID, order)
+        await addToDoc('Orders', ORDERID, 'order')
 
         const ORDERS = await FetchTheseDocs('Orders', 'id', '==', ORDERID, 'id') //Object.values(JSON.parse(fullCart))
 

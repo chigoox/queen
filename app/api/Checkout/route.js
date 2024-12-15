@@ -43,7 +43,7 @@ export async function POST(request) {
             serviceName: service?.name,
             servicePrice: service?.price,
             serviceTime: service?.time,
-            type: 'checkout'
+            type: 'checkout x'
         },
 
     })

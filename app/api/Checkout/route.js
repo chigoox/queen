@@ -1,4 +1,3 @@
-eimport { siteName } from "@/app/META";
 import { isDev } from "@/app/myCodes/Util";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -8,30 +7,30 @@ import Stripe from "stripe";
 export async function POST(request) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     let data = await request.json();
-    let { 
-        customer = {}, 
-        service = {}, 
-        addons, 
-        name = '', 
-        phone = '', 
-        email = '' ,
-        apointmentDate='',
-        apointmentTime='',
+    let {
+        customer = {},
+        service = {},
+        addons,
+        name = '',
+        phone = '',
+        email = '',
+        apointmentDate = '',
+        apointmentTime = '',
     } = data;
 
-console.log(data)
+    console.log(data)
     const session = await stripe.checkout.sessions.create({
         line_items: [
             {
-      price_data: {
-      currency: "usd",
-     product_data: {
-          name: "Crowned Brows & Lashes Deposit"
-        },
-        unit_amount: 2500
-      },
-      quantity: 1
-    }
+                price_data: {
+                    currency: "usd",
+                    product_data: {
+                        name: "Crowned Brows & Lashes Deposit"
+                    },
+                    unit_amount: 2500
+                },
+                quantity: 1
+            }
         ],
         customer: customer || null,
         mode: 'payment',
@@ -44,8 +43,8 @@ console.log(data)
             customerPhone: phone,
             service: service,
             addons: addons,
-            apointmentDate:apointmentDate,
-            apointmentTime:apointmentTime,
+            apointmentDate: apointmentDate,
+            apointmentTime: apointmentTime,
             type: 'checkout',
         },
 

@@ -24,7 +24,7 @@ export async function POST(request) {
     if (event.type === "checkout.session.completed") {
       console.log(event.data.object.metadata)
      
-      OrderConfirmationMail()
+      //OrderConfirmationMail()
        
        
       

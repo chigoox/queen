@@ -31,8 +31,6 @@ export async function POST(request) {
 
 
       const appointment = {
-
-
         dateServer: serverTimestamp(),
         dateReal: new Date().toLocaleString()
       }

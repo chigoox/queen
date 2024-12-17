@@ -189,7 +189,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
             })
         })
 
-        const StripeCustomer = await customerData.json()
+        const StripeCustomer = await customerData?.json()
         const customerID = StripeCustomer[0]?.id
         const data = await fetch('/api/Checkout', {
             method: 'POST',

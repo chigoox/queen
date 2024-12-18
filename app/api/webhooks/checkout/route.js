@@ -5,6 +5,7 @@ import Cors from "micro-cors";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { OrderConfirmationMail } from "../../../myCodes/Email";
+import { fetchDocument } from "../../../myCodes/Database";
 
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE);
 
@@ -23,21 +24,29 @@ export async function POST(request) {
 
     if (event.type === "checkout.session.completed") {
       console.log(event.data.object.metadata)
-      const data = JSON.parse(event.data.object.metadata)
+      const data = event.data.object.metadata
       const { appointmentDate, appointmentTime, service, addons, customerName, customerEmail, customerPhone } = data
       //OrderConfirmationMail()
-      console.log(appointmentDate, appointmentTime, service, addons, customerName, customerEmail, customerPhone)
-
+      
+      fetchDocument('Appointment',)
 
 
       const appointment = {
-        dateServer: serverTimestamp(),
-        dateReal: new Date().toLocaleString()
+        appointmentDate: appointmentDate,
+        appointmentTime: appointmentTime,
+        service: service,
+        addons: addons,
+        customerName: customerName,
+        customerEmail: customerEmail,
+        customerPhone: customerPhone,
+
+        dateCreatedServerTime: serverTimestamp(),
+        dateCreatedRealTime: new Date().toLocaleString()
       }
 
 
       const ORDERID = 0
-      await addToDoc('Orders', ORDERID, 'order')
+      await addToDoc('Appointment', customerPhone, appointment) 
 
       const ORDERS = await FetchTheseDocs('Orders', 'id', '==', ORDERID, 'id') //Object.values(JSON.parse(fullCart))
 

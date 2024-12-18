@@ -23,15 +23,16 @@ export async function POST(request) {
     const event = stripe.webhooks.constructEvent(body, signature, secret);
 
     if (event.type === "checkout.session.completed") {
-      console.log(event.data.object.metadata)
+     
       const data = event.data.object.metadata
       const { appointmentDate, appointmentTime, service, addons, customerName, customerEmail, customerPhone } = data
-      //OrderConfirmationMail()
       
-      fetchDocument('Appointment',)
-
+      
+      let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime','==', true)
+      const apointmentID = apointments?.length || 0
 
       const appointment = {
+        id: apointmentID,
         appointmentDate: appointmentDate,
         appointmentTime: appointmentTime,
         service: service,
@@ -39,23 +40,16 @@ export async function POST(request) {
         customerName: customerName,
         customerEmail: customerEmail,
         customerPhone: customerPhone,
-
         dateCreatedServerTime: serverTimestamp(),
         dateCreatedRealTime: new Date().toLocaleString()
       }
 
 
-      const ORDERID = 0
-      await addToDoc('Appointment', customerPhone, appointment) 
+      
+      await addToDoc('Apointment', apointmentID, appointment,) 
 
-      const ORDERS = await FetchTheseDocs('Orders', 'id', '==', ORDERID, 'id') //Object.values(JSON.parse(fullCart))
-
-      if (ORDERS[0]?.id == ORDERID) {
-
-        await updateDatabaseItem('Admin', 'Orders', 'orderID', orderID + 1)
-      }
-
-      await addToDatabase('User', 'uid', 'currentOrder', ORDERID)
+      const cusomterInfo = {name:customerName, email:customerEmail, phone:customerPhone}
+      await OrderConfirmationMail(cusomterInfo, service, addons, appointmentTime, appointmentDate)
     }
 
 

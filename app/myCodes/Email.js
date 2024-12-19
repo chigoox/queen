@@ -5,7 +5,7 @@ import axios from "axios"
 
 export const OrderConfirmationMail = async (cusomterInfo, service, addons, apointmentTime, apointmentDate) => {
    
-    const { data } = await axios.post('/api/Emails/BookingConfirmed', {
+    const { data } = await axios.post('https://crownedbl.vercel.app/api/Emails/bookingConfirmed', {
       cusomterInfo: cusomterInfo,
       service: service,
       addons: addons,

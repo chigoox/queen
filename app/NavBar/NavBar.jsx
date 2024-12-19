@@ -8,6 +8,7 @@ import { GoDotFill } from "react-icons/go";
 import { LuMenuSquare } from "react-icons/lu";
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 function NavBar({bookingInfo}) {
+    console.log(bookingInfo)
     const [showMenu, setShowMenu] = useState(false)
     const menuItem = ['About Us', 'Contact Us', 'Find My Nanny', 'Find My Family']
     const { push } = useRouter()

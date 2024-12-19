@@ -30,7 +30,7 @@ export async function POST(request) {
       
       let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime','==', true)
       const apointmentID = apointments?.length || 0
-
+console.log(apointments, apointmentID)
       
       const appointment = {
         id: apointmentID,
@@ -46,7 +46,7 @@ export async function POST(request) {
       }
 
 
-      
+      console.log( appointment)
       await addToDoc('Apointment', apointmentID, appointment,) 
 
       const cusomterInfo = {name:customerName, email:customerEmail, phone:customerPhone}

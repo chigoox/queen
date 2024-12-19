@@ -50,7 +50,7 @@ console.log(apointments, apointmentID)
       await addToDoc('Apointment', apointmentID, appointment,) 
 
       const cusomterInfo = {name:customerName, email:customerEmail, phone:customerPhone}
-      await OrderConfirmationMail(cusomterInfo, service, addons, appointmentTime, appointmentDate)
+      await OrderConfirmationMail(cusomterInfo, service, addons, apointmentTime, apointmentDate)
     }
 
 console.log(apointments, apointmentID, appointment)

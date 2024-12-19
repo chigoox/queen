@@ -20,7 +20,7 @@ export async function POST(request) {
   from: 'Acme <onboarding@resend.dev>',
   to: ['dikeemmanuel54@gmail.com'],
   subject: 'hello world',
-  html: '<p>it works!</p>',
+  react: AppointmentBooked({ cusomterInfo:cusomterInfo,  service:service,  addons:addons,apointmentTime:apointmentTime, apointmentDate:apointmentDate }),
 });
 
     if (error) {

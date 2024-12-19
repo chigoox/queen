@@ -368,7 +368,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 </div>
 
             }
-            {true && <div id="checkout" className=' mb-96  center flex-col text-white p-2'>
+            {bookingInfo.apointment && <div id="checkout" className=' mb-96  center flex-col text-white p-2'>
                 <h1 className='text-xl text-center'>{`Your reservation is on ${bookingInfo?.apointment}`}</h1>
                 <h1 className='text-center text-yellow-700'>depoit $25 to comfirm booking</h1>
                 <div className='center gap-1'>

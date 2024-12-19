@@ -31,7 +31,6 @@ export async function POST(request) {
       let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime','==', true)
       const apointmentID = apointments?.length || 0
 
-console.log(apointments, apointmentID)
       
       const appointment = {
         id: apointmentID,
@@ -54,6 +53,7 @@ console.log(apointments, apointmentID)
       await OrderConfirmationMail(cusomterInfo, service, addons, appointmentTime, appointmentDate)
     }
 
+console.log(apointments, apointmentID, appointment)
 
     return NextResponse.json({ result: event, ok: true });
   } catch (error) {

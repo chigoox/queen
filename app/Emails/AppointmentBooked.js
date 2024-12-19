@@ -29,7 +29,7 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
               <ul style={listStyle}>
                 {ADDONS.map((addon, index) => (
                   <li key={index} style={paragraph}>
-                    {addon.name} - ${addon.price.toFixed(2)}
+                    {addon.name} - ${addon.price.toFixed(2)} - {addon.time}mins
                   </li>
                  ))}
               </ul>

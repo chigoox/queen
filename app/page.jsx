@@ -7,6 +7,7 @@ import Booking from '@/app/Calendar/Booking'
 import { useEffect, useState } from 'react';
 import Addons from '@/app/BookingOptions/Addons'
 import { useFetchDocsPresist } from '@/UTIL/Database';
+import NavBar from './NavBar/NavBar';
 
 export default function Home() {
   const [startBooking, setStartBooking] = useState(false)
@@ -39,6 +40,8 @@ export default function Home() {
   return (
     <div className=" border-yellow-400 border  min-h-screen bg-black w-full overflow-hidden pb-10  font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col  p-2">
+       <NavBar/>
+
         {/* LOGO SECTION */}
         <div className=' w-full h-96'>
           <div className='center-col '>

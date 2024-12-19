@@ -14,13 +14,20 @@ function NavBar({bookingInfo}) {
     const { push } = useRouter()
     return (
         <div className='w-full z-50 h-24 bg-yellow-500 fixed bottom-0 left-0 center'>
-            <div className='w-1/3'>{bookingInfo?.customer?.name}</div>
+            <div className='w-1/3'>
+                <div className=''>{bookingInfo?.customer?.name}</div>
+                <div className=''>{bookingInfo?.apointment}</div>
+            </div>
             <DotIcon />
-            <div className='w1/3'>{bookingInfo?.service?.name}</div>
+            <div className='w1/3'>
+                <p>{bookingInfo?.service?.name}</p>
+                <p>${bookingInfo?.service?.price}</p>
+                <p>{bookingInfo?.service?.time}mins</p>
+            </div>
             <DotIcon />
-            <div className='center gap-1 w-1/3'>
-                {Object.values(bookingInfo?.addons || {}).map(()=>(<div className='h-5 w-5 rounded-full bg-black'></div>))}
-                </div>
+            <div className='grid items-center justify-center grid-cols-3 gap-1 w-1/3'>
+                {Object.values(bookingInfo?.addons || {}).map(()=>(<div className='h-3 w-3 rounded-full bg-black'></div>))}
+            </div>
         </div>
     )
 }

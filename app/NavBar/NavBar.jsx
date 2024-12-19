@@ -7,15 +7,15 @@ import { FaBabyCarriage } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { LuMenuSquare } from "react-icons/lu";
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-function NavBar() {
+function NavBar({bookingInfo}) {
     const [showMenu, setShowMenu] = useState(false)
     const menuItem = ['About Us', 'Contact Us', 'Find My Nanny', 'Find My Family']
     const { push } = useRouter()
     return (
         <div className='w-full z-50 h-24 bg-yellow-500 fixed bottom-0 center'>
-            <div>name of service</div>
+            <div>{bookingInfo.customerInfo}</div>
             <DotIcon />
-            <div>total service time</div>
+            <div></div>
             <DotIcon />
             <div>Number of addons</div>
         </div>

@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div className=" border-yellow-400 border  min-h-screen bg-black w-full overflow-hidden pb-10  font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col  p-2">
-       <NavBar/>
+       <NavBar bookingInfo={bookingInfo}/>
 
         {/* LOGO SECTION */}
         <div className=' w-full h-96'>

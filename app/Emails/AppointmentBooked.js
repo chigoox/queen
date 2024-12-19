@@ -3,7 +3,7 @@ import { Body, Button, Container, Html, Text } from "@react-email/components";
 
 export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTime, apointmentDate }) => {
   
-  console.log( cusomterInfo, service,  addons,apointmentTime, apointmentDate)
+  
   const SERVICE = JSON.parse(service)
   let ADDONS = JSON.parse(addons)
   ADDONS = Object.values(ADDONS)
@@ -12,7 +12,7 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
   let totalTime = ADDONS?.reduce((sum, addon) => sum + Number(addon.time), 0) || 0 
   totalTime += SERVICE.time
 
-  console.log(SERVICE, ADDONS, totalPrice)
+  console.log(totalTime, totalPrice)
 
   return(
     <Html>

@@ -8,7 +8,6 @@ export async function POST(request) {
   let data = await request.json();
   console.log(data)
     let { 
-      cusomterInfo, service, addons, apointmentTime, apointmentDate
         cusomterInfo, 
         service, 
         addons, 

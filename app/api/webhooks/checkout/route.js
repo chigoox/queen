@@ -34,8 +34,8 @@ console.log(apointments, apointmentID)
       
       const appointment = {
         id: apointmentID,
-        appointmentDate: appointmentDate,
-        appointmentTime: appointmentTime,
+        apointmentDate: apointmentDate,
+        apointmentTime: apointmentTime,
         service: service,
         addons: addons,
         customerName: customerName,

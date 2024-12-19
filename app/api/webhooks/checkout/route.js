@@ -32,7 +32,7 @@ export async function POST(request) {
       const apointmentID = apointments?.length || 0
       console.log(apointments, apointmentID)
       
-      const appointment = {
+      const apointment = {
         id: apointmentID,
         apointmentDate: apointmentDate,
         apointmentTime: apointmentTime,
@@ -46,16 +46,18 @@ export async function POST(request) {
       }
 
 
-      console.log( appointment)
-      await addToDoc('Apointment', apointmentID, appointment,) 
+      console.log( apointment)
+      await addToDoc('Apointment', apointmentID, apointment) 
 
       const cusomterInfo = {name:customerName, email:customerEmail, phone:customerPhone}
       await OrderConfirmationMail(cusomterInfo, service, addons, apointmentTime, apointmentDate)
     }
 
-    console.log(apointments, apointmentID, appointment)
+    
 
     return NextResponse.json({ result: event, ok: true });
+
+
   } catch (error) {
     console.error(error);
     return NextResponse.json(

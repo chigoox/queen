@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Html } from "@react-email/components";
+import { Body, Button, Container, Html, Text } from "@react-email/components";
 
 export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTime, apointmentDate }) => {
   
@@ -7,8 +7,10 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
   const SERVICE = JSON.parse(service)
   let ADDONS = JSON.parse(addons)
   ADDONS = Object.values(ADDONS)
-  let totalPrice = ADDONS?.reduce((sum, addon) => sum + addon.price, 0) || 0 
+  let totalPrice = ADDONS?.reduce((sum, addon) => sum + Number(addon.price), 0) || 0 
   totalPrice += SERVICE.price
+  let totalTime = ADDONS?.reduce((sum, addon) => sum + Number(addon.time), 0) || 0 
+  totalTime += SERVICE.time
 
   console.log(SERVICE, ADDONS, totalPrice)
 
@@ -23,8 +25,18 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
           <Text style={paragraph}><strong>Appointment:</strong>{apointmentDate}</Text>
           <Text style={paragraph}><strong>Services:</strong></Text>
           <ul style={listStyle}>
-          {SERVICE.name} - ${SERVICE.price.toFixed(2)} - Time: {SERVICE.time}
+            <li style={paragraph}> {SERVICE.name} - ${SERVICE.price.toFixed(2)} - Time: {SERVICE.time}</li>
+            <li style={paragraph}>
+              <ul style={listStyle}>
+                {ADDONS.map((service, index) => (
+                  <li key={index} style={paragraph}>
+                    {service.name} - ${service.price.toFixed(2)}
+                  </li>
+                 ))}
+              </ul>
+            </li>
           </ul>
+          
           <Text style={paragraph}><strong>Total Price:</strong> ${totalPrice.toFixed(2)}</Text>
           <Text style={paragraph}>
             Thank you for booking with us!
@@ -34,3 +46,25 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
     </Html>
   )
 }
+
+
+const main = {
+  backgroundColor: "#ffffff",
+  fontFamily:
+    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+};
+
+const container = {
+  margin: "0 auto",
+  padding: "20px 0 48px",
+};
+
+const paragraph = {
+  fontSize: "16px",
+  lineHeight: "26px",
+};
+
+const listStyle = {
+  paddingLeft: "20px",
+  margin: "10px 0",
+};

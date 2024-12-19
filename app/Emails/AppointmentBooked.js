@@ -7,10 +7,10 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
   const SERVICE = JSON.parse(service)
   let ADDONS = JSON.parse(addons)
   ADDONS = Object.values(ADDONS)
-  let totalPrice = ADDONS?.reduce((sum, addon) => sum + Number(addon.price), 0) || 0 
-  totalPrice += SERVICE.price
-  let totalTime = ADDONS?.reduce((sum, addon) => sum + Number(addon.time), 0) || 0 
-  totalTime += SERVICE.time
+  let totalPrice = ADDONS?.reduce((sum, addon) => Number(sum) + Number(addon.price), 0) || 0 
+  totalPrice +=  Number(SERVICE.price)
+  let totalTime = ADDONS?.reduce((sum, addon) => Number(sum) + Number(addon.time), 0) || 0 
+  totalTime += Number(SERVICE.time)
 
   console.log(totalTime, totalPrice)
 
@@ -24,18 +24,7 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
           </Text>
           <Text style={paragraph}><strong>Appointment:</strong>{apointmentDate}</Text>
           <Text style={paragraph}><strong>Services:</strong></Text>
-          <ul style={listStyle}>
-            <li style={paragraph}> {SERVICE.name} - ${SERVICE.price.toFixed(2)} - Time: {SERVICE.time}</li>
-            <li style={paragraph}>
-              <ul style={listStyle}>
-                {ADDONS.map((addon, index) => (
-                  <li key={index} style={paragraph}>
-                    {addon.name} - ${addon.price.toFixed(2)}
-                  </li>
-                 ))}
-              </ul>
-            </li>
-          </ul>
+          
           
           <Text style={paragraph}><strong>Total Price:</strong> ${totalPrice.toFixed(2)}</Text>
           <Text style={paragraph}><strong>Total Time:</strong> ${totalTime} mins</Text>

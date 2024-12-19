@@ -13,7 +13,7 @@ function NavBar({bookingInfo}) {
     const menuItem = ['About Us', 'Contact Us', 'Find My Nanny', 'Find My Family']
     const { push } = useRouter()
     return (
-        <div className='w-full z-50 h-24 bg-yellow-500 fixed bottom-0 center'>
+        <div className='w-full z-50 h-24 bg-yellow-500 fixed bottom-0 left-0 center'>
             <div className='w-1/3'>{bookingInfo?.customer?.name}</div>
             <DotIcon />
             <div className='w1/3'>{bookingInfo?.service?.name}</div>

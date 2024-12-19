@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const EmailTemplate = ({ cusomterInfo,  service,  addons,apointmentTime, apointmentDate }) => {
+export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTime, apointmentDate }) => {
 
   return(
     <div>{apointmentTime}</div>

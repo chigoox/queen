@@ -6,6 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request) {
 
   let data = await request.json();
+  console.log(data)
     let { 
         toAdmin = false,
         customer = {}, 

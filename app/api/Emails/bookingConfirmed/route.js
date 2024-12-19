@@ -1,4 +1,4 @@
-import AppointmentBooked from '@/app/Emails/AppointmentBooked';
+import { AppointmentBooked} from '@/app/Emails/AppointmentBooked';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -20,8 +20,8 @@ export async function POST(request) {
   from: 'Acme <onboarding@resend.dev>',
   to: ['dikeemmanuel54@gmail.com'],
   subject: 'hello world',
-   react: AppointmentBooked({cusomterInfo, 
-        service,  addons,apointmentTime, apointmentDate });
+  html: '<p>it works!</p>',
+});
 
     if (error) {
       console.log("error")

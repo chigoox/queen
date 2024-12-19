@@ -28,9 +28,9 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
             <li style={paragraph}> {SERVICE.name} - ${SERVICE.price.toFixed(2)} - Time: {SERVICE.time}</li>
             <li style={paragraph}>
               <ul style={listStyle}>
-                {ADDONS.map((service, index) => (
+                {ADDONS.map((addon, index) => (
                   <li key={index} style={paragraph}>
-                    {service.name} - ${service.price.toFixed(2)}
+                    {addon.name} - ${addon.price.toFixed(2)}
                   </li>
                  ))}
               </ul>
@@ -38,6 +38,7 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
           </ul>
           
           <Text style={paragraph}><strong>Total Price:</strong> ${totalPrice.toFixed(2)}</Text>
+          <Text style={paragraph}><strong>Total Time:</strong> ${totalTime} mins</Text>
           <Text style={paragraph}>
             Thank you for booking with us!
           </Text>

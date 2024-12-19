@@ -16,12 +16,12 @@ export async function POST(request) {
     } = data;
   
   try {
-    const { data, error } = await resend.emails.send({
-      from: 'Crowned Brows & Lashes <onboarding@resend.dev>',
-      to: [email],
-      subject: toAdmin ?  'Booking Confirmed' : 'New Appointment Booked',
-      react: AppointmentBooked({ name: name, phone: phone, addons:addons, service:service }),
-    });
+    const { data, error } =await resend.emails.send({
+  from: 'Acme <onboarding@resend.dev>',
+  to: ['dikeemmanuel54@gmail.com'],
+  subject: 'hello world',
+  html: '<p>it works!</p>',
+});
 
     if (error) {
       console.log("error")

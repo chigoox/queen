@@ -1,5 +1,6 @@
 'use client'
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react';
+import { DotIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaBabyCarriage } from "react-icons/fa";
@@ -11,9 +12,11 @@ function NavBar() {
     const menuItem = ['About Us', 'Contact Us', 'Find My Nanny', 'Find My Family']
     const { push } = useRouter()
     return (
-        <div className='w-full h-24 bg-yellow-500 fixed bottom-0 center'>
+        <div className='w-full z-50 h-24 bg-yellow-500 fixed bottom-0 center'>
             <div>name of service</div>
+            <DotIcon />
             <div>total service time</div>
+            <DotIcon />
             <div>Number of addons</div>
         </div>
     )

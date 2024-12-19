@@ -8,8 +8,8 @@ export async function POST(request) {
   let data = await request.json();
   console.log(data)
     let { 
-        toAdmin = false,
-        customer = {}, 
+       
+         
         service = {}, 
         addons, 
         name = '', 
@@ -22,7 +22,7 @@ export async function POST(request) {
       from: 'Crowned Brows & Lashes <onboarding@resend.dev>',
       to: [email],
       subject: toAdmin ?  'Booking Confirmed' : 'New Appointment Booked',
-      react: AppointmentBooked({ name: name, phone: phone, addons:addons, service:service, customer:customer }),
+      react: AppointmentBooked({ name: name, phone: phone, addons:addons, service:service }),
     });
 
     if (error) {

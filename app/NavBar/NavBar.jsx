@@ -11,8 +11,10 @@ function NavBar() {
     const menuItem = ['About Us', 'Contact Us', 'Find My Nanny', 'Find My Family']
     const { push } = useRouter()
     return (
-        <div className='w-full h-40 bg-yellow-500'>
-            
+        <div className='w-full h-24 bg-yellow-500 fixed bottom-0 center'>
+            <div>name of service</div>
+            <div>total service time</div>
+            <div>Number of addons</div>
         </div>
     )
 }

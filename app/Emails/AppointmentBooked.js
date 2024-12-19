@@ -23,11 +23,20 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
             Your appointment has been confirmed. Here are the details:
           </Text>
           <Text style={paragraph}><strong>Appointment:</strong>{apointmentDate}</Text>
-          <Text style={paragraph}><strong>Services:</strong></Text>
-          
+          <Text style={paragraph}><strong>Services:</strong>{{SERVICE.name} - ${SERVICE.price.toFixed(2)} - Time: {SERVICE.time}</Text>
+
+         
+              <ul style={listStyle}>
+                {ADDONS.map((addon, index) => (
+                  <li key={index} style={paragraph}>
+                    {addon.name} - ${addon.price.toFixed(2)}
+                  </li>
+                 ))}
+              </ul>
+            
           
           <Text style={paragraph}><strong>Total Price:</strong> ${totalPrice.toFixed(2)}</Text>
-          <Text style={paragraph}><strong>Total Time:</strong> ${totalTime} mins</Text>
+          <Text style={paragraph}><strong>Total Time:</strong> {totalTime} mins</Text>
           <Text style={paragraph}>
             Thank you for booking with us!
           </Text>

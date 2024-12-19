@@ -23,7 +23,7 @@ export const AppointmentBooked = ({ cusomterInfo,  service,  addons,apointmentTi
             Your appointment has been confirmed. Here are the details:
           </Text>
           <Text style={paragraph}><strong>Appointment:</strong>{apointmentDate}</Text>
-          <Text style={paragraph}><strong>Services:</strong>{{SERVICE.name} - ${SERVICE.price.toFixed(2)} - Time: {SERVICE.time}</Text>
+          <Text style={paragraph}><strong>Services:</strong>{SERVICE.name} - ${SERVICE.price.toFixed(2)} - Time: {SERVICE.time}</Text>
 
          
               <ul style={listStyle}>

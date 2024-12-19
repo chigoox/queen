@@ -8,13 +8,12 @@ export async function POST(request) {
   let data = await request.json();
   console.log(data)
     let { 
-       
-         
-        service = {}, 
+      cusomterInfo, service, addons, apointmentTime, apointmentDate
+        cusomterInfo, 
+        service, 
         addons, 
-        name = '', 
-        phone = '', 
-        email = '' 
+        apointmentTime = '', 
+        apointmentDate = '', 
     } = data;
   
   try {

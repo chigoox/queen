@@ -373,8 +373,8 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 <h1 className="font-bold text-2xl">{bookingInfo?.apointment}</h1>
                 <h1 className='text-center text-yellow-500'>depoit $25 to comfirm booking</h1>
                 <div className=" flex md:flex-row flex-col items-start justify-center gap-4 mb-8">
-                    <h1 className="font-bold text-white">Contact Info:</h1>
-                    <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Full name" type="text" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, name: target.value} }) }) }} />
+                    <h1 className="font-bold mt-4 text-white">Contact Info:</h1>
+                    <input className="h-10 mb-2 p-2 rounded-lg text-black" placeholder="Full name" type="text" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, name: target.value} }) }) }} />
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Email" type="email" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, email: target.value} }) }) }} />
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Phone" type="tel" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, phone: target.value} })}) }} />
                 </div>

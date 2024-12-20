@@ -1,7 +1,7 @@
 export default function ThankYou() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center">
-            <div className="text-center max-w-xl p-8 border-2 border-gold rounded-lg shadow-lg">
+            <div className="text-center max-w-xl p-8 border-2 border-gold rounded-lg shadow-lg ">
                 <h1 className="text-6xl font-extrabold text-gold mb-6 animate-pulse">
                     Thank You!
                 </h1>

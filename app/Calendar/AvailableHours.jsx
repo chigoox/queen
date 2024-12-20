@@ -74,7 +74,6 @@ const AvailableHours = memo(({ freeTimes, setBookingInfo, setReload, reload }) =
             </div>
             {selectedTime && (
                 <div className="w-full py-6">
-                    <h1 className="text-center">reservation time is: </h1>
                     <h1 className="font-semibold text-yellow-500 pl-1 text-center">
                         {format(selectedTime, "MM-dd-yy hh:mm aaaaa'm'")}
                     </h1>

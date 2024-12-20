@@ -12,6 +12,8 @@ function NavBar({bookingInfo}) {
     const [showMenu, setShowMenu] = useState(false)
     const menuItem = ['About Us', 'Contact Us', 'Find My Nanny', 'Find My Family']
     const { push } = useRouter()
+    const price = '$' + bookingInfo?.service?.price
+    const time = bookingInfo?.service?.price + 'mins'
     return (
         <div className='w-full z-50 h-24 bg-yellow-500 fixed bottom-0 left-0 center'>
             <div className='w-1/3'>
@@ -19,14 +21,14 @@ function NavBar({bookingInfo}) {
                 <div className=''>{bookingInfo?.apointment}</div>
             </div>
             <DotIcon />
-            <div className='w1/3'>
+            <div className='w1/3 text-center center-col'>
                 <p>{bookingInfo?.service?.name}</p>
-                <p>${bookingInfo?.service?.price}</p>
-                <p>{bookingInfo?.service?.time}mins</p>
+                <p>${price}</p>
+                <p>{time}</p>
             </div>
             <DotIcon />
             <div className='grid items-center justify-center grid-cols-3 gap-1 w-1/3'>
-                {Object.values(bookingInfo?.addons || {}).map(()=>(<div className='h-3 w-3 rounded-full bg-black'></div>))}
+                {Object.values(bookingInfo?.addons || {}).map((item)=>{return item.name ? (<div className='text-white text-xs bg-black'>{item.name}</div>) : null})}
             </div>
         </div>
     )

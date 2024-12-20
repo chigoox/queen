@@ -23,15 +23,15 @@ export async function POST(request) {
     const event = stripe.webhooks.constructEvent(body, signature, secret);
 
     if (event.type === "checkout.session.completed") {
-     
+
       const data = event.data.object.metadata
       const { apointmentDate, apointmentTime, service, addons, customerName, customerEmail, customerPhone } = data
-      
-      
-      let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime','==', true)
-      const apointmentID = apointments?.length || 0
+
+
+      let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime', '==', true)
+      const apointmentID = (apointments?.length || 0) + 1
       console.log(apointments, apointmentID)
-      
+
       const apointment = {
         id: apointmentID,
         apointmentDate: apointmentDate,
@@ -44,16 +44,16 @@ export async function POST(request) {
         dateCreatedServerTime: serverTimestamp(),
         dateCreatedRealTime: new Date().toLocaleString()
       }
+//
 
+      console.log(apointment)
+      await addToDoc('Apointment', apointmentID, apointment)
 
-      console.log( apointment)
-      await addToDoc('Apointment', apointmentID, apointment) 
-
-      const cusomterInfo = {name:customerName, email:customerEmail, phone:customerPhone}
+      const cusomterInfo = { name: customerName, email: customerEmail, phone: customerPhone }
       await OrderConfirmationMail(cusomterInfo, service, addons, apointmentTime, apointmentDate)
     }
 
-    
+
 
     return NextResponse.json({ result: event, ok: true });
 

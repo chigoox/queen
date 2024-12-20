@@ -12,7 +12,7 @@ const AdminMenuItem = ({ showMenu, menuItem, setSelectedMenu, selectedMenu }) =>
         Booking: <AiOutlineContainer />,
         Products: <ImPriceTag />,
         Customers: <AiOutlineUser />,
-        Content: <AiFillPicture />,
+        WebsiteEditor: <AiFillPicture />,
         Discount: <AiOutlineDollar />
     }
     const SubMenu = ({ menuItem }) => {

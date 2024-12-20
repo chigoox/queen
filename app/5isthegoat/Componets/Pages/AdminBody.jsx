@@ -4,6 +4,7 @@ import { menu } from '../Menu/AdminMenu'
 import { AdminHome } from './AdminHome'
 import { AdminOrders } from './AdminOrders'
 import { AdminProduct } from './AdminProduct'
+import WebsiteEditor from './WebsiteEditor'
 
 const AdminBody = ({ selectedMenu }) => {
     return (
@@ -21,7 +22,7 @@ const AdminBody = ({ selectedMenu }) => {
                 {selectedMenu == menu[2].menus[3] && <AdminHome />}
                 {selectedMenu == menu[3].name && <AdminHome />}
                 {selectedMenu == menu[3].menus[0] && <AdminHome />}
-                {selectedMenu == menu[4] && <AdminHome />}
+                {selectedMenu == menu[4] && <WebsiteEditor />}
                 {selectedMenu == menu[5] && <AdminHome />}
 
             </Card>

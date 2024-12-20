@@ -3,7 +3,7 @@ import AdminMenuItem from './AdminMenuItem'
 import { Button } from '@nextui-org/react'
 import { Menu } from 'lucide-react'
 
-export const menu = ['Home', { name: 'Booking', menus: [] }, { name: 'Products', menus: [] }, { name: 'Customers', menus: [] }, 'Content', 'Discount']
+export const menu = ['Home', { name: 'Booking', menus: [] }, { name: 'Products', menus: [] }, { name: 'Customers', menus: [] }, 'WebsiteEditor', 'Discount']
 export const AdminMenu = ({ setSelectedMenu, selectedMenu }) => {
     const [showMenu, setShowMenu] = useState(true)
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import  Navbar  from "@/app/NavBar/NavBar";
-
+import { Quicksand } from 'next/font/google'
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -13,6 +13,13 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+
+const quicksand = Quicksand({
+  weight: '400',
+  subsets: ['latin'],
+})
+
+
 
 export const metadata: Metadata = {
   title: "CrownedBrows&Lashes",
@@ -27,7 +34,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={quicksand.className}
+        /* className={`${geistSans.variable} ${geistMono.variable} antialiased`} */
       >
         {children}
       </body>

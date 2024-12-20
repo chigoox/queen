@@ -369,12 +369,11 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
 
             }
             {bookingInfo.apointment && <div id="checkout" className=' mb-96  center flex-col text-white p-2'>
-                <h1 className='text-xl text-center'>{`Your reservation is on ${bookingInfo?.apointment}`}</h1>
-                <h1 className='text-center text-yellow-700'>depoit $25 to comfirm booking</h1>
-                <div className='center gap-1'>
-                    <h1 className='text-center text-yellow-700 text-5xl'>$25</h1>
-                </div>
+                <h1 className='text-xl text-center'>{`Your reservation is on:`}</h1>
+                <h1 className="font-bold text-2xl">{bookingInfo?.apointment}</h1>
+                <h1 className='text-center text-yellow-500'>depoit $25 to comfirm booking</h1>
                 <div className=" flex md:flex-row flex-col items-start justify-center gap-4 mb-8">
+                    <h1 className="font-bold text-white">Contact Info:</h1>
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Full name" type="text" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, name: target.value} }) }) }} />
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Email" type="email" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, email: target.value} }) }) }} />
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Phone" type="tel" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, phone: target.value} })}) }} />
@@ -382,8 +381,8 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
 
 
 
-                {!canBook() && <button disabled className={`h-12 w-32 cursor-not-allowed rounded-full ${canBook() ? ' bg-yellow-700' : 'bg-gray-500'} `}>Book Now</button>}
-                {canBook() && <button onClick={bookNow} className={`h-12 w-32 rounded-full ${canBook() ? ' bg-yellow-700' : 'bg-gray-500'} `}>Book Now</button>}
+                {!canBook() && <button disabled className={`h-12 w-32 cursor-not-allowed rounded-full ${canBook() ? ' bg-yellow-500' : 'bg-gray-500'} `}>Book Now</button>}
+                {canBook() && <button onClick={bookNow} className={`h-12 w-32 rounded-full ${canBook() ? ' bg-yellow-500' : 'bg-gray-500'} `}>Book Now</button>}
             </div>}
 
         </div>

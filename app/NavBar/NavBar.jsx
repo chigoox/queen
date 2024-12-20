@@ -23,8 +23,7 @@ function NavBar({bookingInfo}) {
             <DotIcon />
             <div className='w-[40%] text-center center-col'>
                 <p className='font-bold'>{bookingInfo?.service?.name}</p>
-                <p>{price}</p>
-                <p>{time}</p>
+                <p>{price} - {time}</p>
             </div>
             <DotIcon />
             <div className='grid items-center justify-center grid-cols-3 gap-1 w-[20%]'>

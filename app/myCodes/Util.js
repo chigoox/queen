@@ -14,7 +14,10 @@ export const filterNullFromArray = (array) => {
 }
 
 
-
+export function setCSSVariables(variable, color) {
+    const r = document.querySelector(':root');
+    r.style.setProperty(variable, color);
+}
 
 
 

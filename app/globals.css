@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+
+:root {
+--BGColor: rgb(0, 0, 0);
+--AccentColor: #ffc400;
+--TextColor: rgb(0, 0, 0);
+--TextColorM: rgb(255, 255, 255);
+--AccentColorLight: color-mix(in srgb, var(--AccentColor), white);
+--AccentColorDark:color-mix(in srgb, var(--AccentColor), black);
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

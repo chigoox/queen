@@ -13,6 +13,7 @@ export default function Home() {
   const [startBooking, setStartBooking] = useState(false)
   const [pickAddon, setPickAddon] = useState(false)
   const [selectDate, setSelectDate] = useState(false)
+  const [theme, setTheme] = useState('')
 
   const [bookingInfo, setBookingInfo] = useState({})
 
@@ -37,10 +38,17 @@ export default function Home() {
 
     getData()
   }, [window])
+
+  useEffect(() => {
+   // setCSSVariable('--BGColor', theme?.bgColor)
+    // setCSSVariables('--TextColor', theme?.textColor)
+    // setCSSVariables('--AccentColor', theme?.accentColor)
+
+  }, [])
   return (
-    <div className=" border-yellow-400 border  min-h-screen bg-black w-full overflow-hidden pb-10  font-[family-name:var(--font-geist-sans)]">
+    <div className=" border-[color:var(--AccentColor)] border  min-h-screen bg-[color:var(--BGColor)] w-full overflow-hidden pb-10  font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col  p-2">
-       <NavBar bookingInfo={bookingInfo}/>
+        <NavBar bookingInfo={bookingInfo} />
 
         {/* LOGO SECTION */}
         <div className=' w-full h-96'>
@@ -48,15 +56,15 @@ export default function Home() {
             <Logo />
           </div>
           <div className='mt-4 center-col'>
-            <h1 className='text-yellow-500 text-4xl font-bold text-center'>Crowned</h1>
-            <p className='text-white text-xl'>Brows & Lashes</p>
+            <h1 className='text-[color:var(--AccentColor)] text-4xl font-bold text-center'>Crowned</h1>
+            <p className='text-[color:var(--TextColorM)] text-xl'>Brows & Lashes</p>
           </div>
         </div>
 
         {/* Web Intro */}
         {!startBooking &&
           <div>
-            <p className='text-white text-center mt-8'>
+            <p className='text-[color:var(--TextColorM)] text-center mt-8'>
               Welcome to Crowned Brows & Lashes! Please read the following terms and conditions before booking.
 
             </p>
@@ -65,18 +73,18 @@ export default function Home() {
           </div>}
 
         {/* ACCEPT AND BOOK */}
-        {!startBooking && <Button onPress={() => { setStartBooking(!startBooking) }} className='bg-yellow-500 m-auto md:w-1/3 w-full my-4 text-black font-bold'>Agree & Book</Button>}
+        {!startBooking && <Button onPress={() => { setStartBooking(!startBooking) }} className='bg-[color:var(--AccentColor)] text-[color:var(--TextColor)] m-auto md:w-1/3 w-full relative bottom-4 my-10 mb-10 font-bold'>Agree & Book</Button>}
 
 
         {/* Booking Options */}
         {(startBooking && !selectDate) && <BookingOptions bookingInfo={bookingInfo} setBookingInfo={setBookingInfo} options={options} />}
 
         {/* Continue to booking addons */}
-        {(startBooking && !selectDate && bookingInfo?.service) && <Button onPress={() => { setPickAddon(!pickAddon) }} on className='font-bold text-xl'>Continue</Button>}
-        {(startBooking && !selectDate ) && <Button onPress={() => { setStartBooking(false) }} on className='font-bold text-xl mt-4 mb-12'>Back</Button>}
+        {(startBooking && !selectDate && bookingInfo?.service) && <Button onPress={() => { setPickAddon(!pickAddon) }} on className='font-bold text-xl bg-[color:var(--AccentColor)] text-[color:var(--TextColor)]'>Continue</Button>}
+        {(startBooking && !selectDate) && <Button onPress={() => { setStartBooking(false) }} on className='font-bold text-xl mt-4 mb-12 bg-[color:var(--AccentColor)] text-[color:var(--TextColor)]'>Back</Button>}
         <Addons setBookingInfo={setBookingInfo} options={options} contintue={setSelectDate} setIsOpened={setPickAddon} opened={pickAddon} />
 
-        {selectDate && <Booking bookingInfo={bookingInfo} setBookingInfo={setBookingInfo}/>}
+        {selectDate && <Booking bookingInfo={bookingInfo} setBookingInfo={setBookingInfo} />}
       </main>
 
     </div>

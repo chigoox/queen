@@ -40,29 +40,27 @@ const AvailableHours = memo(({ freeTimes, setBookingInfo, setReload, reload }) =
         <div className="flex  flex-col items-center gap-2 mt-4 border-y  h-[30rem]">
             <span>
                 Available times:{" "}
-                <span className="font-semibold text-yellow-500">
+                <span className="font-semibold text-[color:var(--AccentColor)]">
                     {freeTimes.length}
                 </span>
             </span>
             <div className="grid lg:grid-cols-3 grid-cols-5 md:grid-cols-2    text-md gap-4 md:h-[35rem] hidescroll p-4 overflow-y-scroll">
                 {freeTimes.map((hour, hourIdx) => {
-                    console.log(hour)
                     return (
                         <div key={hourIdx}>
                             <button
                                 type="button"
                                 className={cn(
-                                    "bg-gray-800 trans-slow rounded-lg px-2 text-yellow-300 relative hover:border hover:border-gray-900 w-[64px] h-[64px]",
+                                    "bg-gray-800 trans-slow rounded-lg px-2 text-[color:var(--AccentColor)] relative hover:border hover:border-[color:var(--TextColor)] w-[64px] h-[64px]",
                                     selectedTime &&
                                     isSameMinute(selectedTime, hour) &&
-                                    "bg-yellow-300 text-gray-800"
+                                    "bg-[color:var(--AccentColor)] text-gray-800"
                                 )}
                                 onClick={() => { setSelectedTime(hour); setReload(!reload) }}
                             >
                                 <CheckCircle2
-                                    color="yellow"
                                     className={cn(
-                                        "w-[16px] h-[16px] absolute hidden top-0 right-0 transform translate-x-1 -translate-y-1.5 text-yellow-700",
+                                        "w-[16px] h-[16px] absolute hidden top-0 right-0 transform translate-x-1 -translate-y-1.5 text-[color:var(--TextColor)]",
                                         selectedTime && isSameMinute(selectedTime, hour) && "block"
                                     )}
                                 />
@@ -74,11 +72,11 @@ const AvailableHours = memo(({ freeTimes, setBookingInfo, setReload, reload }) =
             </div>
             {selectedTime && (
                 <div className="w-full py-6">
-                    <h1 className="font-semibold text-yellow-500 pl-1 text-center">
+                    <h1 className="font-semibold text-[color:var(--AccentColor)] pl-1 text-center">
                         {format(selectedTime, "MM-dd-yy hh:mm aaaaa'm'")}
                     </h1>
                     <div className="center w-full">
-                        <button onClick={bookTime} className="h-12 w-full bg-yellow-500">Select time</button>
+                        <button onClick={bookTime} className="h-12 w-full text-[color:var(--TextColor)] bg-[color:var(--AccentColor)]">Select time</button>
                     </div>
                 </div>
             )}

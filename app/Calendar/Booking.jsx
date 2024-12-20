@@ -215,7 +215,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
     }
 
     return (
-        <div className='z-30 bg-black mt-8  m-auto w-full text-white h-full hidescroll overflow-scroll'>
+        <div className='z-30 bg-black mt-8  m-auto w-full text-[color:var(--TextColorM)] h-full hidescroll overflow-scroll'>
             {loading && <Loading />}
 
             {
@@ -234,13 +234,12 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                                 <ChevronLeft
                                     size={20}
                                     aria-hidden="true"
-                                    color='yellow'
                                     className={cn(
-                                        isThisMonth(new Date(currentMonth)) && "text-yellow-400"
+                                        isThisMonth(new Date(currentMonth)) && "text-[color:var(--AccentColor)]"
                                     )}
                                 />
                             </button>
-                            <h2 className="font-semibold text-yellow-700 justify-center flex text-center">
+                            <h2 className="font-semibold text-[color:var(--AccentColor)] justify-center flex text-center">
                                 {format(firstDayCurrentMonth, " MMMM yyyy")}
                             </h2>
                             <button
@@ -248,7 +247,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                                 className="flex justify-end"
                                 onClick={nextMonth}
                             >
-                                <ChevronRight size={20} aria-hidden="true" color='yellow' />
+                                <ChevronRight size={20} aria-hidden="true" className="text-[color:var(--AccentColor)]" />
                             </button>
                         </div>
 
@@ -260,9 +259,9 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                                         <div
                                             key={i}
                                             className={cn(
-                                                "flex justify-center items-center text-sm text-yellow-300 w-full py-2",
+                                                "flex justify-center items-center text-sm text-[color:var(--AccentColor)] w-full py-2",
                                                 {
-                                                    "text-yellow-600 ":
+                                                    "text-[color:var(--AccentColorLight)] ":
                                                         day === "Sun" || day === "Sat"
                                                 }
                                             )}
@@ -293,28 +292,28 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                                                 className={cn(
                                                     "w-12 h-12 md:h-24 md:w-24 flex flex-col p-2 justify-center items-center rounded-xl gap-0 group bg-gray-900 relative group",
                                                     isEqual(day, selectedDay) &&
-                                                    "bg-yellow-600 text-yellow-900 text-lg",
-                                                    isEqual(today, day) && "text-blue-900 bg-yellow-700",
+                                                    "bg-[color:var(--AccentColor)] text-[color:var(--TextColor)] text-lg",
+                                                    isEqual(today, day) && "text-[color:var(--TextColor)] bg-[color:var(--AccentColorLight)]",
                                                     isBefore(day, today) &&
-                                                    "text-yellow-800 bg-gray-700 cursor-not-allowed",
-                                                    isEqual(today, day) && "text-white bg-yellow-700",
+                                                    "text-[color:var(--AccentColorDark)] bg-gray-700 cursor-not-allowed",
+                                                    isEqual(today, day) && "text-[color:var(--TextColorM)] bg-[color:var(--AccentColorDark)]",
                                                     isBefore(day, today) && "cursor-not-allowed",
                                                     isEqual(day, selectedDay) &&
                                                     isToday(day) &&
-                                                    "bg-yellow-600",
+                                                    "text-[color:var(--AccentColorLight)]",
                                                     !isEqual(day, selectedDay) &&
                                                     !isToday(day) &&
                                                     !isSameMonth(day, firstDayCurrentMonth) &&
-                                                    "text-yellow-300",
+                                                    "text-[color:var(--TextColorM)]",
                                                     !isEqual(day, selectedDay) &&
                                                     !isToday(day) &&
                                                     isSameMonth(day, firstDayCurrentMonth) &&
-                                                    "text-white"
+                                                    "text-[color:var(--TextColorM)]"
                                                 )}
                                                 disabled={isBefore(day, today)}
                                             >
                                                 {isAfter(day, startOfYesterday()) && (
-                                                    <span className="hidden group-hover:flex absolute top-0 -translate-x-.5 -translate-y-4 z-10 text-[11px] bg-slate-900 text-slate-100 px-1 rounded-md gap-1">
+                                                    <span className="hidden group-hover:flex absolute top-0 -translate-x-.5 -translate-y-4 z-10 text-[11px] bg-slate-900 text-[color:var(--TextColorM)] px-1 rounded-md gap-1">
                                                         <span>{availableTimesInThisMonth[dayIdx]}</span>
                                                         <span>Available</span>
                                                     </span>
@@ -335,8 +334,8 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                                                     className={cn(
                                                         "hidden",
                                                         isEqual(day, selectedDay) &&
-                                                        "absolute block top-0 right-0 h-[18px] w-[18px] translate-x-1 -translate-y-1 text-yellow-600",
-                                                        isEqual(day, today) && "text-orange-400"
+                                                        "absolute block top-0 right-0 h-[18px] w-[18px] translate-x-1 -translate-y-1 text-[color:var(--AccentColor)]",
+                                                        isEqual(day, today) && "text-[color:var(--AccentColorLight)]"
                                                     )}
                                                 />
 
@@ -357,7 +356,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                         <span className="flex items-center w-full justify-center gap-1">
                             <span>
                                 <h1 className='text-center'>Select reservation time</h1>
-                                <h1 className="text-center text-yellow-400 font-semibold pl-1">
+                                <h1 className="text-center text-[color:var(--AccentColor)] font-semibold pl-1">
                                     {format(selectedDay, "dd MMMM yyyy").toString()}
                                 </h1>
                             </span>
@@ -368,12 +367,12 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 </div>
 
             }
-            {bookingInfo.apointment && <div id="checkout" className=' mb-96  center flex-col text-white p-2'>
+            {bookingInfo.apointment && <div id="checkout" className=' mb-96  center flex-col text-[color:var(--TextColorM)] p-2'>
                 <h1 className='text-xl text-center'>{`Your reservation is on:`}</h1>
                 <h1 className="font-bold text-2xl">{bookingInfo?.apointment}</h1>
-                <h1 className='text-center text-yellow-500'>depoit $25 to comfirm booking</h1>
+                <h1 className='text-center text-[color:var(--AccentColor)]'>depoit $25 to comfirm booking</h1>
                 <div className=" flex md:flex-row flex-col items-start justify-center gap-4 mb-8">
-                    <h1 className="font-bold mt-4 text-white">Contact Info:</h1>
+                    <h1 className="font-bold mt-4 text-[color:var(--TextColorM)]">Contact Info:</h1>
                     <input className="h-10 mb-2 p-2 rounded-lg text-black" placeholder="Full name" type="text" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, name: target.value} }) }) }} />
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Email" type="email" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, email: target.value} }) }) }} />
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Phone" type="tel" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, phone: target.value} })}) }} />
@@ -381,8 +380,8 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
 
 
 
-                {!canBook() && <button disabled className={`h-12 w-32 cursor-not-allowed rounded-full ${canBook() ? ' bg-yellow-500' : 'bg-gray-500'} `}>Book Now</button>}
-                {canBook() && <button onClick={bookNow} className={`h-12 w-32 rounded-full ${canBook() ? ' bg-yellow-500' : 'bg-gray-500'} `}>Book Now</button>}
+                {!canBook() && <button disabled className={`h-12 w-32 cursor-not-allowed rounded-full ${canBook() ? ' bg-[color:var(--AccentColor)]' : 'bg-gray-500'} `}>Book Now</button>}
+                {canBook() && <button onClick={bookNow} className={`h-12 w-32 rounded-full ${canBook() ? 'text-[color:var(--TextColor)] bg-[color:var(--AccentColor)]' : 'bg-gray-500'} `}>Book Now</button>}
             </div>}
 
         </div>

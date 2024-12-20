@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 const BookingOptions = ({ options, setBookingInfo, bookingInfo }) => {
     const [selectedCategory, setSelectedCategory] = useState('false')
 
-    console.log(options)
+    
 
     return (
         <div>
@@ -31,8 +31,8 @@ const BookingOptions = ({ options, setBookingInfo, bookingInfo }) => {
                         return (
                             <div key={index} className='h-24 w-full text-white  center gap-4 p-2'>
                                 <div className=' w-full h-3/4 m-auto'>
-                                    <h1 className='text-3xl text-yellow-600 font-bold'>{item.name}</h1>
-                                    <div className='text-gray-400 font-semibold'>${item.metadata.price} -  {(item.metadata.time)} Minutes</div>
+                                    <h1 className='text-3xl text-[color:var(--AccentColor)] font-bold'>{item.name}</h1>
+                                    <div className='text-[color:var(--TextMColor)] font-semibold'>${item.metadata.price} -  {(item.metadata.time)} Minutes</div>
                                 </div>
                                 <Checkbox isSelected={bookingInfo.service} onValueChange={(v) => { setBookingInfo((old) => { return ({ ...old, service: { name: item.name, price: item.metadata.price, time: item.metadata.time } })}) }} radius='none' size='lg' className='rounded-none h-24 w-24' />
 

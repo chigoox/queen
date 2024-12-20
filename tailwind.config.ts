@@ -12,7 +12,19 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        gold: "#FFD700",
       },
+      animation: {
+        pulse: "pulse 1.5s infinite",
+      },
+      keyframes: {
+        pulse: {
+          "0%, 100%": { opacity: '1' },
+          "50%": { opacity: '0.5'},
+        },
+      },
+      
+      
     },
   },
   plugins: [nextui()],

@@ -22,7 +22,7 @@ function NavBar({bookingInfo}) {
             </div>
             <DotIcon />
             <div className='w1/3 text-center center-col'>
-                <p>{bookingInfo?.service?.name}</p>
+                <p className='font-bold'>{bookingInfo?.service?.name}</p>
                 <p>{price}</p>
                 <p>{time}</p>
             </div>

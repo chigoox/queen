@@ -21,13 +21,13 @@ function NavBar({bookingInfo}) {
                 <div className='text-xs font-bold'>{bookingInfo?.apointment}</div>
             </div>
             <DotIcon />
-            <div className='w1/3 text-center center-col'>
+            <div className='w-1/2 text-center center-col'>
                 <p className='font-bold'>{bookingInfo?.service?.name}</p>
                 <p>{price}</p>
                 <p>{time}</p>
             </div>
             <DotIcon />
-            <div className='grid items-center justify-center grid-cols-3 gap-1 w-1/3'>
+            <div className='grid items-center justify-center grid-cols-3 gap-1 w-[20%]'>
                 {Object.values(bookingInfo?.addons || {}).map((item)=>{return item.name ? (<div className='text-white rounded-lg center text-xs bg-black w-3 h-3 p-2'>{item.name.charAt(0)}</div>) : null})}
             </div>
         </div>

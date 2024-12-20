@@ -21,7 +21,7 @@ function NavBar({bookingInfo}) {
                 <div className='text-xs font-bold'>{bookingInfo?.apointment}</div>
             </div>
             <DotIcon />
-            <div className='w-1/2 text-center center-col'>
+            <div className='w-[45%] text-center center-col'>
                 <p className='font-bold'>{bookingInfo?.service?.name}</p>
                 <p>{price}</p>
                 <p>{time}</p>

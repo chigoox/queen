@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-import { useUploader } from "../Hooks/useUploader"
-import { createProduct } from "../myCodes/Stripe"
-import { filterObject } from "../myCodes/Util"
+import { useUploader } from "../../Hooks/useUploader"
+import { createProduct } from "../../myCodes/Stripe"
+import { filterObject } from "../../myCodes/Util"
 import axios from 'axios'
 import { message } from 'antd'
 

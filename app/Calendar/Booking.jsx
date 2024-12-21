@@ -186,6 +186,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 name: bookingInfo?.customer.name,
                 email: bookingInfo?.customer.email,
                 phone: bookingInfo?.customer.phone,
+                
             })
         })
 
@@ -204,7 +205,8 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 customer: customerID,
                 service: JSON.stringify(bookingInfo.service),
                 apointmentDate: bookingInfo?.apointment,
-                apointmentTime: bookingInfo?.time12
+                apointmentTime: bookingInfo?.time12,
+                ownerID: 0,
               
             })
         })

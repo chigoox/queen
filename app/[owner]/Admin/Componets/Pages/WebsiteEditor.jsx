@@ -10,6 +10,8 @@ import { generate, green, presetPalettes, red } from '@ant-design/colors';
 import { CollapsibleSection, CollapsibleSectionMain } from '@/app/HomePage/BookingInfo';
 import Bookings from '@/app/Calendar/Booking';
 import { fileToBase64Url, getBase64 } from '@/app/myCodes/Util';
+import { addToDoc } from '@/app/myCodes/Database';
+import { useUploader } from '@/app/Hooks/useUploader';
 
 const genPresets = (presets = presetPalettes) =>
   Object.entries(presets).map(([label, colors]) => ({
@@ -38,8 +40,22 @@ const WebsiteEditor = () => {
 
   console.log(siteInfo)
 
-const submit = () =>{
+const submit = async () =>{
 
+  const imageLogo = await useUploader(siteInfo.logo, 'OwnerName/Logo')
+  console.log(imageLogo)
+  
+  let imageCategories = []
+  for (let index = 0; index < siteInfo.categories.length; index++) {
+          const file = siteInfo.categories[index].image;
+          const url = await useUploader(file, 'OwnerName/Categories')
+          imageCategories.push({name: siteInfo.categories[index].name,image:url})
+      }
+
+  setSiteInfo(()=>{return({...siteInfo, categories:imageCategories, logo: imageLogo})})
+  
+  if(imageLogo)
+  await addToDoc('Owners', 'ownerName', {siteInfo:{...siteInfo}})
 
   return('')
 }
@@ -86,9 +102,8 @@ const { token } = theme.useToken();
     setSiteInfo({ ...siteInfo, categories: updatedCategories });
   };
 
-  const handleLogoUpload = async ( {fileList} ) => {
-    console.log(fileList[0].thumbUrl)
-      setSiteInfo({ ...siteInfo, logo: fileList[0].thumbUrl });
+  const handleLogoUpload = async ( {file} ) => {
+      setSiteInfo({ ...siteInfo, logo: file});
     
   };
 
@@ -238,7 +253,7 @@ const { token } = theme.useToken();
 {/* Color Pickers */}
 <h3 className='font-bold text-3xl text-center'>Theme</h3>
       <div className='m-auto p-1 overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>
-        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5   md:w-[80%] m-auto'>
+        <div className='grid grid-cols-1   md:w-[80%] m-auto'>
           <div className='m-auto'>
             <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Background Color</div>)} value={siteInfo.colors.background} onChange={(color) => handleColorChange('background', color)} />
           </div>
@@ -260,7 +275,7 @@ const { token } = theme.useToken();
 
       
       {/* Preview */}
-      <div className='center-col rounded-t-full overflow-hidden' style={{ ...previewStyle, padding: '20px', border: '1px solid' }}>
+      <div className='center-col rounded-xl overflow-hidden' style={{ ...previewStyle, padding: '20px', border: '1px solid' }}>
         <Image className='bg-black h-20 w-20 rounded-full' src={siteInfo.logo} />
         <h2 className='font-bold' style={{color: siteInfo.colors.accent}}>{siteInfo.heading}</h2>
         <p style={{color: siteInfo.colors.text}}>{siteInfo.subHeading}</p>

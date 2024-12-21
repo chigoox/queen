@@ -8,7 +8,7 @@ import WebsiteEditor from './WebsiteEditor'
 
 const AdminBody = ({ selectedMenu }) => {
     return (
-        <div className={`Body p-10 left-4 md:left-0 trans relative h-screen border-green-700 border w-full bg-white`}>
+        <div className={`Body p-10 left-4 md:left-0 trans relative h-screen overflow-hidden border-green-700 border w-full bg-white`}>
             <h1 className="font-bold  sm:left-0 lg:left-0 md:left-2 relative font-2xl text-black">{selectedMenu}</h1>
             <Card className="w-full max-h-full h-auto p-4 mt-5  min-h-32">
                 {selectedMenu == menu[0] && <AdminHome />}

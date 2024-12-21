@@ -2,11 +2,21 @@ import React, { useState } from 'react';
 import ImgCrop from 'antd-img-crop';
 import { SketchPicker } from 'react-color';
 import { Button as ButtonNext, Image } from '@nextui-org/react';
-import { Input, Button, Upload, message } from 'antd';
+import { Input, Button, Upload, message, ColorPicker, theme } from 'antd';
+import { generate, green, presetPalettes, red } from '@ant-design/colors';
+
+
 
 import { CollapsibleSection, CollapsibleSectionMain } from '@/app/HomePage/BookingInfo';
 import Bookings from '@/app/Calendar/Booking';
 import { fileToBase64Url, getBase64 } from '@/app/myCodes/Util';
+
+const genPresets = (presets = presetPalettes) =>
+  Object.entries(presets).map(([label, colors]) => ({
+    label,
+    colors,
+  }));
+
 
 const WebsiteEditor = () => {
   const [siteInfo, setSiteInfo] = useState({
@@ -34,6 +44,16 @@ const submit = () =>{
   return('')
 }
 
+
+//generate colors for colorPicker
+const { token } = theme.useToken();
+  const presets = genPresets({
+    primary: generate(token.colorPrimary),
+    red,
+    green,
+  });
+
+
   const handleInputChange = (field, value) => {
     setSiteInfo({ ...siteInfo, [field]: value });
   };
@@ -41,7 +61,7 @@ const submit = () =>{
   const handleColorChange = (colorField, color) => {
     setSiteInfo({
       ...siteInfo,
-      colors: { ...siteInfo.colors, [colorField]: color.hex },
+      colors: { ...siteInfo.colors, [colorField]: color.toHexString() },
     });
   };
 
@@ -93,7 +113,7 @@ const submit = () =>{
   };
 
   return (
-    <div className='h-[40rem] w-full overflow-hidden overflow-y-scroll hidescroll' style={{ padding: '20px' }}>
+    <div className='h-full w-full md:w-[60%]  m-auto border p-4 overflow-hidden overflow-y-scroll hidescroll ' >
      
      <div className='center-col gap-2'>
        {/* Logo Upload */}
@@ -132,6 +152,8 @@ const submit = () =>{
       
 
       {/* Heading */}
+     <div>
+     <h1 className='font-bold'>Site Heading</h1>
       <Input
         placeholder="Heading"
         value={siteInfo.heading}
@@ -147,12 +169,13 @@ const submit = () =>{
         style={{ marginBottom: '10px' }}
       />
      </div>
+     </div>
 
 
 
 {/* Terms */}
 <div style={{ marginBottom: '20px' }}>
-        <h3 className='font-bold text-lg'>Terms</h3>
+        <h3 className='font-bold t'>Terms & Conditions</h3>
         {siteInfo.terms.map((term, index) => (
           <div key={index} style={{ marginBottom: '10px' }}>
             <Input
@@ -178,7 +201,7 @@ const submit = () =>{
       </div>
 
       {/* Categories */}
-      <div className='' style={{ marginBottom: '20px' }}>
+      <div className='border-dashed border-2 p-2' style={{ marginBottom: '20px' }}>
         <h3 className='font-bold text-lg'>Categories</h3>
         <div className=''>
         {siteInfo.categories.map((category, index) => (
@@ -213,43 +236,24 @@ const submit = () =>{
       </div>
 
 {/* Color Pickers */}
-<h3 className='font-bold text-lg'>Colors</h3>
+<h3 className='font-bold text-3xl text-center'>Theme</h3>
       <div className='m-auto p-1 overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <div>
-            <p>Background</p>
-            <SketchPicker
-              color={siteInfo.colors.background}
-              onChange={(color) => handleColorChange('background', color)}
-            />
+        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5   md:w-[80%] m-auto'>
+          <div className='m-auto'>
+            <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Background Color</div>)} value={siteInfo.colors.background} onChange={(color) => handleColorChange('background', color)} />
           </div>
-          <div>
-            <p>Accent</p>
-            <SketchPicker
-              color={siteInfo.colors.accent}
-              onChange={(color) => handleColorChange('accent', color)}
-            />
+          <div className='m-auto'>
+            <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Accent Color</div>)} value={siteInfo.colors.accent} onChange={(color) => handleColorChange('accent', color)} />
           </div>
-          <div>
-            <p>Text Main</p>
-            <SketchPicker
-              color={siteInfo.colors.text}
-              onChange={(color) => handleColorChange('text', color)}
-            />
+          <div className='m-auto center-col border w-40'>
+            <div className='center'>Text Color</div>
+            <div className='center gap-2'>
+            <ColorPicker className=' justify-start' presets={presets}  value={siteInfo.colors.text} onChange={(color) => handleColorChange('text', color)} />
+            <ColorPicker className='justify-start'  presets={presets}  value={siteInfo.colors.text2} onChange={(color) => handleColorChange('text2', color)} />
+            <ColorPicker className='justify-start'  presets={presets}  value={siteInfo.colors.text3} onChange={(color) => handleColorChange('text3', color)} />
+            </div>
           </div>
-          <div>
-            <p>Text Sub</p>
-            <SketchPicker
-              color={siteInfo.colors.text2}
-              onChange={(color) => handleColorChange('text2', color)}
-            />
-          </div>
-          <div>
-            <p>Text ETC</p>
-            <SketchPicker
-              color={siteInfo.colors.text3}
-              onChange={(color) => handleColorChange('text3', color)}
-            />
+          <div className='m-auto'>
           </div>
         </div>
       </div>
@@ -280,7 +284,7 @@ const submit = () =>{
 
       </div>
 
-      <Button onClick={submit}>SAVE</Button>
+      <Button className='w-full my-5 h-10' onClick={submit}>SAVE</Button>
 
     </div>
   );

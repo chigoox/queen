@@ -28,6 +28,12 @@ const WebsiteEditor = () => {
 
   console.log(siteInfo)
 
+const submit = () =>{
+
+
+  return('')
+}
+
   const handleInputChange = (field, value) => {
     setSiteInfo({ ...siteInfo, [field]: value });
   };
@@ -273,6 +279,8 @@ const WebsiteEditor = () => {
           </div>
 
       </div>
+
+      <Button onClick={submit}>SAVE</Button>
 
     </div>
   );

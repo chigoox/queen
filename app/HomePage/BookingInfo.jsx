@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CollapsibleSection = ({ size, title, children }) => {
+export const CollapsibleSection = ({ size, title, children }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -24,7 +24,7 @@ const CollapsibleSection = ({ size, title, children }) => {
     );
 };
 
-const CollapsibleSectionMain = ({ title, children }) => {
+export const CollapsibleSectionMain = ({ title, children }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 

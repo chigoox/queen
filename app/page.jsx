@@ -66,12 +66,12 @@ export default function Home() {
         style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1545185043-78ab5b7e0af2?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")', backgroundSize: 'cover' }}
         cl
       >
-        <div className="bg-black bg-opacity-50 p-10 rounded-lg">
+        <div className="lg:bg-black bg-opacity-50 p-10 rounded-lg">
           <h2 className="text-5xl font-bold mb-4">Seamless Scheduling Made Easy</h2>
           <p className="text-xl mb-6">
             Manage your appointments effortlessly with our intuitive booking platform.
           </p>
-          <Button auto shadow color="gradient" className="px-8">
+          <Button  auto shadow color="gradient" className="px-8 bg-black">
             Get Started
           </Button>
         </div>
@@ -109,7 +109,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="bg-gradient-to-r m-auto col-span-2 flex justify-between items-center from-gray-200 to-gray-100 rounded-lg shadow-lg p-8 text-center"
+            className="bg-gradient-to-r m-auto col-span-2 flex flex-col lg:flex-row justify-between items-center from-gray-200 to-gray-100 rounded-lg shadow-lg p-8 text-center"
           >
            <div className='w-1/2'>
            <h3 className="text-3xl font-bold text-gray-800 mb-4 text-left">Automated Booking Software Built to Save You Time</h3>
@@ -117,18 +117,18 @@ export default function Home() {
               Get a branded scheduling page that showcases your services and real-time availability. With easy payment and intake forms, your scheduler is everything your clients need to self-schedule appointments.
             </p>
            </div>
-            <img src={"https://plus.unsplash.com/premium_photo-1663076518116-0f0637626edf?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} alt="Automated Booking" className="w-64 h-64 object-cover rounded-xl overflow-hidden" />
+            <img src={"https://plus.unsplash.com/premium_photo-1663076518116-0f0637626edf?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} alt="Automated Booking" className="lg:w-64 w-full lg:h-64 object-cover rounded-xl overflow-hidden" />
           </motion.div>
          
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="bg-gradient-to-r m-auto from-gray-200 col-span-2 lg:col-span-1 to-gray-100 rounded-lg shadow-lg p-8 text-center"
+            className="bg-gradient-to-r m-auto from-gray-200 col-span-2 lg:col-span-1 to-gray-100 rounded-lg shadow-lg  text-center"
           >
-            <div className='w-3/4 '>
-            <h3 className="text-3xl text-left font-bold text-gray-800 mb-4">Control your availability with online appointments</h3>
-            <p className="text-gray-700 text-left mb-4">
+            <div className='w-3/4 p-4 m-auto'>
+            <h3 className="text-3xl lg:text-left font-bold text-gray-800 mb-4">Control your availability with online appointments</h3>
+            <p className="text-gray-700 lg:text-left mb-4">
             Tools to help you schedule and earn on your own terms–customize exactly how and when clients can book with you, host virtual appointments or classes, and block off personal time. Grow your business with scheduling automation.
             </p>
             </div>
@@ -141,9 +141,9 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="bg-gradient-to-r m-auto  from-gray-200 col-span-2 lg:col-span-1 to-gray-100 rounded-lg shadow-lg p-8 text-center"
           >
-           <div className='w-3/4'>
-           <h3 className="text-3xl text-left font-bold text-gray-800 mb-4">Nail the first impression (and the next)</h3>
-            <p className="text-gray-700 mb-4 text-left">
+           <div className='w-3/4 text-center m-auto'>
+           <h3 className="text-3xl  font-bold text-gray-800 mb-4">Nail the first impression (and the next)</h3>
+            <p className="text-gray-700 mb-4 ">
             Deliver a personalized experience that keeps clients coming back with custom intake forms, email marketing engagements, and easy access to details from past appointments.
             </p>
            </div>
@@ -169,7 +169,7 @@ export default function Home() {
             <div className="h-full bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
               <div className="relative h-48 overflow-hidden">
                 <img 
-                  src="/api/placeholder/800/600"
+                  src={'https://images.unsplash.com/photo-1490902931801-d6f80ca94fe4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}
                   alt="Free Plan"
                   className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
                 />
@@ -206,7 +206,7 @@ export default function Home() {
             <div className="h-full bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-blue-500">
               <div className="relative h-48 overflow-hidden">
                 <img 
-                  src="/api/placeholder/800/600"
+                  src={'https://plus.unsplash.com/premium_photo-1679830513869-cd3648acb1db?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}
                   alt="Premium Plan"
                   className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
                 />
@@ -246,7 +246,7 @@ export default function Home() {
             <div className="h-full bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
               <div className="relative h-48 overflow-hidden">
                 <img 
-                  src="/api/placeholder/800/600"
+                  src={'https://plus.unsplash.com/premium_photo-1734407274561-7d8e477cc5a6?q=80&w=1962&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}
                   alt="Enterprise Plan"
                   className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
                 />

@@ -111,7 +111,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="bg-gradient-to-r m-auto col-span-2 flex flex-col lg:flex-row justify-between lg:items-center from-gray-200 to-gray-100 rounded-lg shadow-lg p-8 text-center"
           >
-           <div className='w-1/2'>
+           <div className='lg:w-1/2'>
            <h3 className="text-3xl font-bold text-gray-800 mb-4 text-left">Automated Booking Software Built to Save You Time</h3>
             <p className="text-gray-700 mb-4 text-left">
               Get a branded scheduling page that showcases your services and real-time availability. With easy payment and intake forms, your scheduler is everything your clients need to self-schedule appointments.

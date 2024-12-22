@@ -109,7 +109,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="bg-gradient-to-r m-auto col-span-2 flex flex-col lg:flex-row justify-between items-center from-gray-200 to-gray-100 rounded-lg shadow-lg p-8 text-center"
+            className="bg-gradient-to-r m-auto col-span-2 flex flex-col lg:flex-row justify-between lg:items-center from-gray-200 to-gray-100 rounded-lg shadow-lg p-8 text-center"
           >
            <div className='w-1/2'>
            <h3 className="text-3xl font-bold text-gray-800 mb-4 text-left">Automated Booking Software Built to Save You Time</h3>

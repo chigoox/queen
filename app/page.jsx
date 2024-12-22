@@ -6,6 +6,9 @@ import { motion } from 'motion/react';
 import Carousel from '@/app/General/Embla/Carousel'
 import { BookType, Check } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation'
+
+
 
 export default function Home() {
   const features = ['Client self-scheduling',
@@ -15,7 +18,9 @@ export default function Home() {
     ]
   const siteName = 'BooX'
 
+  const {push} = useRouter()
 
+  
 
   const sectionRef = useRef(null);
 
@@ -50,7 +55,7 @@ export default function Home() {
         <div className="container mx-auto  py-4 px-6 flex justify-between items-center text-white">
           <h1 className="text-3xl font-bold">{siteName}</h1>
           <nav>
-            <Button auto ghost size="sm" color="white">
+            <Button onPress={()=>{push('/ContactUs')}} auto ghost size="sm" color="white">
               Contact Us
             </Button>
           </nav>
@@ -71,7 +76,7 @@ export default function Home() {
           <p className="text-xl mb-6">
             Manage your appointments effortlessly with our intuitive booking platform.
           </p>
-          <Button  auto shadow color="gradient" className="px-8 bg-black">
+          <Button onPress={()=>{push('/Signup')}} auto shadow color="gradient" className="px-8 bg-black">
             Get Started
           </Button>
         </div>
@@ -194,7 +199,7 @@ export default function Home() {
                   ))}
                 </ul>
                 
-                <button className="mt-8 w-full py-3 px-6 rounded-lg bg-emerald-50 text-emerald-600 font-semibold hover:bg-emerald-100 transition-colors">
+                <button onPress={()=>{push('/Signup')}} className="mt-8 w-full py-3 px-6 rounded-lg bg-emerald-50 text-emerald-600 font-semibold hover:bg-emerald-100 transition-colors">
                   Get Started
                 </button>
               </div>
@@ -234,7 +239,7 @@ export default function Home() {
                   ))}
                 </ul>
                 
-                <button className="mt-8 w-full py-3 px-6 rounded-lg bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors">
+                <button onPress={()=>{push('/Signup')}} className="mt-8 w-full py-3 px-6 rounded-lg bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors">
                   Get Premium
                 </button>
               </div>
@@ -281,7 +286,7 @@ export default function Home() {
                   </li>
                 </ul>
                 
-                <button className="mt-8 w-full py-3 px-6 rounded-lg bg-purple-50 text-purple-600 font-semibold hover:bg-purple-100 transition-colors">
+                <button onPress={()=>{push('/ContactUs')}} className="mt-8 w-full py-3 px-6 rounded-lg bg-purple-50 text-purple-600 font-semibold hover:bg-purple-100 transition-colors">
                   Contact Sales
                 </button>
               </div>

@@ -2,12 +2,15 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import { Input, Button, Radio, RadioGroup } from '@nextui-org/react';
 import { Divider } from '@nextui-org/divider';
 import { AUTH } from '@/Firebase';
 import { message } from 'antd';
+import { sendEmailVerification , updateProfile } from "firebase/auth";
+import { useRouter } from 'next/navigation'
+import { addToDoc } from '../myCodes/Database';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -17,9 +20,14 @@ const SignupPage = () => {
     firstName: '',
     lastName: '',
     planType: 'free',
+    password: '',
+    passwordMatch: '',
+    userName: '',
   });
   const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const {push} = useRouter()
+
 
   const showError = (errorMessage) => {
     messageApi.error({
@@ -28,7 +36,6 @@ const SignupPage = () => {
       style: { marginTop: '20vh' },
     });
   };
-
   const showSuccess = (successMessage) => {
     messageApi.success({
       content: successMessage,
@@ -53,6 +60,7 @@ const SignupPage = () => {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
     if (!emailRegex.test(email)) {
       showError('Please enter a valid email address');
       return false;
@@ -64,6 +72,18 @@ const SignupPage = () => {
       return false;
     }
 
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+  if (!passwordRegex.test(formData.password)) {
+    showError('Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.');
+    return false;
+  }
+
+    
+    if (formData.password != formData.passwordMatch) {
+      showError('Password does not match');
+      return false;
+    }
+
     return true;
   };
 
@@ -71,25 +91,60 @@ const SignupPage = () => {
     try {
       setLoading(true);
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(AUTH, provider);
+      await signInWithPopup(AUTH, provider).then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+       //update userName if one
+
+       addToDoc('Owners',user.uid,{...formData, password: '', passwordMatch: ''})
+        if(formData.userName){
+          //Update userInfo
+           updateProfile(user, {
+            displayName:formData.userName,
+          })
+        }
+      })
       showSuccess('Successfully signed up with Google!');
+    
+      
     } catch (error) {
       showError(error.message);
     } finally {
       setLoading(false);
+      push(`/${formData.userName}/Admin`)
+
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validateForm()) return;
 
+    
     try {
       setLoading(true);
-      await createUserWithEmailAndPassword(AUTH, formData.email, formData.password);
+      const user = await createUserWithEmailAndPassword(AUTH, formData.email, formData.password);
       showSuccess('Account created successfully!');
       // Save additional user data to the database if needed
+
+      const USER = user.user
+
+      //Update userInfo
+      await updateProfile(USER, {
+        displayName:formData.userName,
+      })
+
+      //Send Verification Email
+      await sendEmailVerification(USER)
+
+
+       addToDoc('Owners',USER.uid,{...formData, password: '', passwordMatch: ''})
+ 
+      push(`/${formData.userName}/Admin`)
+
     } catch (error) {
       const errorMessage = {
         'auth/email-already-in-use': 'This email is already registered. Please use a different email or try logging in.',
@@ -141,11 +196,41 @@ const SignupPage = () => {
                 </div>
 
                 <Input
+                  name="userName"
+                  type="text"
+                  label="User Name"
+                  placeholder="ChigooX"
+                  value={formData.userName}
+                  onChange={handleInputChange}
+                  required
+                />
+
+                <Input
                   name="email"
                   type="email"
                   label="Email"
                   placeholder="your@email.com"
                   value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+
+<Input
+                  name="password"
+                  type="password"
+                  label="Password"
+                  placeholder="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                />
+
+<Input
+                  name="passwordMatch"
+                  type="password"
+                  label="Confirm Password"
+                  placeholder="passwordMatch"
+                  value={formData.passwordMatch}
                   onChange={handleInputChange}
                   required
                 />

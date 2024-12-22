@@ -4,7 +4,7 @@ import { Admin } from "./Admin"
 async function Page() {
 
     return (
-        <div className="bg-black min-h-screen  mt-20 overflow-hidden relative">
+        <div className="bg-black min-h-screen   overflow-hidden relative">
             <Admin />
         </div>
 

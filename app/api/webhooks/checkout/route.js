@@ -25,7 +25,7 @@ export async function POST(request) {
     if (event.type === "checkout.session.completed") {
 
       const data = event.data.object.metadata
-      const { apointmentDate, apointmentTime, service, addons, customerName, customerEmail, customerPhone } = data
+      const { apointmentDate, apointmentTime, service, addons, customerName, customerEmail, customerPhone, ownerID } = data
 
 
       let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime', '==', true)
@@ -33,7 +33,8 @@ export async function POST(request) {
       console.log(apointments, apointmentID)
 
       const apointment = {
-        id: apointmentID,
+        ownerID:ownerID,
+        apointmentID: apointmentID,
         apointmentDate: apointmentDate,
         apointmentTime: apointmentTime,
         service: service,

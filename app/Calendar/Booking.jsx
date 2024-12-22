@@ -186,6 +186,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 name: bookingInfo?.customer.name,
                 email: bookingInfo?.customer.email,
                 phone: bookingInfo?.customer.phone,
+                
             })
         })
 
@@ -204,7 +205,8 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 customer: customerID,
                 service: JSON.stringify(bookingInfo.service),
                 apointmentDate: bookingInfo?.apointment,
-                apointmentTime: bookingInfo?.time12
+                apointmentTime: bookingInfo?.time12,
+                ownerID: 0,
               
             })
         })
@@ -367,7 +369,7 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 </div>
 
             }
-            {bookingInfo.apointment && <div id="checkout" className=' mb-96  center flex-col text-[color:var(--TextColorM)] p-2'>
+            {bookingInfo?.apointment && <div id="checkout" className=' mb-96  center flex-col text-[color:var(--TextColorM)] p-2'>
                 <h1 className='text-xl text-center'>{`Your reservation is on:`}</h1>
                 <h1 className="font-bold text-2xl">{bookingInfo?.apointment}</h1>
                 <h1 className='text-center text-[color:var(--AccentColor)]'>depoit $25 to comfirm booking</h1>

@@ -8,6 +8,7 @@ export async function POST(request) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     let data = await request.json();
     let {
+        ownerID = 0,
         customer = {},
         service = {},
         addons,
@@ -46,6 +47,7 @@ export async function POST(request) {
             apointmentDate: apointmentDate,
             apointmentTime: apointmentTime,
             type: 'checkout',
+            ownerID:ownerID,
         },
 
     })

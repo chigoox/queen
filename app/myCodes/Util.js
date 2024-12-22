@@ -63,13 +63,27 @@ export const filterObject = (obj, filterFunc) => {
 
 }
 
-export const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
+export function fileToBase64Url(file) {
+    console.log(file.thumbUrl)
+    return new Promise((resolve, reject) => {
         const reader = new FileReader();
+
+        reader.onload = () => {
+            // Convert result to Base64URL format
+            const base64 = reader.result.split(',')[1]; // Remove the data URL prefix
+            const base64Url = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+            resolve(base64Url);
+        };
+
+        reader.onerror = (error) => {
+            reject(error);
+        };
+
         reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
     });
+}
+
+    
 
 export const createArray = (length) => {
     const newArray = Array.from({ length: length }, (value, index) => index)

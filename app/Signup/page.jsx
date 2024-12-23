@@ -163,7 +163,18 @@ const SignupPage = () => {
   return (
     <>
       {contextHolder}
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+      <motion.div  
+      animate={{
+            background: [
+              'linear-gradient(45deg, #4f46e5 0%, #818cf8 100%)',
+              'linear-gradient(45deg, #818cf8 0%, #4f46e5 100%)'
+            ]
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }} className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -174,6 +185,20 @@ const SignupPage = () => {
             <CardHeader className="flex flex-col gap-1 items-center">
               <h1 className="text-2xl font-bold">Create Your Account</h1>
               <p className="text-gray-500">Start managing your bookings today</p>
+               <motion.div
+                        className="mt-6 text-center"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <p className="text-sm text-gray-600">
+                          Have an account?{' '}
+                          <a
+                            href="/Login"
+                            className="text-indigo-600 hover:text-indigo-700 font-medium transition-colors duration-200"
+                          >
+                            Log In
+                          </a>
+                        </p>
+                      </motion.div>
             </CardHeader>
             <CardBody>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -325,7 +350,7 @@ const SignupPage = () => {
               </CardBody>
             </Card>
           </motion.div>
-        </div>
+        </motion.div>
       </>
     );
   };

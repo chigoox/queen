@@ -9,7 +9,7 @@ const AuthWrapper = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(AUTH, (user) => {
       if (!user) {
-        router.push('/Signup'); // Redirect to login if not authenticated
+        router.push('/'); // Redirect to login if not authenticated
       }
     });
 

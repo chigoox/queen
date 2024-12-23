@@ -20,7 +20,7 @@ const genPresets = (presets = presetPalettes) =>
     colors,
   }));
 
-  const user = getAuth()
+const user = getAuth()
 
 const WebsiteEditor = () => {
   const [siteInfo, setSiteInfo] = useState({
@@ -41,6 +41,11 @@ const WebsiteEditor = () => {
   });
 
 
+  //check for changes and set saved to false if a change is made
+  const [saved, setSaved] = useState(false)
+  useEffect(() => {setSaved(false)}, [siteInfo])
+  
+//submitt button
 const submit = async () =>{
 
   const imageLogo = await useUploader(siteInfo.logo, `${user?.currentUser.uid}/Logo`)
@@ -56,7 +61,7 @@ const submit = async () =>{
   
  
   await addToDoc('Owners', user?.currentUser.uid, {siteInfo:{...siteInfo, categories:imageCategories, logo: imageLogo}})
-
+  setSaved(true)
   return('')
 }
 

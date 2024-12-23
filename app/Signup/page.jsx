@@ -11,6 +11,7 @@ import { message } from 'antd';
 import { sendEmailVerification , updateProfile } from "firebase/auth";
 import { useRouter } from 'next/navigation'
 import { addToDoc } from '../myCodes/Database';
+import  PasswordValidator  from '@/app/Signup/Componets/PasswordValidator'
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -235,6 +236,7 @@ const SignupPage = () => {
                   required
                 />
 
+<PasswordValidator password={formData.password} passwordMatch={formData.passwordMatch} />
                 <Input
                   name="bookingSiteName"
                   label="Booking Site Name"
@@ -259,7 +261,7 @@ const SignupPage = () => {
                   <RadioGroup
                     name="planType"
                     value={formData.planType}
-                    onChange={(value) => setFormData({ ...formData, planType: value })}
+                    onChange={({target}) => setFormData({ ...formData, planType: target.value })}
                   >
                     <Radio value="free">
                       <div className="flex flex-col">
@@ -274,6 +276,14 @@ const SignupPage = () => {
                         <span className="text-sm font-semibold">Premium Plan</span>
                         <span className="text-xs text-gray-500">
                           $50 one-time fee - No additional charges
+                        </span>
+                      </div>
+                    </Radio>
+                    <Radio value="user">
+                      <div className="flex flex-col">
+                        <span className="text-sm font-semibold">User</span>
+                        <span className="text-xs text-gray-500">
+                          Only here to book
                         </span>
                       </div>
                     </Radio>

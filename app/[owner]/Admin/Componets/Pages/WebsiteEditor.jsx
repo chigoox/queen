@@ -12,6 +12,7 @@ import Bookings from '@/app/Calendar/Booking';
 import { fileToBase64Url, getBase64 } from '@/app/myCodes/Util';
 import { addToDoc } from '@/app/myCodes/Database';
 import { useUploader } from '@/app/Hooks/useUploader';
+import { getAuth } from 'firebase/auth';
 
 const genPresets = (presets = presetPalettes) =>
   Object.entries(presets).map(([label, colors]) => ({
@@ -19,6 +20,7 @@ const genPresets = (presets = presetPalettes) =>
     colors,
   }));
 
+  const user = getAuth()
 
 const WebsiteEditor = () => {
   const [siteInfo, setSiteInfo] = useState({
@@ -38,12 +40,10 @@ const WebsiteEditor = () => {
     depositFee: 25
   });
 
-  console.log(siteInfo)
 
 const submit = async () =>{
 
-  const imageLogo = await useUploader(siteInfo.logo, 'OwnerName/Logo')
-  console.log(imageLogo)
+  const imageLogo = await useUploader(siteInfo.logo, `${user?.currentUser.uid}/Logo`)
   
   let imageCategories = []
   for (let index = 0; index < siteInfo.categories.length; index++) {
@@ -54,8 +54,8 @@ const submit = async () =>{
 
   setSiteInfo(()=>{return({...siteInfo, categories:imageCategories, logo: imageLogo})})
   
-  if(imageLogo)
-  await addToDoc('Owners', 'ownerName', {siteInfo:{...siteInfo}})
+ 
+  await addToDoc('Owners', user?.currentUser.uid, {siteInfo:{...siteInfo, categories:imageCategories, logo: imageLogo}})
 
   return('')
 }

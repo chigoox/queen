@@ -1,29 +1,37 @@
 import { useFetchDocsPresist } from '@/app/myCodes/Database'
 import { fetchAllProducts } from '@/app/myCodes/Stripe'
 import { createArray } from '@/app/myCodes/Util'
+import { AUTH } from '@/Firebase'
 import { Button } from '@nextui-org/react'
+import { onAuthStateChanged } from 'firebase/auth'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 function ProductsListAdmin({ sortBy, window, setWidow, setSelectedProductData }) {
     const [products, setProducts] = useState([])
-
+    const router = useRouter();
 
     useEffect(() => {
-        const getData = async () => {
-            let FIREBS_PRODUCTS
-
-            await useFetchDocsPresist('Services', 'active', '!=', false, 'created', (data) => {
-                FIREBS_PRODUCTS = data.map(i => {
-                    const miliseconds = i.created.seconds * 1000 + i.created.nanoseconds / 1000000
-                    return ({ ...i, created: miliseconds })
+        const unsubscribe = onAuthStateChanged(AUTH, async (currentUser) => {
+            const getData = async () => {
+                let FIREBS_PRODUCTS
+    
+                await useFetchDocsPresist('Services', 'owner', '==', currentUser.uid, 'created', (data) => {
+                    FIREBS_PRODUCTS = data.map(i => {
+                        const miliseconds = i.created.seconds * 1000 + i.created.nanoseconds / 1000000
+                        return ({ ...i, created: miliseconds })
+                    })
+                    console.log(FIREBS_PRODUCTS)
+                    setProducts([...FIREBS_PRODUCTS])
                 })
-                console.log(FIREBS_PRODUCTS)
-                setProducts([...FIREBS_PRODUCTS])
+            }
+    
+            getData()
             })
-        }
+      
 
-        getData()
-    }, [window])
+        return () => unsubscribe();
+    }, [router])
 
 
 

@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
     
     const data = await request.json();
-    const { productData } = data
+    const { productData, UID } = data
     console.log(productData)
 
         const id = getRandTN(10)
@@ -17,7 +17,8 @@ export async function POST(request) {
             ...productData,
             created: serverTimestamp(),
             default_price: `PriceID_${getRandTN(10)}`,
-            id: `SRV_${id}`
+            id: `SRV_${id}`,
+            owner:UID
         })
 
         return NextResponse.json({ status: 'OK POSTED TO FIREBASE' })

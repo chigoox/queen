@@ -5,8 +5,10 @@ import { createProduct } from "../../myCodes/Stripe"
 import { filterObject } from "../../myCodes/Util"
 import axios from 'axios'
 import { message } from 'antd'
+import { getAuth } from 'firebase/auth'
 
 export const useCreateProductUtil = async (product, runFunAfter) => {
+    const user = getAuth().currentUser
     //setup Products
     let PRODUCT = { ...product }
     delete PRODUCT.PRICES
@@ -37,6 +39,7 @@ export const useCreateProductUtil = async (product, runFunAfter) => {
     const sendData = async () => {
         const { data } = await axios.post('/api/CreateProduct', {
             productData: PRODUCT,
+            UID:user.uid
         },
             {
                 headers: {

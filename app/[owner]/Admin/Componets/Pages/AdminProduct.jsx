@@ -21,7 +21,7 @@ export const AdminProduct = () => {
                 <Button onPress={() => { setProductWindow('openNew') }} className='ADD-NEW-BUTTON h-6 mb-10  w-fit p-2 bg-white rounded min-w-0'><AiFillPlusSquare color='blue' size={24} /></Button>
                 {['Active'].map(item => {
                     return (
-                        <Button onPress={() => { setFilter(filter == item ? false : item) }}>
+                        <Button key={item} onPress={() => { setFilter(filter == item ? false : item) }}>
                             {item}
                         </Button>
                     )

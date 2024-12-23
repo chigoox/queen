@@ -1,12 +1,50 @@
 import { Card } from '@nextui-org/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { menu } from '../Menu/AdminMenu'
 import { AdminHome } from './AdminHome'
 import { AdminOrders } from './AdminOrders'
 import { AdminProduct } from './AdminProduct'
 import WebsiteEditor from './WebsiteEditor'
-
+import { FetchTheseDocs } from '@/UTIL/Database'
+import { useRouter } from 'next/navigation'
+import { onAuthStateChanged } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore';
+import { AUTH } from '@/Firebase'
 const AdminBody = ({ selectedMenu }) => {
+const [WebsiteEditorData, setWebsiteEditorData] = useState({})
+const [owner, setOwner] = useState(null);
+  const [ownerData, setOwnerData] = useState(null);
+  const [loading, setLoading] = useState(false)
+
+ const router = useRouter()
+
+useEffect(() => {
+    const unsubscribe = onAuthStateChanged(AUTH, async (currentUser) => {
+        setOwner(currentUser);
+      try {
+        // Fetch user-specific data from Firestore
+        const userDocRef = doc(db, 'Owner', currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+            setOwnerData(userDoc.data());
+        } else {
+          console.error('No user data found!');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [router]);
+
+
+
+
+
     return (
         <div className={`Body p-10 left-4 md:left-0 trans relative h-screen overflow-hidden border-green-700 border w-full bg-white`}>
             <h1 className="font-bold  sm:left-0 lg:left-0 md:left-2 relative font-2xl text-black">{selectedMenu}</h1>

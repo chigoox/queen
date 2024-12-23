@@ -98,8 +98,8 @@ const SignupPage = () => {
         // The signed-in user info.
         const user = result.user;
        //update userName if one
+       addToDoc('Owners',user.uid,{uid:user.uid,Owner:{...formData, password: '', passwordMatch: ''}})
 
-       addToDoc('Owners',user.uid,{...formData, password: '', passwordMatch: ''})
         if(formData.userName){
           //Update userInfo
            updateProfile(user, {
@@ -141,7 +141,7 @@ const SignupPage = () => {
       await sendEmailVerification(USER)
 
 
-       addToDoc('Owners',USER.uid,{...formData, password: '', passwordMatch: ''})
+       addToDoc('Owners',USER.uid,{uid:USER.uid,Owner:{...formData, password: '', passwordMatch: ''}})
  
       push(`/${formData.userName}/Admin`)
 

@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button, Input } from '@nextui-org/react';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
 import { AUTH } from '@/Firebase';
+import { useRouter } from 'next/navigation'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -26,17 +27,22 @@ const itemVariants = {
 };
 
 export default function Login() {
+  const {push} = useRouter()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+console.log(user)
   const handleEmailLogin = async () => {
     setIsLoading(true);
     try {
       await signInWithEmailAndPassword(AUTH, email, password);
       // Success animation before redirect
       setIsLoading(false);
+  const user = getAuth().currentUser
+
+  push(`/${user.displayName}/Admin`)
+
     } catch (err) {
       setError(err.message);
       setIsLoading(false);
@@ -47,6 +53,11 @@ export default function Login() {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(AUTH, provider);
+  const user = getAuth().currentUser
+
+  push(`/${user.displayName}/Admin`)
+
+
     } catch (err) {
       setError(err.message);
     }

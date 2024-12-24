@@ -12,6 +12,7 @@ import { sendEmailVerification , updateProfile } from "firebase/auth";
 import { useRouter } from 'next/navigation'
 import { addToDoc } from '../myCodes/Database';
 import  PasswordValidator  from '@/app/Signup/Componets/PasswordValidator'
+import {generateRandomUsername} from '@/app/myCodes/Util'
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -89,6 +90,7 @@ const SignupPage = () => {
   };
 
   const handleGoogleSignup = async () => {
+    const randUserName =  generateRandomUsername()
     try {
       setLoading(true);
       const provider = new GoogleAuthProvider();
@@ -99,23 +101,27 @@ const SignupPage = () => {
         // The signed-in user info.
         const user = result.user;
        //update userName if one
-       addToDoc('Owners',user.uid,{uid:user.uid,Owner:{...formData, password: '', passwordMatch: ''}})
-
+       addToDoc('Owners',user.uid,{userName:randUserName,uid:user.uid,Owner:{...formData, password: '', passwordMatch: ''}})
         if(formData.userName){
           //Update userInfo
            updateProfile(user, {
             displayName:formData.userName,
           })
+        }else{
+          //Update userInfo
+          updateProfile(user, {
+            displayName: randUserName
+          })
         }
       })
       showSuccess('Successfully signed up with Google!');
     
-      
+      setLoading(false);
+      push(`/${randUserName}/Admin`)
     } catch (error) {
       showError(error.message);
     } finally {
-      setLoading(false);
-      push(`/${formData.userName}/Admin`)
+     
 
     }
   };
@@ -142,7 +148,7 @@ const SignupPage = () => {
       await sendEmailVerification(USER)
 
 
-       addToDoc('Owners',USER.uid,{uid:USER.uid,Owner:{...formData, password: '', passwordMatch: ''}})
+       addToDoc('Owners',USER.uid,{userName:formData.userName ,uid:USER.uid,Owner:{...formData, password: '', passwordMatch: ''}})
  
       push(`/${formData.userName}/Admin`)
 

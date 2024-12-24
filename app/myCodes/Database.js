@@ -94,17 +94,16 @@ export const FetchTheseDocs = async (datacollection, key, opp, value, orderby) =
     return data
 }
 export const useFetchDocsPresist = async (datacollection, key, opp, value, orderby, setter) => {
-    const ref = collection(DATABASE, `${datacollection}`)
-    const qry = orderby ? query(ref, where(`${key}`, `${opp}`, `${value}`), orderBy(`${orderby}`, 'desc')) : query(ref, where(`${value}`, `${opp}`, `${key}`))
-    onSnapshot(qry, (querySnapshot) => {
-        let data = []
-        querySnapshot.forEach((doc) => {
-            data = [...data, doc.data()]
-        });
-        setter(data)
-    })
+    const ref = collection(DATABASE, datacollection); // No need for template literals
+    const qry = orderby
+        ? query(ref, where(key, opp, value), orderBy(orderby, 'desc')) // Correct order of where
+        : query(ref, where(key, opp, value)); // Simplified for no orderBy
 
-}
+    onSnapshot(qry, (querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => doc.data()); // Efficiently map doc.data()
+        setter(data);
+    });
+};
 
 
 export async function deleteDocument(collection, Doc) {

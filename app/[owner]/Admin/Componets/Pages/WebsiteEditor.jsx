@@ -22,8 +22,8 @@ const genPresets = (presets = presetPalettes) =>
 
 const user = getAuth()
 
-const WebsiteEditor = () => {
-  const [siteInfo, setSiteInfo] = useState({
+const WebsiteEditor = ({SITEINFO}) => {
+  const [siteInfo, setSiteInfo] = useState(SITEINFO ||{
     name: '',
     heading: '',
     subHeading: '',
@@ -34,11 +34,16 @@ const WebsiteEditor = () => {
       text2: '#333333',
       text3: '#333333',
     },
-    terms: [{ title: '', body: '' }],
+    terms: [{ title: '', body: [''] }],
     categories: [{ name: '', image: null }],
     logo: null,
     depositFee: 25
   });
+
+  useEffect(() => {
+    setSiteInfo(SITEINFO)
+  }, [SITEINFO])
+  
 
 
   //check for changes and set saved to false if a change is made
@@ -86,18 +91,42 @@ const { token } = theme.useToken();
     });
   };
 
-  const handleTermChange = (index, field, value) => {
+  const handleTermChange = (termIndex, bodyIndex, value) => {
     const updatedTerms = [...siteInfo.terms];
-    updatedTerms[index][field] = value;
+    updatedTerms[termIndex].body[bodyIndex] = value;
     setSiteInfo({ ...siteInfo, terms: updatedTerms });
   };
 
-  const addTerm = () => {
-    setSiteInfo({ ...siteInfo, terms: [...siteInfo.terms, { title: '', body: '' }] });
+  const handleTitleChange = (termIndex, value) => {
+    const updatedTerms = [...siteInfo.terms];
+    updatedTerms[termIndex].title = value;
+    setSiteInfo({ ...siteInfo, terms: updatedTerms });
   };
 
-  const removeTerm = (index) => {
-    const updatedTerms = siteInfo.terms.filter((_, i) => i !== index);
+  const addBodyToTerm = (termIndex) => {
+    const updatedTerms = [...siteInfo.terms];
+    updatedTerms[termIndex].body.push('');
+    setSiteInfo({ ...siteInfo, terms: updatedTerms });
+  };
+
+  const removeBodyFromTerm = (termIndex, bodyIndex) => {
+    const updatedTerms = [...siteInfo.terms];
+    if (updatedTerms[termIndex].body.length > 1) {
+      updatedTerms[termIndex].body.splice(bodyIndex, 1);
+      setSiteInfo({ ...siteInfo, terms: updatedTerms });
+    }
+  };
+
+  const addTerm = () => {
+    setSiteInfo({
+      ...siteInfo,
+      terms: [...siteInfo.terms, { title: '', body: [''] }],
+    });
+  };
+
+  const removeTerm = (termIndex) => {
+    const updatedTerms = [...siteInfo.terms];
+    updatedTerms.splice(termIndex, 1);
     setSiteInfo({ ...siteInfo, terms: updatedTerms });
   };
 
@@ -195,22 +224,36 @@ const { token } = theme.useToken();
 
 {/* Terms */}
 <div style={{ marginBottom: '20px' }}>
-        <h3 className='font-bold t'>Terms & Conditions</h3>
-        {siteInfo.terms.map((term, index) => (
-          <div key={index} style={{ marginBottom: '10px' }}>
+        <h3 className="font-bold">Terms & Conditions</h3>
+        {siteInfo.terms.map((term, termIndex) => (
+          <div key={termIndex} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
             <Input
               placeholder="Term Title"
               value={term.title}
-              onChange={(e) => handleTermChange(index, 'title', e.target.value)}
-              style={{ marginBottom: '5px' }}
+              onChange={(e) => handleTitleChange(termIndex, e.target.value)}
+              style={{ marginBottom: '10px' }}
             />
-            <Input.TextArea
-              placeholder="Term Body"
-              value={term.body}
-              onChange={(e) => handleTermChange(index, 'body', e.target.value)}
-              style={{ marginBottom: '5px' }}
-            />
-            <Button onClick={() => removeTerm(index)} danger>
+            {(term?.body || []).map((body, bodyIndex) => (
+              <div key={bodyIndex} style={{ marginBottom: '10px' }}>
+                <Input.TextArea
+                  placeholder={`Body ${bodyIndex + 1}`}
+                  value={body}
+                  onChange={(e) => handleTermChange(termIndex, bodyIndex, e.target.value)}
+                  rows={4}
+                />
+                <Button
+                  onClick={() => removeBodyFromTerm(termIndex, bodyIndex)}
+                  danger
+                  style={{ marginTop: '5px' }}
+                >
+                  Remove Body
+                </Button>
+              </div>
+            ))}
+            <Button onClick={() => addBodyToTerm(termIndex)} type="dashed" style={{ marginTop: '10px' }}>
+              Add Body
+            </Button>
+            <Button onClick={() => removeTerm(termIndex)} danger style={{ marginTop: '10px', marginLeft: '10px' }}>
               Remove Term
             </Button>
           </div>

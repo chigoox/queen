@@ -83,6 +83,18 @@ export function fileToBase64Url(file) {
     });
 }
 
+
+export function generateRandomUsername() {
+    const adjectives = ["Swift", "Brave", "Clever", "Mighty", "Lucky", "Witty", "Silent", "Loyal", "Bright", "Fierce"];
+    const nouns = ["Eagle", "Tiger", "Wolf", "Bear", "Fox", "Dragon", "Hawk", "Lion", "Phoenix", "Shadow"];
+    const numbers = Math.floor(1000 + Math.random() * 9000); // Generates a 4-digit random number
+
+    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+
+    return `${randomAdjective}${randomNoun}${numbers}`;
+}
+
     
 
 export const createArray = (length) => {

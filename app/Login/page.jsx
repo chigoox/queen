@@ -32,7 +32,6 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-console.log(user)
   const handleEmailLogin = async () => {
     setIsLoading(true);
     try {

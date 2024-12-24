@@ -1,15 +1,16 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { useFetchDocsPresist } from "../../myCodes/Database"
+import { useFetchDocsPresist, watchDocument } from "../../myCodes/Database"
 import BookingInfo from "../../HomePage/BookingInfo"
-import Addons from "../../BookingOptions/Addons"
-import BookingOptions from "../../BookingOptions/BookingOptions"
+import Addons from "./BookingOptions/Addons"
+import BookingOptions from "./BookingOptions/BookingOptions"
 import NavBar from "../../NavBar/NavBar"
 import Logo from "../../General/Logo"
 import { Button } from '@nextui-org/react';
 import Bookings from "@/app/Calendar/Booking"
- 
+import { usePathname } from "next/navigation"
+
 
 
 export default function Home() {
@@ -17,10 +18,23 @@ export default function Home() {
   const [pickAddon, setPickAddon] = useState(false)
   const [selectDate, setSelectDate] = useState(false)
   const [theme, setTheme] = useState('')
+const [ownerData, setOwnerData] = useState({})
+const pathname = usePathname()
+const owenerID = pathname.replace('/Booking','').replace('/','')
+console.log(ownerData)
+
+useEffect(() => {
+  const getData = async () => {
+watchDocument('Owner',owenerID, setOwnerData)
+  }
+
+
+getData()
+
+}, [])
 
   const [bookingInfo, setBookingInfo] = useState({})
 
-  console.log(bookingInfo)
 
 
   const [options, setOptions] = useState([])

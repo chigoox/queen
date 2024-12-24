@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ImgCrop from 'antd-img-crop';
 import { SketchPicker } from 'react-color';
 import { Button as ButtonNext, Image } from '@nextui-org/react';

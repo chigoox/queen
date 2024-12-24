@@ -1,15 +1,15 @@
 'use client'
 
+import Bookings from "@/app/Calendar/Booking"
+import { Button } from '@nextui-org/react'
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { useFetchDocsPresist, watchDocument } from "../../myCodes/Database"
+import Logo from "../../General/Logo"
 import BookingInfo from "../../HomePage/BookingInfo"
+import { useFetchDocsPresist } from "../../myCodes/Database"
+import NavBar from "../../NavBar/NavBar"
 import Addons from "./BookingOptions/Addons"
 import BookingOptions from "./BookingOptions/BookingOptions"
-import NavBar from "../../NavBar/NavBar"
-import Logo from "../../General/Logo"
-import { Button } from '@nextui-org/react';
-import Bookings from "@/app/Calendar/Booking"
-import { usePathname } from "next/navigation"
 
 
 
@@ -20,12 +20,12 @@ export default function Home() {
   const [theme, setTheme] = useState('')
 const [ownerData, setOwnerData] = useState({})
 const pathname = usePathname()
-const owenerID = pathname.replace('/Booking','').replace('/','')
+const ownerUserName = pathname.replace('/Booking','').replace('/','')
 console.log(ownerData)
 
 useEffect(() => {
   const getData = async () => {
-watchDocument('Owner',owenerID, setOwnerData)
+    await useFetchDocsPresist('Owner','userName', '==', ownerUserName, 'ownerUserName')
   }
 
 

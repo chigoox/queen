@@ -30,7 +30,7 @@ const SignupPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const {push} = useRouter()
 
-
+console.log(formData)
   const showError = (errorMessage) => {
     messageApi.error({
       content: errorMessage,
@@ -122,7 +122,7 @@ const SignupPage = () => {
           ...formData, password: '',
            passwordMatch: ''}
           })
-          
+
         if(formData.userName){
           //Update userInfo
            updateProfile(user, {
@@ -288,7 +288,7 @@ const SignupPage = () => {
                   required
                 />
 
-<PasswordValidator password={formData.password} passwordMatch={formData.passwordMatch} />
+<PasswordValidator password={formData.password} confirmPassword={formData.passwordMatch} />
                 <Input
                   name="bookingSiteName"
                   label="Booking Site Name"

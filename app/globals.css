@@ -7,6 +7,7 @@
 --BGColor: rgb(0, 0, 0);
 --AccentColor: #ff001e;
 --TextColor: rgb(0, 0, 0);
+--TextColor2: rgb(0, 0, 0);
 --TextColorM: rgb(255, 255, 255);
 --AccentColorLight: color-mix(in srgb, var(--AccentColor), white);
 --AccentColorDark:color-mix(in srgb, var(--AccentColor), black);

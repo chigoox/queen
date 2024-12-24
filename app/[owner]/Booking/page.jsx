@@ -10,6 +10,7 @@ import { useFetchDocsPresist } from "../../myCodes/Database"
 import NavBar from "../../NavBar/NavBar"
 import Addons from "./BookingOptions/Addons"
 import BookingOptions from "./BookingOptions/BookingOptions"
+import { setCSSVariables } from "@/app/myCodes/Util"
 
 
 
@@ -72,9 +73,12 @@ console.log(OWNER)
   }, [window])
 
   useEffect(() => {
-   // setCSSVariable('--BGColor', theme?.bgColor)
-    // setCSSVariables('--TextColor', theme?.textColor)
-    // setCSSVariables('--AccentColor', theme?.accentColor)
+    setCSSVariables('--BGColor',colors.background)
+     setCSSVariables('--TextColorM', colors.text)
+     setCSSVariables('--TextColor', colors.text2)
+     setCSSVariables('--TextColor2', colors.text3)
+    setCSSVariables('--AccentColor', colors.accent)
+
 
   }, [])
   return (

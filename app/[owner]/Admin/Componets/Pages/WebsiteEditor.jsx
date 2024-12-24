@@ -141,7 +141,7 @@ const { token } = theme.useToken();
     
   };
 
-  const addCategory = () => {
+  const addCategofry = () => {
     setSiteInfo({
       ...siteInfo,
       categories: [...siteInfo.categories, { name: '', image: null }],

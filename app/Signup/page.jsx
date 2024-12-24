@@ -101,7 +101,28 @@ const SignupPage = () => {
         // The signed-in user info.
         const user = result.user;
        //update userName if one
-       addToDoc('Owners',user.uid,{userName:randUserName,uid:user.uid,Owner:{...formData, password: '', passwordMatch: ''}})
+       addToDoc('Owners',user.uid,{siteInfo:{
+        name: '',
+        heading: '',
+        subHeading: '',
+        colors: {
+          background: '#ffffff',
+          accent: '#000000',
+          text: '#333333',
+          text2: '#333333',
+          text3: '#333333',
+        },
+        terms: [{ title: '', body: [''] }],
+        categories: [{ name: '', image: null }],
+        logo: null,
+        depositFee: 25
+      },
+        userName:randUserName,
+        uid:user.uid,Owner:{
+          ...formData, password: '',
+           passwordMatch: ''}
+          })
+          
         if(formData.userName){
           //Update userInfo
            updateProfile(user, {

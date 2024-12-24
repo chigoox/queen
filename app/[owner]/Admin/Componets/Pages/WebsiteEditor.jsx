@@ -141,7 +141,7 @@ const { token } = theme.useToken();
     
   };
 
-  const addCategofry = () => {
+  const addCategory = () => {
     setSiteInfo({
       ...siteInfo,
       categories: [...siteInfo.categories, { name: '', image: null }],
@@ -156,9 +156,9 @@ const { token } = theme.useToken();
  
 
   const previewStyle = {
-    backgroundColor: siteInfo.colors.background,
-    color: siteInfo.colors.text,
-    borderColor: siteInfo.colors.accent,
+    backgroundColor: siteInfo?.colors.background,
+    color: siteInfo?.colors.text,
+    borderColor: siteInfo?.colors.accent,
   };
 
   return (
@@ -184,7 +184,7 @@ const { token } = theme.useToken();
       {/* Website Name */}
       <Input
         placeholder="Website Name"
-        value={siteInfo.name}
+        value={siteInfo?.name}
         onChange={(e) => handleInputChange('name', e.target.value)}
         style={{ marginBottom: '10px' }}
       />
@@ -193,7 +193,7 @@ const { token } = theme.useToken();
         <lable>Booking Deposit</lable>
         <Input
         placeholder="Deposit Fee"
-        value={siteInfo.depositFee}
+        value={siteInfo?.depositFee}
         onChange={(e) => handleInputChange('depositFee', e.target.value)}
         style={{ marginBottom: '10px' }}
       />
@@ -205,7 +205,7 @@ const { token } = theme.useToken();
      <h1 className='font-bold'>Site Heading</h1>
       <Input
         placeholder="Heading"
-        value={siteInfo.heading}
+        value={siteInfo?.heading}
         onChange={(e) => handleInputChange('heading', e.target.value)}
         style={{ marginBottom: '10px' }}
       />
@@ -213,7 +213,7 @@ const { token } = theme.useToken();
       {/* Sub-heading */}
       <Input
         placeholder="Sub-heading"
-        value={siteInfo.subHeading}
+        value={siteInfo?.subHeading}
         onChange={(e) => handleInputChange('subHeading', e.target.value)}
         style={{ marginBottom: '10px' }}
       />
@@ -225,7 +225,7 @@ const { token } = theme.useToken();
 {/* Terms */}
 <div style={{ marginBottom: '20px' }}>
         <h3 className="font-bold">Terms & Conditions</h3>
-        {siteInfo.terms.map((term, termIndex) => (
+        {((siteInfo?.terms || [])).map((term, termIndex) => (
           <div key={termIndex} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
             <Input
               placeholder="Term Title"
@@ -267,7 +267,7 @@ const { token } = theme.useToken();
       <div className='border-dashed border-2 p-2' style={{ marginBottom: '20px' }}>
         <h3 className='font-bold text-lg'>Categories</h3>
         <div className=''>
-        {siteInfo.categories.map((category, index) => (
+        {siteInfo?.categories.map((category, index) => (
           <div key={index} style={{ marginBottom: '10px' }}>
             <Input
               placeholder="Category Name"
@@ -303,17 +303,17 @@ const { token } = theme.useToken();
       <div className='m-auto p-1 overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>
         <div className='grid grid-cols-1   md:w-[80%] m-auto'>
           <div className='m-auto'>
-            <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Background Color</div>)} value={siteInfo.colors.background} onChange={(color) => handleColorChange('background', color)} />
+            <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Background Color</div>)} value={siteInfo?.colors.background} onChange={(color) => handleColorChange('background', color)} />
           </div>
           <div className='m-auto'>
-            <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Accent Color</div>)} value={siteInfo.colors.accent} onChange={(color) => handleColorChange('accent', color)} />
+            <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Accent Color</div>)} value={siteInfo?.colors.accent} onChange={(color) => handleColorChange('accent', color)} />
           </div>
           <div className='m-auto center-col border w-40'>
             <div className='center'>Text Color</div>
             <div className='center gap-2'>
-            <ColorPicker className=' justify-start' presets={presets}  value={siteInfo.colors.text} onChange={(color) => handleColorChange('text', color)} />
-            <ColorPicker className='justify-start'  presets={presets}  value={siteInfo.colors.text2} onChange={(color) => handleColorChange('text2', color)} />
-            <ColorPicker className='justify-start'  presets={presets}  value={siteInfo.colors.text3} onChange={(color) => handleColorChange('text3', color)} />
+            <ColorPicker className=' justify-start' presets={presets}  value={siteInfo?.colors.text} onChange={(color) => handleColorChange('text', color)} />
+            <ColorPicker className='justify-start'  presets={presets}  value={siteInfo?.colors.text2} onChange={(color) => handleColorChange('text2', color)} />
+            <ColorPicker className='justify-start'  presets={presets}  value={siteInfo?.colors.text3} onChange={(color) => handleColorChange('text3', color)} />
             </div>
           </div>
           <div className='m-auto'>
@@ -325,23 +325,23 @@ const { token } = theme.useToken();
       {/* Preview */}
       <div className='center-col rounded-xl overflow-hidden' style={{ ...previewStyle, padding: '20px', border: '1px solid' }}>
         <Image className='bg-black h-20 w-20 rounded-full' src={siteInfo.logo} />
-        <h2 className='font-bold' style={{color: siteInfo.colors.accent}}>{siteInfo.heading}</h2>
-        <p style={{color: siteInfo.colors.text}}>{siteInfo.subHeading}</p>
+        <h2 className='font-bold' style={{color: siteInfo?.colors.accent}}>{siteInfo?.heading}</h2>
+        <p style={{color: siteInfo?.colors.text}}>{siteInfo?.subHeading}</p>
 
         <CollapsibleSectionMain title={'Read Terms'}>
                 <CollapsibleSection title="Deposit">
                     <ul className="space-y-4">
-                        <li style={{color: siteInfo.colors.text}}>$20 deposit is required to book, and it is non-refundable.</li>
+                        <li style={{color: siteInfo?.colors.text}}>$20 deposit is required to book, and it is non-refundable.</li>
                         
                     </ul>
                 </CollapsibleSection>
           </CollapsibleSectionMain>
 
-          <ButtonNext style={{color: siteInfo.colors.text2, backgroundColor: siteInfo.colors.accent}} className='center p-2 font-bold text-xl '>Continue</ButtonNext>
+          <ButtonNext style={{color: siteInfo?.colors.text2, backgroundColor: siteInfo.colors.accent}} className='center p-2 font-bold text-xl '>Continue</ButtonNext>
           
-          <div style={{backgroundColor: siteInfo.colors.background}} className='rounded w-3/4  center p-2 my-4 h-20 m-auto'>
-            <div style={{backgroundColor: siteInfo.colors.accent}} className='h-20 w-20 center font-bold rounded-lg'>
-              <h1 className='center' style={{ color: siteInfo.colors.text2}}>5</h1>
+          <div style={{backgroundColor: siteInfo?.colors.background}} className='rounded w-3/4  center p-2 my-4 h-20 m-auto'>
+            <div style={{backgroundColor: siteInfo?.colors.accent}} className='h-20 w-20 center font-bold rounded-lg'>
+              <h1 className='center' style={{ color: siteInfo?.colors.text2}}>5</h1>
             </div>
           </div>
 

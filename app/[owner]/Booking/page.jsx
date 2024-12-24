@@ -80,7 +80,7 @@ console.log(OWNER)
     setCSSVariables('--AccentColor', colors.accent)
 
 
-  }, [])
+  }, [colors])
   return (
     <div className=" border-[color:var(--AccentColor)] border  min-h-screen bg-[color:var(--BGColor)] w-full overflow-hidden pb-10  font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col  p-2">

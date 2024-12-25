@@ -1,5 +1,5 @@
 import { Button } from "@nextui-org/react"
-import { ArrowDownRightIcon, CornerDownRight, DivideIcon, MoveDown, Tally1 } from "lucide-react"
+import { ArrowDownRightIcon, BookAIcon, CornerDownRight, DivideIcon, Edit2Icon, MoveDown, Settings, Tally1 } from "lucide-react"
 import { useState } from "react"
 import { AiFillHome, AiFillPicture, AiOutlineContainer, AiOutlineDollar, AiOutlineUser } from "react-icons/ai"
 import { ImPriceTag } from "react-icons/im"
@@ -10,10 +10,12 @@ const AdminMenuItem = ({ showMenu, menuItem, setSelectedMenu, selectedMenu }) =>
     const menuIcon = {
         Home: <AiFillHome />,
         Booking: <AiOutlineContainer />,
-        Products: <ImPriceTag />,
+        Services: <BookAIcon />,
         Customers: <AiOutlineUser />,
-        WebsiteEditor: <AiFillPicture />,
-        Discount: <AiOutlineDollar />
+        WebsiteEditor: <Edit2Icon />,
+        Discount: <AiOutlineDollar />,
+        Settings: <Settings/>,
+
     }
     const SubMenu = ({ menuItem }) => {
 

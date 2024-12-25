@@ -5,6 +5,7 @@ import { AdminHome } from './AdminHome'
 import { AdminOrders } from './AdminOrders'
 import { AdminProduct } from './AdminProduct'
 import WebsiteEditor from './WebsiteEditor'
+import AdminSettings from './AdminSettings'
 
 const AdminBody = ({ selectedMenu, owner, ownerData }) => {
 const [WebsiteEditorData, setWebsiteEditorData] = useState({})
@@ -31,6 +32,7 @@ console.log(ownerData, owner)
                 {selectedMenu == menu[3].menus[0] && <AdminHome />}
                 {selectedMenu == menu[4] && <WebsiteEditor SITEINFO={ownerData?.siteInfo} />}
                 {selectedMenu == menu[5] && <AdminHome />}
+                {selectedMenu == menu[6] && <AdminSettings ownerInfo={ownerData?.Owner} />}
 
             </Card>
         </div>

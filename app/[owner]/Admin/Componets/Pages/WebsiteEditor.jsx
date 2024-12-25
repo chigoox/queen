@@ -53,7 +53,7 @@ const WebsiteEditor = ({SITEINFO}) => {
 //submitt button
 const submit = async () =>{
 
-  const imageLogo = await useUploader(siteInfo.logo, `${user?.currentUser.uid}/Logo`)
+  const imageLogo = await useUploader(siteInfo?.logo, `${user?.currentUser.uid}/Logo`)
   
   let imageCategories = []
   for (let index = 0; index < siteInfo.categories.length; index++) {
@@ -87,7 +87,7 @@ const { token } = theme.useToken();
   const handleColorChange = (colorField, color) => {
     setSiteInfo({
       ...siteInfo,
-      colors: { ...siteInfo.colors, [colorField]: color.toHexString() },
+      colors: { ...siteInfo?.colors, [colorField]: color.toHexString() },
     });
   };
 
@@ -324,7 +324,7 @@ const { token } = theme.useToken();
       
       {/* Preview */}
       <div className='center-col rounded-xl overflow-hidden' style={{ ...previewStyle, padding: '20px', border: '1px solid' }}>
-        <Image className='bg-black h-20 w-20 rounded-full' src={siteInfo.logo} />
+        <Image className='bg-black h-20 w-20 rounded-full' src={siteInfo?.logo} />
         <h2 className='font-bold' style={{color: siteInfo?.colors.accent}}>{siteInfo?.heading}</h2>
         <p style={{color: siteInfo?.colors.text}}>{siteInfo?.subHeading}</p>
 
@@ -337,7 +337,7 @@ const { token } = theme.useToken();
                 </CollapsibleSection>
           </CollapsibleSectionMain>
 
-          <ButtonNext style={{color: siteInfo?.colors.text2, backgroundColor: siteInfo.colors.accent}} className='center p-2 font-bold text-xl '>Continue</ButtonNext>
+          <ButtonNext style={{color: siteInfo?.colors.text2, backgroundColor: siteInfo?.colors.accent}} className='center p-2 font-bold text-xl '>Continue</ButtonNext>
           
           <div style={{backgroundColor: siteInfo?.colors.background}} className='rounded w-3/4  center p-2 my-4 h-20 m-auto'>
             <div style={{backgroundColor: siteInfo?.colors.accent}} className='h-20 w-20 center font-bold rounded-lg'>

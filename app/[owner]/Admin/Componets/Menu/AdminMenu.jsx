@@ -6,7 +6,7 @@ import { signOut } from 'firebase/auth'
 import { AUTH } from '@/Firebase'
 import { useRouter } from 'next/navigation'
 
-export const menu = ['Home', { name: 'Booking', menus: [] }, { name: 'Products', menus: [] }, { name: 'Customers', menus: [] }, 'WebsiteEditor', 'Discount']
+export const menu = ['Home', { name: 'Booking', menus: [] }, { name: 'Services', menus: [] }, { name: 'Customers', menus: [] }, 'WebsiteEditor', 'Discount','Settings']
 export const AdminMenu = ({ setSelectedMenu, selectedMenu, ownerData }) => {
     const [showMenu, setShowMenu] = useState(true)
     const {push} = useRouter()
@@ -25,7 +25,7 @@ console.log(ownerData)
             </Button>
 
             <Button onPress={async () => {  push(`/${ownerData?.userName}/Booking`) }} className={` text-gray-600 font-semibold hover:bg-gray-200 bg-white relative top-20 ${showMenu ? 'p-4' : 'p-1'} w-full   flex justify-start  mt-2 h-7  group rounded-xl`}>
-                <EyeIcon  className='w-23 h-24' />
+                <EyeIcon size={22}  className='w-23 h-24' />
                 Website
             </Button>
             <Button onPress={async () => { await signOut(AUTH); push('/') }} className={` text-gray-600 font-semibold hover:bg-gray-200 bg-white relative top-20 ${showMenu ? 'p-4' : 'p-1'} w-full   flex justify-start  mt-2 h-7  group rounded-xl`}>

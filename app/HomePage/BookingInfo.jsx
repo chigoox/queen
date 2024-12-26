@@ -50,7 +50,6 @@ export const CollapsibleSectionMain = ({ title, children }) => {
 
 const BookingInfo = ({termsData}) => {
     const [isOpenMain, setIsOpenMain] = useState(false);
-console.log(termsData)
     return (
         <CollapsibleSectionMain title={'Read Terms'}>
             <div className="p-8 max-w-lg mx-auto  rounded-lg shadow-lg text-[color:var(--TextColorM)]">

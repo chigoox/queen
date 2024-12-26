@@ -10,7 +10,6 @@ export const menu = ['Home', { name: 'Booking', menus: [] }, { name: 'Services',
 export const AdminMenu = ({ setSelectedMenu, selectedMenu, ownerData }) => {
     const [showMenu, setShowMenu] = useState(true)
     const {push} = useRouter()
-console.log(ownerData)
     return (
         <div className={`Navigator ${showMenu ? 'w-[22rem] lg:w-64' : 'w-11 overflow-hidden'}  z-10 px-2  lg:relative absolute trans top-0 left-0 border-r bg-white h-screen`}>
             {menu.map((item) => {

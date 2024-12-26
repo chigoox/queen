@@ -41,7 +41,6 @@ const {
 //
 useEffect(() => {
   const getData = async () => {
-    console.log(pageOwnerUserName)
     await useFetchDocsPresist('Owners', 'userName', '==', pageOwnerUserName, 'userName', setOwnerData);
   }
 getData()
@@ -52,8 +51,7 @@ getData()
 
 
   const [options, setOptions] = useState([])
-  console.log(options)
-console.log(OWNER)
+
   useEffect(() => {
     const getData = async () => {
       let FIREBS_PRODUCTS
@@ -63,7 +61,6 @@ console.log(OWNER)
           const miliseconds = i.created.seconds * 1000 + i.created.nanoseconds / 1000000
           return ({ ...i, created: miliseconds })
         })
-        console.log(FIREBS_PRODUCTS)
         setOptions([...FIREBS_PRODUCTS])
       })
     }

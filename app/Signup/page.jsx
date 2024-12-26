@@ -30,7 +30,6 @@ const SignupPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const {push} = useRouter()
 
-console.log(formData)
   const showError = (errorMessage) => {
     messageApi.error({
       content: errorMessage,

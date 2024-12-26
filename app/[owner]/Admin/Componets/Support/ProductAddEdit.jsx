@@ -42,7 +42,6 @@ console.log(SITEINFO)
     })
 
 
-    console.log(product)
     useEffect(() => {
         if (openType == "openNew") onOpen()
         if (openType == "openEdit") onOpen()
@@ -201,7 +200,6 @@ export const VariavntPanel = ({ indexi, setter }) => {
     const [variantCount, setVariantCount] = useState({ [`variant0`]: { name: '', value: {}, valueCount: 1 } })
     const ActualPrice = Object.values(variantCount).map(item => {
         const SubVariants = Object.values(item.value)
-        console.log(item)
         return SubVariants.length > 0 ? SubVariants.map(_item => {
             (`${item.name} ${_item}`)
             return (
@@ -213,7 +211,6 @@ export const VariavntPanel = ({ indexi, setter }) => {
     })
 
 
-    console.log(ActualPrice)
 
 
     return (

@@ -12,7 +12,6 @@ const [WebsiteEditorData, setWebsiteEditorData] = useState({})
 
 
 
-console.log(ownerData, owner)
 
 
     return (

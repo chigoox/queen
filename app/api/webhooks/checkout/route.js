@@ -1,11 +1,11 @@
-import { FetchTheseDocs, addToDatabase, addToDoc } from "@/app/myCodes/Database";
+import { FetchTheseDocs, addToDatabase } from "@/app/myCodes/Database";
 import { format } from "date-fns";
 import { serverTimestamp } from "firebase/firestore";
 import Cors from "micro-cors";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { OrderConfirmationMail } from "../../../myCodes/Email";
-import { fetchDocument } from "../../../myCodes/Database";
+import { addToDoc, fetchDocument } from "../../../myCodes/Database";
 
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE);
 

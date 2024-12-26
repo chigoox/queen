@@ -196,7 +196,7 @@ const bookID = getRandTN(10)
        
         let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime', '==', true)
         const apointmentID = (apointments?.length || 0) + 1
-        
+        console.log(apointmentID)
         const apointment = {
             ownerID:OWNER.uid,
             OwnerUserName:OWNER?.userName,

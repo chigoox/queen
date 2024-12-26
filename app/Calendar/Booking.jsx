@@ -1,3 +1,4 @@
+import { FetchTheseDocs, addToDatabase } from "@/app/myCodes/Database";
 import {
     add,
     eachDayOfInterval,
@@ -29,9 +30,9 @@ import TimesBar from './TimesBar'
 import { fetchDocument } from '@/UTIL/Database'
 import Loading from "@/app/Loading"
 import { Form, Input } from "@nextui-org/react"
-
-
-
+import {getRandTN} from '@/app/myCodes/Util'
+import {addToDoc} from '@/app/myCodes/Database'
+import { serverTimestamp } from "firebase/firestore"
 
 
 
@@ -189,15 +190,39 @@ const Bookings = ({OWNER, bookingInfo, setBookingInfo }) => {
                 
             })
         })
-
+const bookID = getRandTN(10)
         const StripeCustomer = await customerData?.json()
         const customerID = StripeCustomer[0]?.id
+       
+        let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime', '==', true)
+        const apointmentID = (apointments?.length || 0) + 1
+        
+        const apointment = {
+            ownerID:OWNER.uid,
+            OwnerUserName:OWNER?.userName,
+            apointmentID: apointmentID,
+            apointmentDate: bookingInfo?.apointment,
+            apointmentTime: bookingInfo?.time12,
+            service: bookingInfo.service,
+            addons: bookingInfo.addons,
+            customerName: bookingInfo?.customer.name,
+            customerEmail: bookingInfo?.customer.email,
+            customerPhone: bookingInfo?.customer.phone,
+            dateCreatedServerTime: serverTimestamp(),
+            dateCreatedRealTime: new Date().toLocaleString(),
+            bookID: bookID,
+            customer: customerID,
+            price: bookingInfo?.metadata?.price,
+        }
+        
+        await addToDoc('Temp', bookID, apointment)
+
         const data = await fetch('/api/Checkout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
              redirect: 'follow',
             body: JSON.stringify({
-                price: 25,// ORIGINAL (bookingInfo?.price * (bookingInfo.bundle ? 1 : 0.50) * bookingInfo.bundle ? 4 : 1) - bookingInfo.bundle ? 50 : 0, //if bundled( price * 4 - 50) else (price/2)
+                price: bookingInfo?.metadata?.price,// ORIGINAL (bookingInfo?.price * (bookingInfo.bundle ? 1 : 0.50) * bookingInfo.bundle ? 4 : 1) - bookingInfo.bundle ? 50 : 0, //if bundled( price * 4 - 50) else (price/2)
                 name: bookingInfo?.customer.name,
                 email: bookingInfo?.customer.email,
                 phone: bookingInfo?.customer.phone,
@@ -207,12 +232,15 @@ const Bookings = ({OWNER, bookingInfo, setBookingInfo }) => {
                 apointmentDate: bookingInfo?.apointment,
                 apointmentTime: bookingInfo?.time12,
                 ownerID: OWNER?.uid,
-                OwnerUserName: OWNER?.userName
+                OwnerUserName: OWNER?.userName,
+                bookID: bookID
+
+
               
             })
         })
-        let URL = await data.json()
 
+        let URL = await data.json()
         window.location.href = URL
 
     }

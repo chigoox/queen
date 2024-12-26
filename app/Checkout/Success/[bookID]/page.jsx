@@ -1,4 +1,28 @@
+'use client'
+import { useFetchDocsPresist } from "@/app/myCodes/Database"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
+
+
 export default function ThankYou() {
+
+        const [bookingData, setBookingData] = useState([])
+        const APPOINTMENT = bookingData[0]
+        const pathname = usePathname()
+        const search = pathname.replace('/Checkout/Success/','').replace('/','')
+    
+        console.log(search)
+        //fetch Data for user in current page
+        useEffect(() => {
+        const getData = async () => {
+            await useFetchDocsPresist('Temp', 'bookID', '==', search, 'bookID', setBookingData);
+        }
+        getData()
+        }, [])
+
+
+console.log(bookingData)
+
     return (
         <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center">
             <div className="text-center max-w-xl p-8 border-2 border-gold rounded-lg shadow-lg ">

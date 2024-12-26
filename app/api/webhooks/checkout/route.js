@@ -1,4 +1,3 @@
-import { FetchTheseDocs, addToDatabase } from "@/app/myCodes/Database";
 import { format } from "date-fns";
 import { serverTimestamp } from "firebase/firestore";
 import Cors from "micro-cors";
@@ -25,11 +24,10 @@ export async function POST(request) {
     if (event.type === "checkout.session.completed") {
 
       const data = event.data.object.metadata
-      const { OwnerUserName, apointmentDate, apointmentTime, service, addons, customerName, customerEmail, customerPhone, ownerID } = data
+      const { OwnerUserName, apointmentDate, apointmentTime, service, addons, customerName, customerEmail, customerPhone, ownerID, apointmentID } = data
 
 
-      let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime', '==', true)
-      const apointmentID = (apointments?.length || 0) + 1
+      
 
       const apointment = {
         ownerID:ownerID,
@@ -57,9 +55,6 @@ console.log('Firestore Response:', res);
 
       const cusomterInfo = { name: customerName, email: customerEmail, phone: customerPhone }
       await OrderConfirmationMail(cusomterInfo, service, addons, apointmentTime, apointmentDate)
-
-
-      
     }
 
 

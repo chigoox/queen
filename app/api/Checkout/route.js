@@ -2,13 +2,12 @@ import { isDev } from "@/app/myCodes/Util";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-
-
 export async function POST(request) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     let data = await request.json();
     let {
         ownerID = 0,
+        bookID = 0,
         customer = {},
         service = {},
         addons,
@@ -35,8 +34,8 @@ export async function POST(request) {
         ],
         customer: customer || null,
         mode: 'payment',
-        success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/${OwnerUserName}/Checkout/Success`,
-        cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/${OwnerUserName}/Checkout/Cancelled`,
+        success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Success/${bookID}`,
+        cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Cancelled/${bookID}`,
         metadata: {
             customerID: customer?.ID,
             customerName: name,

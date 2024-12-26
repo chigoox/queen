@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import ImgCrop from 'antd-img-crop';
-import { SketchPicker } from 'react-color';
-import { Button as ButtonNext, Image } from '@nextui-org/react';
-import { Input, Button, Upload, message, ColorPicker, theme } from 'antd';
 import { generate, green, presetPalettes, red } from '@ant-design/colors';
+import { Button as ButtonNext, Image } from '@nextui-org/react';
+import { Button, ColorPicker, Input, Upload, theme } from 'antd';
+import ImgCrop from 'antd-img-crop';
+import { useEffect, useState } from 'react';
 
 
 
 import { CollapsibleSection, CollapsibleSectionMain } from '@/app/HomePage/BookingInfo';
-import Bookings from '@/app/[owner]/Calendar/Booking';
-import { fileToBase64Url, getBase64 } from '@/app/myCodes/Util';
-import { addToDoc } from '@/app/myCodes/Database';
 import { useUploader } from '@/app/Hooks/useUploader';
+import { addToDoc } from '@/app/myCodes/Database';
 import { getAuth } from 'firebase/auth';
 
 const genPresets = (presets = presetPalettes) =>

@@ -8,7 +8,7 @@ import { generate, green, presetPalettes, red } from '@ant-design/colors';
 
 
 import { CollapsibleSection, CollapsibleSectionMain } from '@/app/HomePage/BookingInfo';
-import Bookings from '@/app/Calendar/Booking';
+import Bookings from '@/app/[owner]/Calendar/Booking';
 import { fileToBase64Url, getBase64 } from '@/app/myCodes/Util';
 import { addToDoc } from '@/app/myCodes/Database';
 import { useUploader } from '@/app/Hooks/useUploader';

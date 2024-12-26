@@ -1,6 +1,6 @@
 'use client'
 
-import Bookings from "@/app/Calendar/Booking"
+import Bookings from "@/app/[owner]/Calendar/Booking"
 import { Button } from '@nextui-org/react'
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"

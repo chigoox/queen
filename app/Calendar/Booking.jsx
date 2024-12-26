@@ -204,21 +204,45 @@ const bookID = getRandTN(10)
             apointmentID: apointmentID,
             apointmentDate: bookingInfo?.apointment,
             apointmentTime: bookingInfo?.time12,
-            service: bookingInfo.service,
-            addons: bookingInfo.addons,
+            service: bookingInfo?.service || {},
+            addons: bookingInfo?.addons || {},
             customerName: bookingInfo?.customer.name,
             customerEmail: bookingInfo?.customer.email,
             customerPhone: bookingInfo?.customer.phone,
             dateCreatedServerTime: serverTimestamp(),
             dateCreatedRealTime: new Date().toLocaleString(),
             bookID: bookID,
-            customer: customerID,
-            price: bookingInfo?.metadata?.price,
+            customer: customerID || null,
+            price: bookingInfo?.metadata?.price || 0,
         }
         console.log(apointment)
         await addToDoc('Temp', bookID, apointment)
 
-        
+        const data = await fetch('/api/Checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+             redirect: 'follow',
+            body: JSON.stringify({
+                price: bookingInfo?.metadata?.price || 0,// ORIGINAL (bookingInfo?.price * (bookingInfo.bundle ? 1 : 0.50) * bookingInfo.bundle ? 4 : 1) - bookingInfo.bundle ? 50 : 0, //if bundled( price * 4 - 50) else (price/2)
+                name: bookingInfo?.customer.name,
+                email: bookingInfo?.customer.email,
+                phone: bookingInfo?.customer.phone,
+                addons: JSON.stringify(bookingInfo.addons || {}),
+                customer: customerID || null,
+                service: JSON.stringify(bookingInfo.service || {}),
+                apointmentDate: bookingInfo?.apointment,
+                apointmentTime: bookingInfo?.time12,
+                ownerID: OWNER?.uid,
+                OwnerUserName: OWNER?.userName,
+                bookID: bookID
+
+
+              
+            })
+        })
+
+        let URL = await data.json()
+        window.location.href = URL
 
     }
 

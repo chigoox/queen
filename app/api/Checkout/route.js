@@ -35,8 +35,8 @@ export async function POST(request) {
         ],
         customer: customer || null,
         mode: 'payment',
-        success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/${userName}/Checkout/Success`,
-        cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/${userName}/Checkout/Cancelled`,
+        success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/${OwnerUserName}/Checkout/Success`,
+        cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/${OwnerUserName}/Checkout/Cancelled`,
         metadata: {
             customerID: customer?.ID,
             customerName: name,

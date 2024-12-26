@@ -46,13 +46,20 @@ export async function POST(request) {
         dateCreatedRealTime: new Date().toLocaleString()
       }
 //
+console.log('Appointment Data:', apointment);
+await addToDoc('Apointment', apointmentID, apointment);
+const ref = db.collection('Apointment').doc(apointmentID);
+const res = await ref.set(apointment, { merge: true });
 
-      await addToDoc('Apointment', apointmentID, apointment)
-      const ref = db.collection('Apointment').doc(apointmentID);
-      const res = await ref.set(apointment, { merge: true });
+// Log Firestore response
+console.log('Firestore Response:', res);
+
 
       const cusomterInfo = { name: customerName, email: customerEmail, phone: customerPhone }
       await OrderConfirmationMail(cusomterInfo, service, addons, apointmentTime, apointmentDate)
+
+
+      
     }
 
 

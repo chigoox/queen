@@ -218,31 +218,7 @@ const bookID = getRandTN(10)
         console.log(apointment)
         await addToDoc('Temp', bookID, apointment)
 
-        const data = await fetch('/api/Checkout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-             redirect: 'follow',
-            body: JSON.stringify({
-                price: bookingInfo?.metadata?.price,// ORIGINAL (bookingInfo?.price * (bookingInfo.bundle ? 1 : 0.50) * bookingInfo.bundle ? 4 : 1) - bookingInfo.bundle ? 50 : 0, //if bundled( price * 4 - 50) else (price/2)
-                name: bookingInfo?.customer.name,
-                email: bookingInfo?.customer.email,
-                phone: bookingInfo?.customer.phone,
-                addons: JSON.stringify(bookingInfo.addons),
-                customer: customerID,
-                service: JSON.stringify(bookingInfo.service),
-                apointmentDate: bookingInfo?.apointment,
-                apointmentTime: bookingInfo?.time12,
-                ownerID: OWNER?.uid,
-                OwnerUserName: OWNER?.userName,
-                bookID: bookID
-
-
-              
-            })
-        })
-
-        let URL = await data.json()
-        window.location.href = URL
+        
 
     }
 

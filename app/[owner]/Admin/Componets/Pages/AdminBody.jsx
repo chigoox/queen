@@ -23,7 +23,7 @@ console.log(ownerData, owner)
                 {selectedMenu == menu[1].name && <AdminOrders />}
                 {selectedMenu == menu[1].menus[0] && <AdminHome />}
                 {selectedMenu == menu[1].menus[1] && <AdminHome />}
-                {selectedMenu == menu[2].name && <AdminProduct />}
+                {selectedMenu == menu[2].name && <AdminProduct SITEINFO={ownerData?.siteInfo}   />}
                 {selectedMenu == menu[2].menus[0] && <AdminHome />}
                 {selectedMenu == menu[2].menus[1] && <AdminHome />}
                 {selectedMenu == menu[2].menus[2] && <AdminHome />}

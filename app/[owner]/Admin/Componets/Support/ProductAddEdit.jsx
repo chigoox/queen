@@ -5,7 +5,6 @@ import { Uploader } from './Uploader';
 //import Masonry from 'masonry-layout';
 import { createArray } from '@/app/myCodes/Util';
 import dynamic from "next/dynamic";
-import { category } from '@/app/META';
 import { useCreateProductUtil, useUpdateProductUtil } from '../../AdminUtil';
 const TextEditor = dynamic(() => import("./BundledEditor"), {
     ssr: false,
@@ -16,10 +15,10 @@ const Masonry = dynamic(() => import("masonry-layout"), {
 
 
 
-export const ProductAddEdit = ({ openType, setWindow, defualt }) => {
+export const ProductAddEdit = ({SITEINFO, openType, setWindow, defualt }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-
+const category = ([...SITEINFO?.categories, 'Addon'] || []).map((item)=>{return(item.name)})
+console.log(SITEINFO)
     useEffect(() => {
         var grid = document.querySelector('.grid');
         var msnry = new Masonry(grid, {

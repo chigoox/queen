@@ -13,8 +13,8 @@ const BookingOptions = ({categories, options, setBookingInfo, bookingInfo }) => 
             {/* Brows or lashes */}
             <div className='center gap-2 mt-8  h-32 my-2'>
                 {(categories || []).map((item, index) => {
-                    return (<Button key={index} onPress={() => { setSelectedCategory(item) }} radius='none' className={`p-0 trans  relative text-3xl bg-yellow-600 text-white font-semibold  ${selectedCategory == item ? 'w-[60%] h-full' : selectedCategory == false ? 'w-1/2 h-full' : 'w-[40%] h-24'}`}>
-                        <h1 className='absolute z-20 '>
+                    return (<Button key={index} onPress={() => { setSelectedCategory(item) }} radius='none' className={`p-0 trans  relative text-3xl bg-[color:var(--AccentColor)] text-white font-semibold  ${selectedCategory == item ? 'w-[60%] h-full' : selectedCategory == false ? 'w-1/2 h-full' : 'w-[40%] h-24'}`}>
+                        <h1 className='absolute z-20 text-[color:var(--TextColor)]'>
                             {item?.name}
                         </h1>
                         <Image className='w-full object-cover' alt='categoryImage' src={item?.Image}/> 

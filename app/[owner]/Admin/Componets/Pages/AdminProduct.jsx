@@ -4,7 +4,7 @@ import { AiFillPlusSquare } from 'react-icons/ai'
 import { ProductAddEdit } from '../Support/ProductAddEdit'
 import ProductsListAdmin from '../Support/ProductsListAdmin'
 
-export const AdminProduct = () => {
+export const AdminProduct = ({SITEINFO }) => {
     const [ProductWindow, setProductWindow] = useState(false)
     const [selectedProductData, setSelectedProductData] = useState({})
     const [filter, setFilter] = useState(false)
@@ -13,8 +13,8 @@ export const AdminProduct = () => {
         <div>
 
 
-            {ProductWindow == 'openNew' && <ProductAddEdit setWindow={setProductWindow} openType={'openNew'} />}
-            {ProductWindow == 'openEdit' && <ProductAddEdit defualt={selectedProductData} setWindow={setProductWindow} openType={'openEdit'} />}
+            {ProductWindow == 'openNew' && <ProductAddEdit  SITEINFO={SITEINFO} setWindow={setProductWindow} openType={'openNew'} />}
+            {ProductWindow == 'openEdit' && <ProductAddEdit SITEINFO={SITEINFO} defualt={selectedProductData} setWindow={setProductWindow} openType={'openEdit'} />}
 
 
             <div className='between'>

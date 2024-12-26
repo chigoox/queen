@@ -17,9 +17,9 @@ export async function POST(request) {
         email = '',
         apointmentDate = '',
         apointmentTime = '',
+        OwnerUserName = ''
     } = data;
 
-    console.log(data)
     const session = await stripe.checkout.sessions.create({
         line_items: [
             {
@@ -35,8 +35,8 @@ export async function POST(request) {
         ],
         customer: customer || null,
         mode: 'payment',
-        success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Success`,
-        cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Cancelled`,
+        success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/${userName}/Checkout/Success`,
+        cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/${userName}/Checkout/Cancelled`,
         metadata: {
             customerID: customer?.ID,
             customerName: name,
@@ -48,6 +48,7 @@ export async function POST(request) {
             apointmentTime: apointmentTime,
             type: 'checkout',
             ownerID:ownerID,
+            ownerUserName:OwnerUserName
         },
 
     })

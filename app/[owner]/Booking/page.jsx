@@ -55,8 +55,8 @@ getData()
   useEffect(() => {
     const getData = async () => {
       let FIREBS_PRODUCTS
-
-      await useFetchDocsPresist('Services', 'owner', '==', pageOwnerUserName, 'created', (data) => {
+console.log('first', OWNER)
+      await useFetchDocsPresist('Services', 'owner', '==', OWNER?.uid, 'created', (data) => {
         FIREBS_PRODUCTS = data.map(i => {
           const miliseconds = i.created.seconds * 1000 + i.created.nanoseconds / 1000000
           return ({ ...i, created: miliseconds })
@@ -66,7 +66,7 @@ getData()
     }
 
     getData()
-  }, [window])
+  }, [OWNER])
 
   useEffect(() => {
     setCSSVariables('--BGColor',colors.background)
@@ -116,7 +116,7 @@ getData()
         {(startBooking && !selectDate) && <Button onPress={() => { setStartBooking(false) }} on className='font-bold text-xl mt-4 mb-12 bg-[color:var(--AccentColor)] text-[color:var(--TextColor)]'>Back</Button>}
         <Addons setBookingInfo={setBookingInfo} options={options} contintue={setSelectDate} setIsOpened={setPickAddon} opened={pickAddon} />
 
-        {selectDate && <Bookings bookingInfo={bookingInfo} setBookingInfo={setBookingInfo} />}
+        {selectDate && <Bookings OWNER={OWNER} bookingInfo={bookingInfo} setBookingInfo={setBookingInfo} />}
       </main>
 
     </div>

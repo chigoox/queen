@@ -36,7 +36,7 @@ import { Form, Input } from "@nextui-org/react"
 
 
 
-const Bookings = ({ bookingInfo, setBookingInfo }) => {
+const Bookings = ({OWNER, bookingInfo, setBookingInfo }) => {
     const [adminDATA, setAdminDATA] = useState({})
     const reservations = adminDATA?.allRes ? adminDATA?.allRes : []
 
@@ -206,7 +206,8 @@ const Bookings = ({ bookingInfo, setBookingInfo }) => {
                 service: JSON.stringify(bookingInfo.service),
                 apointmentDate: bookingInfo?.apointment,
                 apointmentTime: bookingInfo?.time12,
-                ownerID: 0,
+                ownerID: OWNER?.uid,
+                OwnerUserName: OWNER?.userName
               
             })
         })

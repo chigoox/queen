@@ -16,7 +16,6 @@ const cors = Cors({
 const secret = process.env.STRIPE_WEBHOOK_KEY
 
 export async function POST(request) {
-  console.log('webhook working')
   try {
     const body = await request.text();
     const signature = headers().get("stripe-signature");
@@ -25,15 +24,15 @@ export async function POST(request) {
     if (event.type === "checkout.session.completed") {
 
       const data = event.data.object.metadata
-      const { apointmentDate, apointmentTime, service, addons, customerName, customerEmail, customerPhone, ownerID } = data
+      const { OwnerUserName, apointmentDate, apointmentTime, service, addons, customerName, customerEmail, customerPhone, ownerID } = data
 
 
       let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime', '==', true)
       const apointmentID = (apointments?.length || 0) + 1
-      console.log(apointments, apointmentID)
 
       const apointment = {
         ownerID:ownerID,
+        OwnerUserName:OwnerUserName,
         apointmentID: apointmentID,
         apointmentDate: apointmentDate,
         apointmentTime: apointmentTime,
@@ -47,7 +46,6 @@ export async function POST(request) {
       }
 //
 
-      console.log(apointment)
       await addToDoc('Apointment', apointmentID, apointment)
 
       const cusomterInfo = { name: customerName, email: customerEmail, phone: customerPhone }

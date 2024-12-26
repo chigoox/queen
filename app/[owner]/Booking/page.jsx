@@ -18,7 +18,6 @@ export default function Home() {
   const [startBooking, setStartBooking] = useState(false)
   const [pickAddon, setPickAddon] = useState(false)
   const [selectDate, setSelectDate] = useState(false)
-  const [theme, setTheme] = useState('')
   const [ownerData, setOwnerData] = useState([])
   const OWNER = ownerData[0]
 const pathname = usePathname()
@@ -113,7 +112,7 @@ console.log(OWNER)
 
 
         {/* Booking Options */}
-        {(startBooking && !selectDate) && <BookingOptions bookingInfo={bookingInfo} setBookingInfo={setBookingInfo} options={options} />}
+        {(startBooking && !selectDate) && <BookingOptions categories={categories} bookingInfo={bookingInfo} setBookingInfo={setBookingInfo} options={options} />}
 
         {/* Continue to booking addons */}
         {(startBooking && !selectDate && bookingInfo?.service) && <Button onPress={() => { setPickAddon(!pickAddon) }} on className='font-bold text-xl bg-[color:var(--AccentColor)] text-[color:var(--TextColor)]'>Continue</Button>}

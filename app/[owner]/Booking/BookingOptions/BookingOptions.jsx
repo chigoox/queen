@@ -2,7 +2,7 @@ import { useFetchDocsPresist } from '@/UTIL/Database'
 import { Button, Checkbox, Image } from '@nextui-org/react'
 import React, { useEffect, useState } from 'react'
 
-const BookingOptions = (categories,{ options, setBookingInfo, bookingInfo }) => {
+const BookingOptions = ({categories, options, setBookingInfo, bookingInfo }) => {
     const [selectedCategory, setSelectedCategory] = useState('false')
 
     // == 'Lashes' ? 'https://stacylash.com/cdn/shop/articles/The_Ultimate_Guide_to_Mega_Volume_Lashes_720x.jpg?v=1706891084' : 'https://microbeautybar.com/cdn/shop/files/OmbreBrow2_750x.jpg?v=1712873330'} />

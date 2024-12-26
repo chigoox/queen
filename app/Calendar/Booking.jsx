@@ -179,6 +179,7 @@ const Bookings = ({OWNER, bookingInfo, setBookingInfo }) => {
 
     const bookNow = async () => {
         setLoading(true)
+        console.log('asd')
         const customerData = await fetch('/api/FindCustomer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -214,7 +215,7 @@ const bookID = getRandTN(10)
             customer: customerID,
             price: bookingInfo?.metadata?.price,
         }
-        
+        console.log(apointment)
         await addToDoc('Temp', bookID, apointment)
 
         const data = await fetch('/api/Checkout', {

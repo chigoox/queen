@@ -1,6 +1,7 @@
 'use client'
 
 import Bookings from "@/app/[owner]/Calendar/Booking"
+import { setCSSVariables } from "@/app/myCodes/Util"
 import { Button } from '@nextui-org/react'
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -10,7 +11,6 @@ import { useFetchDocsPresist } from "../../myCodes/Database"
 import NavBar from "../../NavBar/NavBar"
 import Addons from "./BookingOptions/Addons"
 import BookingOptions from "./BookingOptions/BookingOptions"
-import { setCSSVariables } from "@/app/myCodes/Util"
 
 
 

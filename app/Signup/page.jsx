@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo } from 'firebase/auth';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import { Input, Button, Radio, RadioGroup } from '@nextui-org/react';
 import { Divider } from '@nextui-org/divider';
@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 import { addToDoc } from '../myCodes/Database';
 import  PasswordValidator  from '@/app/Signup/Componets/PasswordValidator'
 import {generateRandomUsername} from '@/app/myCodes/Util'
-
+import { addUniqueUsername } from '@/app/myCodes/DatabaseUtils';
 const SignupPage = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -92,6 +92,11 @@ const SignupPage = () => {
     const randUserName =  generateRandomUsername()
     try {
       setLoading(true);
+
+
+// Pass the UserCredential   
+
+
       const provider = new GoogleAuthProvider();
       await signInWithPopup(AUTH, provider).then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -100,6 +105,8 @@ const SignupPage = () => {
         // The signed-in user info.
         const user = result.user;
        //update userName if one
+const { isNewUser } = getAdditionalUserInfo(result)   
+       
        addToDoc('Owners',user.uid,{siteInfo:{
         name: '',
         heading: '',
@@ -120,7 +127,7 @@ const SignupPage = () => {
         uid:user.uid,Owner:{
           ...formData, password: '',
            passwordMatch: ''}
-          })
+      })
 
         if(formData.userName){
           //Update userInfo
@@ -149,10 +156,17 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
+    if(formData?.userName){
+      const userNameTaken = await addUniqueUsername(formData?.userName)
+      if(!userNameTaken){
+        showError('Username already exists!');
+        return;
+      }
+    }
     
     try {
       setLoading(true);
+    
       const user = await createUserWithEmailAndPassword(AUTH, formData.email, formData.password);
       showSuccess('Account created successfully!');
       // Save additional user data to the database if needed

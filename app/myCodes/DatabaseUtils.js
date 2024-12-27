@@ -22,7 +22,7 @@ export async function addUniqueUsername(userName) {
   const querySnapshot = await getDocs(userQuery);
 
   if (!querySnapshot.empty) {
-    throw new Error("Username already exists!");
+   
     return false;
   }
 

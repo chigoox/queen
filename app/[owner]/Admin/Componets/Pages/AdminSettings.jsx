@@ -6,6 +6,7 @@ import ImgCrop from "antd-img-crop";
 import { getAuth, updateProfile } from "firebase/auth";
 import { motion } from "motion/react";
 import React, { useState } from "react";
+import { addUniqueUsername } from "../../../../myCodes/DatabaseUtils";
 
 
 
@@ -21,6 +22,15 @@ const AdminSettings = ({ownerInfo}) => {
 
   const handleUpdateProfile = async () => {
     const imageLogo = await useUploader(photo, `${auth?.currentUser.uid}/profilePicture`)
+  
+    if(info.userName){
+      const userNameTaken = await addUniqueUsername(info.userName)
+      if(!userNameTaken){
+        message.error("Username already exists!");
+        return;
+      }
+    }
+    
     try {
       await updateProfile(auth.currentUser, {
         displayName: info.userName || auth.currentUser.displayName,

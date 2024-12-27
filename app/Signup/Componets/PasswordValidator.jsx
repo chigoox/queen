@@ -11,7 +11,6 @@ const PasswordValidator = ({ password, confirmPassword }) => {
   });
 
   const validatePassword = (pwd, confirmPwd) => {
-    console.log(pwd, confirmPwd)
     const validations = {
       length: pwd.length >= 8,
       uppercase: /[A-Z]/.test(pwd),

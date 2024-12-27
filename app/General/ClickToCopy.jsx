@@ -15,8 +15,8 @@ const ClickToCopy = ({ textToCopy }) => {
   };
 
   return (
-    <div className='center-col p-4 m-auto bg-white shadow' style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
-      <span className='text-lg font-bold'>{textToCopy}</span>
+    <div className='center-col p-4 m-auto w-96 bg-white shadow' style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+      <span className='lg:text-lg text-xs  font-bold'>{textToCopy}</span>
       <Button
         onClick={handleCopy}
         style={{

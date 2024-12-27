@@ -311,12 +311,12 @@ const { token } = theme.useToken();
           <div className='m-auto'>
             <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Accent Color</div>)} value={siteInfo?.colors.accent} onChange={(color) => handleColorChange('accent', color)} />
           </div>
-          <div className='m-auto center-col border w-40'>
-            <div className='center'>Text Color</div>
-            <div className='center-col gap-2'>
-            <ColorPicker className=' justify-start' presets={presets}  value={siteInfo?.colors.text} onChange={(color) => handleColorChange('text', color)} />
-            <ColorPicker className='justify-start'  presets={presets}  value={siteInfo?.colors.text2} onChange={(color) => handleColorChange('text2', color)} />
-            <ColorPicker className='justify-start'  presets={presets}  value={siteInfo?.colors.text3} onChange={(color) => handleColorChange('text3', color)} />
+          <div className='p-1 m-auto center-col border w-40'>
+            <div className='text-center'>Text Color</div>
+            <div className='w-full flex flex-col justify-star items-start'>
+            <ColorPicker showText={(color)=>(<div>Text Main</div>)} className=' w-32 justify-start' presets={presets}  value={siteInfo?.colors.text} onChange={(color) => handleColorChange('text', color)} />
+            <ColorPicker showText={(color)=>(<div>Text Accent</div>)} className='w-32 justify-start'  presets={presets}  value={siteInfo?.colors.text2} onChange={(color) => handleColorChange('text2', color)} />
+            <ColorPicker showText={(color)=>(<div>Text Etc</div>)} className='w-32 justify-start'  presets={presets}  value={siteInfo?.colors.text3} onChange={(color) => handleColorChange('text3', color)} />
             </div>
           </div>
           <div className='m-auto'>
@@ -349,11 +349,10 @@ const { token } = theme.useToken();
           </div>
 
       </div>
-<div className='flex flex-col items-center gap-4 p-6 bg-gray-100 rounded-lg shadow-md'>
+<div className='flex flex-col  items-center gap-4 p-6 bg-gray-100 rounded-lg shadow-md'>
   <h1 className='font-bold text-xl text-gray-800'>Website Link</h1>
   <ClickToCopy 
     textToCopy={`https://crownedbl.vercel.app/${pageOwnerUserName}/Booking`} 
-    className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300'
   />
 </div>
       <Button className='w-full my-10 h-10' onClick={submit}>SAVE</Button>

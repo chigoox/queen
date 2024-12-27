@@ -19,7 +19,7 @@ export const Admin = () => {
   
   useEffect(() => {
       const unsubscribe = onAuthStateChanged(AUTH, async (currentUser) => {
-          setOwner(currentUser);
+        setOwner(currentUser);
         try {
           // Fetch user-specific data from Firestore
           const userDocRef = doc(DATABASE, 'Owners', currentUser.uid);

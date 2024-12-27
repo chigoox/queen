@@ -5,6 +5,7 @@
 
 :root {
 --BGColor: rgb(0, 0, 0);
+--BGColorL:color-mix(in srgb, var(--BGColor), white  10%);
 --AccentColor: #ff001e;
 --TextColor: rgb(0, 0, 0);
 --TextColor2: rgb(0, 0, 0);

@@ -3,6 +3,8 @@ import { Button as ButtonNext, Image } from '@nextui-org/react';
 import { Button, ColorPicker, Input, Upload, theme } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import { useEffect, useState } from 'react';
+import ClickToCopy from '@/app/General/ClickToCopy.jsx'
+import { usePathname, useRouter } from "next/navigation"
 
 
 
@@ -41,6 +43,10 @@ const WebsiteEditor = ({SITEINFO}) => {
     setSiteInfo(SITEINFO)
   }, [SITEINFO])
   
+
+const pathname = usePathname()
+const pageOwnerUserName = pathname.replace('/Admin','').replace('/','')
+
 
 
   //check for changes and set saved to false if a change is made
@@ -297,7 +303,7 @@ const { token } = theme.useToken();
 
 {/* Color Pickers */}
 <h3 className='font-bold text-3xl text-center'>Theme</h3>
-      <div className='m-auto p-1 overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>
+      <div className='m-auto p-1 center-col overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>
         <div className='grid grid-cols-1   md:w-[80%] m-auto'>
           <div className='m-auto'>
             <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Background Color</div>)} value={siteInfo?.colors.background} onChange={(color) => handleColorChange('background', color)} />
@@ -343,8 +349,14 @@ const { token } = theme.useToken();
           </div>
 
       </div>
-
-      <Button className='w-full my-5 h-10' onClick={submit}>SAVE</Button>
+<div className='flex flex-col items-center gap-4 p-6 bg-gray-100 rounded-lg shadow-md'>
+  <h1 className='font-bold text-xl text-gray-800'>Website Link</h1>
+  <ClickToCopy 
+    textToCopy={`https://crownedbl.vercel.app/${pageOwnerUserName}/Booking`} 
+    className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300'
+  />
+</div>
+      <Button className='w-full my-10 h-10' onClick={submit}>SAVE</Button>
 
     </div>
   );

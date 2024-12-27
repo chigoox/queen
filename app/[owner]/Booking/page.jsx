@@ -3,7 +3,7 @@
 import Bookings from "@/app/Calendar/Booking"
 import { setCSSVariables } from "@/app/myCodes/Util"
 import { Button } from '@nextui-org/react'
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import Logo from "../../General/Logo"
 import BookingInfo from "../../HomePage/BookingInfo"
@@ -11,6 +11,8 @@ import { useFetchDocsPresist } from "../../myCodes/Database"
 import NavBar from "../../NavBar/NavBar"
 import Addons from "./BookingOptions/Addons"
 import BookingOptions from "./BookingOptions/BookingOptions"
+import { getAuth } from "firebase/auth"
+import { Settings2 } from "lucide-react"
 
 
 
@@ -38,6 +40,13 @@ const {
   logo= null,
   depositFee= 25
 } = OWNER?.siteInfo || {} 
+
+
+
+const ownerUID = OWNER?.uid
+const userID = getAuth()?.currentUser
+const isAdmin = ownerUID === userID
+
 //
 useEffect(() => {
   const getData = async () => {
@@ -77,14 +86,20 @@ console.log('first', OWNER)
 
 
   }, [colors])
+
+  const {push} = useRouter()
   return (
-    <div className=" border-[color:var(--AccentColor)] border  min-h-screen bg-[color:var(--BGColor)] w-full overflow-hidden pb-10  font-[family-name:var(--font-geist-sans)]">
+    <div className=" border-[color:var(--AccentColor)] border  min-h-screen bg-[color:var(--BGColor)] w-full overflow-hidden pb-10 md:px-40 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col  p-2">
         <NavBar bookingInfo={bookingInfo} />
 
         {/* LOGO SECTION */}
         <div className=' w-full h-96'>
-          <div className='center-col '>
+          <div className='center-col'>
+            <Button onPress={() => { push(`/${pageOwnerUserName}/Admin`) }} className='absolute bg-opacity-0 top-4 right-4 bg-[color:var(--AccentColor)] text-[color:var(--TextColor)]'>
+
+            <Settings2  size={'48'} className=""/>
+            </Button>
             <Logo url={logo} />
           </div>
           <div className='mt-4 center-col'>
@@ -92,6 +107,8 @@ console.log('first', OWNER)
             <p className='text-[color:var(--TextColorM)] text-xl'>{subHeading}</p>
           </div>
         </div>
+
+
 
         {/* Web Intro */}
         {!startBooking &&

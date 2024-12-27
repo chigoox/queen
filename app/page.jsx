@@ -55,8 +55,8 @@ export default function Home() {
         <div className="container mx-auto  py-4 px-6 flex justify-between items-center text-white">
           <h1 className="text-3xl font-bold">{siteName}</h1>
           <nav>
-            <Button onPress={()=>{push('/ContactUs')}} auto ghost size="sm" color="white">
-              Contact Us
+            <Button onPress={()=>{push('/Login')}} auto ghost size="sm" color="white">
+              Login
             </Button>
           </nav>
         </div>

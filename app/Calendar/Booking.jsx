@@ -215,7 +215,6 @@ const bookID = getRandTN(10)
             customer: customerID || null,
             price: bookingInfo?.metadata?.price || 0,
         }
-        console.log(apointment)
         
         const data = await fetch('/api/Checkout', {
             method: 'POST',
@@ -239,7 +238,7 @@ const bookID = getRandTN(10)
         })
         
         let URL = await data.json()
-        await addToDoc('Temp', bookID, apointment)
+       // await addToDoc('Temp', bookID, apointment)
         window.location.href = URL
 
     }

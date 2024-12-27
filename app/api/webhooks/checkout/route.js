@@ -31,7 +31,6 @@ export async function POST(request) {
 
       const apointment = {
         ownerID:ownerID,
-        OwnerUserName:OwnerUserName,
         apointmentID: apointmentID,
         apointmentDate: apointmentDate,
         apointmentTime: apointmentTime,

@@ -8,6 +8,7 @@ export async function POST(request) {
     let {
         ownerID = 0,
         bookID = 0,
+        apointmentID = 0,
         customer = {},
         service = {},
         addons,
@@ -47,7 +48,8 @@ export async function POST(request) {
             apointmentTime: apointmentTime,
             type: 'checkout',
             ownerID:ownerID,
-            ownerUserName:OwnerUserName
+            ownerUserName:OwnerUserName,
+            apointmentID: apointmentID,
         },
 
     })

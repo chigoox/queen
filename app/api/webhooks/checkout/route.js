@@ -45,9 +45,6 @@ export async function POST(request) {
       console.log('Appointment Data:', apointment);
       await addToDoc('Apointment', apointmentID, apointment);
 
-// Log Firestore response
-console.log('Firestore Response:', res);
-
 
       const cusomterInfo = { name: customerName, email: customerEmail, phone: customerPhone }
       await OrderConfirmationMail(cusomterInfo, service, addons, apointmentTime, apointmentDate)

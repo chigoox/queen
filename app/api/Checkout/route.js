@@ -9,7 +9,7 @@ export async function POST(request) {
         ownerID = 0,
         bookID = 0,
         apointmentID = 0,
-        customer = {},
+        customer = 0,
         service = {},
         addons,
         name = '',
@@ -38,7 +38,7 @@ export async function POST(request) {
         success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Success/${bookID}`,
         cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Cancelled/${bookID}`,
         metadata: {
-            customerID: customer?.ID,
+            customerID: customer,
             customerName: name,
             customerEmail: email,
             customerPhone: phone,

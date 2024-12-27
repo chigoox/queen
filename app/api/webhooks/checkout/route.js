@@ -1,11 +1,9 @@
-import { format } from "date-fns";
 import { serverTimestamp } from "firebase/firestore";
 import Cors from "micro-cors";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
+import { addToDoc } from "../../../myCodes/Database";
 import { OrderConfirmationMail } from "../../../myCodes/Email";
-import { addToDoc, fetchDocument } from "../../../myCodes/Database";
-import { db } from "@/firebaseAdmin";
 
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE);
 
@@ -24,7 +22,7 @@ export async function POST(request) {
     if (event.type === "checkout.session.completed") {
 
       const data = event.data.object.metadata
-      const { OwnerUserName, apointmentDate, apointmentTime, service, addons, customerName, customerEmail, customerPhone, ownerID, apointmentID } = data
+      const {customerID ,OwnerUserName, apointmentDate, apointmentTime, service, addons, customerName, customerEmail, customerPhone, ownerID, apointmentID } = data
 
 
       
@@ -36,17 +34,17 @@ export async function POST(request) {
         apointmentTime: apointmentTime,
         service: service,
         addons: addons,
+        customerID: customerID,
         customerName: customerName,
         customerEmail: customerEmail,
         customerPhone: customerPhone,
         dateCreatedServerTime: serverTimestamp(),
-        dateCreatedRealTime: new Date().toLocaleString()
+        dateCreatedRealTime: new Date().toLocaleString(),
+        OwnerUserName: OwnerUserName,
       }
 //
-console.log('Appointment Data:', apointment);
-await addToDoc('Apointment', apointmentID, apointment);
-const ref = db.collection('Apointment').doc(apointmentID);
-const res = await ref.set(apointment, { merge: true });
+      console.log('Appointment Data:', apointment);
+      await addToDoc('Apointment', apointmentID, apointment);
 
 // Log Firestore response
 console.log('Firestore Response:', res);

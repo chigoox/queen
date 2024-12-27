@@ -5,8 +5,9 @@ import { Button, Card, Input, Spacer } from '@nextui-org/react';
 import { motion } from 'motion/react';
 import Carousel from '@/app/General/Embla/Carousel'
 import { BookType, Check } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation'
+import OwnerSearch from '@/app/General/OwnerSearch';
 
 
 
@@ -19,8 +20,8 @@ export default function Home() {
   const siteName = 'BooX'
 
   const {push} = useRouter()
-
-  
+  const [showSearch, setShowSearch] = useState(false)
+  const toggleSearch = () => {setShowSearch(!showSearch)}
 
   const sectionRef = useRef(null);
 
@@ -79,6 +80,9 @@ export default function Home() {
           <Button onPress={()=>{push('/Signup')}} auto shadow color="gradient" className="px-8 bg-black">
             Get Started
           </Button>
+          <Button onPress={toggleSearch} auto shadow color="gradient" className="px-8 underline">
+            Book Now with
+          </Button>
         </div>
       <Carousel slides={[
         {bookType:'Consultant',
@@ -107,7 +111,7 @@ export default function Home() {
 
       {/* Main Content Section */}
       <main className="flex-grow  container mx-auto py-10 px-6">
-
+      {showSearch && <OwnerSearch toggleSearch={()=>{setShowSearch(!showSearch)}} />}
 {/* Information Section */}
 <section className="mb-10 grid gap-4 md:grid-cols-2 lg:p-52 md:p-20" >
           <motion.div

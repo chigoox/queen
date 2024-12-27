@@ -96,7 +96,7 @@ console.log('first', OWNER)
         {/* LOGO SECTION */}
         <div className=' w-full h-96'>
           <div className='center-col'>
-            <Button onPress={() => { push(`/${pageOwnerUserName}/Admin`) }} className='absolute bg-opacity-0 top-4 right-4 bg-[color:var(--AccentColor)] text-[color:var(--TextColor)]'>
+            <Button  onPress={() => { push(`/${pageOwnerUserName}/Admin`) }} className='absolute z-50 bg-opacity-0 top-4 right-4 bg-[color:var(--AccentColor)] text-[color:var(--TextColor)]'>
 
             <Settings2  size={'48'} className=""/>
             </Button>

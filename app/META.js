@@ -6,6 +6,7 @@
 export const siteName = 'Crowned Brows & Lashes'
 export const siteTag = ''
 export const siteEmail = 'Crowned Brows & Lashes'
+export const siteURL = 'https://crownedbl.vercel.app/'
 
 
 export const NavBarVideoURL = 'hLDQ88vAhIs'

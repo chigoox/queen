@@ -313,7 +313,7 @@ const { token } = theme.useToken();
           </div>
           <div className='m-auto center-col border w-40'>
             <div className='center'>Text Color</div>
-            <div className='center gap-2'>
+            <div className='center-col gap-2'>
             <ColorPicker className=' justify-start' presets={presets}  value={siteInfo?.colors.text} onChange={(color) => handleColorChange('text', color)} />
             <ColorPicker className='justify-start'  presets={presets}  value={siteInfo?.colors.text2} onChange={(color) => handleColorChange('text2', color)} />
             <ColorPicker className='justify-start'  presets={presets}  value={siteInfo?.colors.text3} onChange={(color) => handleColorChange('text3', color)} />

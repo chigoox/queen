@@ -196,7 +196,7 @@ const bookID = getRandTN(10)
         const customerID = StripeCustomer[0]?.id
        
         let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime', '==', true)
-        const apointmentID = (apointments?.length || 0) + 1
+        const apointmentID = `AP_${getRandTN(10)}`
         console.log(apointmentID)
         const apointment = {
             ownerID:OWNER.uid,
@@ -216,8 +216,7 @@ const bookID = getRandTN(10)
             price: bookingInfo?.metadata?.price || 0,
         }
         console.log(apointment)
-        await addToDoc('Temp', bookID, apointment)
-
+        
         const data = await fetch('/api/Checkout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -238,8 +237,9 @@ const bookID = getRandTN(10)
                 apointmentID: apointmentID || null,
             })
         })
-
+        
         let URL = await data.json()
+        await addToDoc('Temp', bookID, apointment)
         window.location.href = URL
 
     }

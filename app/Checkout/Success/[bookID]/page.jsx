@@ -1,28 +1,39 @@
 'use client'
-import { useFetchDocsPresist } from "@/app/myCodes/Database"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import { addToDoc, deleteDocument, fetchDocument, useFetchDocsPresist } from "../../../myCodes/Database"
 
 
 export default function ThankYou() {
 
         const [bookingData, setBookingData] = useState([])
-        const APPOINTMENT = bookingData[0]
+        const APPOINTMENT = bookingData.length > 0 ? bookingData[0] : null
+        const [ownerData, setOwnerData] = useState(false)
         const pathname = usePathname()
-        const search = pathname.replace('/Checkout/Success/','').replace('/','')
-    
-        console.log(search)
+        const search = pathname.replace('/Checkout/Success/', '').replace('/', '')
+        const [loading, setLoading] = useState(false)
         //fetch Data for user in current page
         useEffect(() => {
         const getData = async () => {
-            await useFetchDocsPresist('Temp', 'bookID', '==', search, 'bookID', setBookingData);
+            setLoading(true)
+            const data = await fetchDocument('Temp', search, setBookingData);
+           
+            await fetchDocument('Owner', data?.ownerID, setOwnerData)
+           
+           
+            if (data?.service) {
+              await  addToDoc('Apointment', `AP_${data.bookID}`, {...data, apointmentID: `AP_${data.bookID}`})
+              await deleteDocument('Temp', data.bookID)
+            }
+            setLoading(false)
         }
         getData()
         }, [])
 
 
-console.log(bookingData)
 
+
+        console.log(ownerData)
     return (
         <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center">
             <div className="text-center max-w-xl p-8 border-2 border-gold rounded-lg shadow-lg ">

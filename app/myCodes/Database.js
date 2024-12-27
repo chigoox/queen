@@ -24,7 +24,6 @@ export const watchDocument = async (collection, Doc, setter) => {
 }
 
 export async function addToDoc(collection, Doc, data) {
-    console.log('from ccoc',data)
     if (Doc) {
         try {
             await setDoc(doc(DATABASE, collection, Doc),

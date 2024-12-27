@@ -48,7 +48,7 @@ export async function POST(request) {
             apointmentTime: apointmentTime,
             type: 'checkout',
             ownerID:ownerID,
-            ownerUserName:OwnerUserName,
+            OwnerUserName:OwnerUserName,
             apointmentID: apointmentID,
         },
 

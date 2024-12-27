@@ -40,7 +40,6 @@ export async function POST(request) {
         customerPhone: customerPhone,
         dateCreatedServerTime: serverTimestamp(),
         dateCreatedRealTime: new Date().toLocaleString(),
-        OwnerUserName: OwnerUserName,
       }
 //
       console.log('Appointment Data:', apointment);

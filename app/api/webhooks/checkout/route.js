@@ -42,7 +42,6 @@ export async function POST(request) {
         dateCreatedRealTime: new Date().toLocaleString(),
       }
 //
-      console.log('Appointment Data:', apointment);
       await addToDoc('Apointment', apointmentID, apointment);
 
 

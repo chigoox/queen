@@ -22,7 +22,7 @@ export async function POST(request) {
         siteDeposit= 0,
     } = data;
 console.log(customer)
-    if (customer === '') {
+    if (customer === null) {
         const session = await stripe.checkout.sessions.create({
             line_items: [
                 {
@@ -69,7 +69,7 @@ console.log(customer)
                     quantity: 1
                 }
             ],
-            customer: customer || null,
+            customer: customer,
             mode: 'payment',
             success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Success/${ownerID}`,
             cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Cancelled/${ownerID}`,

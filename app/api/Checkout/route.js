@@ -55,6 +55,10 @@ console.log(customer)
             },
     
         })
+
+        console.log(session.url)
+        return NextResponse.json(session.url)
+        
     }else{
         const session = await stripe.checkout.sessions.create({
             line_items: [
@@ -91,9 +95,11 @@ console.log(customer)
             },
     
         })
+
+        console.log(session.url)
+        return NextResponse.json(session.url)
     }
-    console.log(session.url)
-    return NextResponse.json(session.url)
+   
 }
 
 

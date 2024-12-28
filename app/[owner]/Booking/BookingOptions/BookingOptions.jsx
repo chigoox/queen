@@ -16,7 +16,7 @@ console.log(selectedCategory)
                         <h1 className='absolute z-20 text-[color:var(--TextColor)]'>
                             {item?.name}
                         </h1>
-                        <Image className='w-full object-cover' alt='categoryImage' src={item?.Image}/> 
+                        <Image className='w-full object-cover' alt='categoryImage' src={item?.image}/> 
                     </Button>
                     )
                 })}

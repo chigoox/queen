@@ -115,7 +115,7 @@ console.log(SITEINFO)
                                         <CardBody className=''>
                                             <h1 className='font-bold'>Pricing</h1>
 
-                                            <div className='p-2 flex gap-4'>
+                                            <div className='p-2 flex flex-col md:flex-row gap-4'>
                                                 <div>
                                                     <h1 className='text-sm'>Price</h1>
                                                     <Input value={product.metadata.price} onValueChange={(v) => { setTextMeta(v, 'price') }} size='xs' placeholder='' className='h-10' />

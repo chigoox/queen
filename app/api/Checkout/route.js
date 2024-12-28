@@ -17,7 +17,9 @@ export async function POST(request) {
         email = '',
         apointmentDate = '',
         apointmentTime = '',
-        OwnerUserName = ''
+        OwnerUserName = '',
+        siteName= '',
+        siteDeposit= 0,
     } = data;
 console.log(customer)
     if (customer === '') {
@@ -60,9 +62,9 @@ console.log(customer)
                     price_data: {
                         currency: "usd",
                         product_data: {
-                            name: "Crowned Brows & Lashes Deposit"
+                            name: siteName? siteName + ' Deposit' :  'Deposit'
                         },
-                        unit_amount: 2500
+                        unit_amount: Number(siteDeposit) * 100 || 2500
                     },
                     quantity: 1
                 }
@@ -72,6 +74,8 @@ console.log(customer)
             success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Success/${ownerID}`,
             cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Cancelled/${ownerID}`,
             metadata: {
+                siteName: siteName,
+                siteDeposit: siteName,
                 customerID: customer,
                 customerName: name,
                 customerEmail: email,

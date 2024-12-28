@@ -198,23 +198,6 @@ const bookID = getRandTN(10)
         let apointments = await FetchTheseDocs('Apointment', 'dateCreatedServerTime', '==', true)
         const apointmentID = `AP_${getRandTN(10)}`
         
-        const apointment = {
-            ownerID:OWNER.uid,
-            OwnerUserName:OWNER?.userName,
-            apointmentID: apointmentID,
-            apointmentDate: bookingInfo?.apointment,
-            apointmentTime: bookingInfo?.time12,
-            service: bookingInfo?.service || {},
-            addons: bookingInfo?.addons || [],
-            customerName: bookingInfo?.customer.name,
-            customerEmail: bookingInfo?.customer.email,
-            customerPhone: bookingInfo?.customer.phone,
-            dateCreatedServerTime: serverTimestamp(),
-            dateCreatedRealTime: new Date().toLocaleString(),
-            bookID: bookID,
-            customer: customerID || null,
-            price: bookingInfo?.metadata?.price || 0,
-        }
         
         const data = await fetch('/api/Checkout', {
             method: 'POST',
@@ -234,6 +217,8 @@ const bookID = getRandTN(10)
                 OwnerUserName: OWNER?.userName || null,
                 bookID: bookID || null,
                 apointmentID: apointmentID || null,
+                siteName: OWNER?.siteInfo?.name || null,
+                siteDeposit: OWNER?.siteInfo?.depositFee || null,
             })
         })
         

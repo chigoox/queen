@@ -104,42 +104,46 @@ const SignupPage = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-       //update userName if one
-const { isNewUser } = getAdditionalUserInfo(result)   
+       //update userInfo if new user
+      const { isNewUser } = getAdditionalUserInfo(result)   
        
-       addToDoc('Owners',user.uid,{siteInfo:{
-        name: '',
-        heading: '',
-        subHeading: '',
-        colors: {
-          background: '#ffffff',
-          accent: '#000000',
-          text: '#333333',
-          text2: '#333333',
-          text3: '#333333',
+       if(isNewUser){
+        addToDoc('Owners',user.uid,{siteInfo:{
+          name: formData?.bookingSiteName || '',
+          heading: '',
+          subHeading: '',
+          colors: {
+            background: '#ffffff',
+            accent: '#000000',
+            text: '#333333',
+            text2: '#333333',
+            text3: '#333333',
+          },
+          terms: [{ title: '', body: [''] }],
+          categories: [{ name: '', image: null }],
+          logo: null,
+          depositFee: 25
         },
-        terms: [{ title: '', body: [''] }],
-        categories: [{ name: '', image: null }],
-        logo: null,
-        depositFee: 25
-      },
-        userName:randUserName,
-        uid:user.uid,Owner:{
-          ...formData, password: '',
-           passwordMatch: ''}
-      })
+          userName:randUserName,
+          uid:user.uid,Owner:{
+            ...formData, password: '',
+             passwordMatch: ''}
+        })
+  
+          if(formData.userName){
+            //Update userInfo
+             updateProfile(user, {
+              displayName:formData.userName,
+            })
+          }else{
+            //Update userInfo
+            updateProfile(user, {
+              displayName: randUserName
+            })
+          }
+       }
 
-        if(formData.userName){
-          //Update userInfo
-           updateProfile(user, {
-            displayName:formData.userName,
-          })
-        }else{
-          //Update userInfo
-          updateProfile(user, {
-            displayName: randUserName
-          })
-        }
+
       })
       showSuccess('Successfully signed up with Google!');
     

@@ -1,6 +1,6 @@
 import { useUploader } from "@/app/Hooks/useUploader";
 import { addToDoc } from "@/app/myCodes/Database";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, user } from "@nextui-org/react";
 import { Upload, message, Button as ButtonA } from "antd";
 import ImgCrop from "antd-img-crop";
 import { getAuth, updateProfile } from "firebase/auth";
@@ -39,7 +39,7 @@ const AdminSettings = ({ownerInfo}) => {
         ,
 
       });
-      await addToDoc('Owners', auth.currentUser.uid,{Owner:{...info, profilePicture:photo}})
+      await addToDoc('Owners', auth.currentUser.uid,{Owner:{...info, profilePicture:photo}, userName:info.userName})
       message.success("Profile updated successfully!");
     } catch (error) {
       console.error("Error updating profile:", error);

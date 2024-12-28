@@ -19,7 +19,7 @@ export async function POST(request) {
         apointmentTime = '',
         OwnerUserName = ''
     } = data;
-
+console.log(customer)
     if (customer === '') {
         const session = await stripe.checkout.sessions.create({
             line_items: [

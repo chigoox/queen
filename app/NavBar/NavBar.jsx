@@ -9,7 +9,7 @@ function NavBar({bookingInfo}) {
     const price = bookingInfo?.service ? '$' + bookingInfo?.service?.price : ''
     const time = bookingInfo?.service ? bookingInfo?.service?.price + 'mins' : ''
     return (
-        <div className='w-full p-2 z-50 h-20 bg-[color:var(--AccentColor)] text-[color:var(--TextColor)] fixed bottom-0 left-0 center'>
+        <div className='w-full p-2 z-[99999] h-20 bg-[color:var(--AccentColor)] text-[color:var(--TextColor)] fixed bottom-0 left-0 center'>
             <div className='w-1/3'>
                 <div className=''>{bookingInfo?.customer?.name}</div>
                 <div className='text-xs font-bold'>{bookingInfo?.apointment}</div>

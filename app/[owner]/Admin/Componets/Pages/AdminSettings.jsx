@@ -60,6 +60,30 @@ const AdminSettings = ({ownerInfo}) => {
     
   };
 
+  const setUpConntectedAccount = async () => {
+   await fetch('/api/LinkConnectedAccount', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userName: ownerInfo?.userName,
+        state: 'state',
+      }),
+    })
+
+    await fetch('/api/CreateConnectedAccount', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userName: ownerInfo?.userName,
+        state: 'state',
+      }),
+    })
+  }
+
   
 
   return (
@@ -71,7 +95,7 @@ const AdminSettings = ({ownerInfo}) => {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-2xl font-bold text-center mb-6">Update Profile</h1>
-
+<Button onPress={()=>{setUpConntectedAccount()}} className="my-4 font-semibold">Connect Stripe</Button>
         <div className="mb-4 center-col gap-2">
           <Input
             label="User Name"

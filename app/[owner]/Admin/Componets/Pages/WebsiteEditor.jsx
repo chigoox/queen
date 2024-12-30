@@ -36,7 +36,8 @@ const WebsiteEditor = ({SITEINFO}) => {
     terms: [{ title: '', body: [''] }],
     categories: [{ name: '', image: null }],
     logo: null,
-    depositFee: 25
+    depositFee: 25,
+    apointmentInterveral: 30
   });
 
   useEffect(() => {
@@ -201,6 +202,17 @@ const { token } = theme.useToken();
         style={{ marginBottom: '10px' }}
       />
       </div>
+      
+      <div className='border border-dashed my-4 p-2'>
+        <lable>appointment Interval</lable>
+        <Input
+        placeholder="Appointment Interval"
+        value={siteInfo?.apointmentInterveral}
+        onChange={(e) => handleInputChange('apointmentInterveral', e.target.value)}
+        style={{ marginBottom: '10px' }}
+      />
+      </div>
+      
       
 
       {/* Heading */}

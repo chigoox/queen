@@ -61,7 +61,7 @@ const AdminSettings = ({ownerInfo}) => {
   };
 
   const setUpConntectedAccount = async () => {
-   await fetch('/api/LinkConnectedAccount', {
+  const data = await  fetch('/api/LinkConnectedAccount', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,6 +72,10 @@ const AdminSettings = ({ownerInfo}) => {
       }),
     })
 
+    let URL = await data.json()
+       // await addToDoc('Temp', bookID, apointment)
+        window.location.href = URL
+
     await fetch('/api/CreateConnectedAccount', {
       method: 'POST',
       headers: {
@@ -79,6 +83,9 @@ const AdminSettings = ({ownerInfo}) => {
       },
       body: JSON.stringify({
         userName: ownerInfo?.userName,
+        email:ownerInfo?.Owner.email,
+        uid:ownerInfo.uid,
+        stripeAccountID: ownerInfo?.stripeAccountID,
         state: 'state',
       }),
     })

@@ -12,7 +12,8 @@ import { addUniqueUsername } from "../../../../myCodes/DatabaseUtils";
 
 const auth = getAuth();
 
-const AdminSettings = ({ownerInfo}) => {
+const AdminSettings = ({OWNER}) => {
+  const ownerInfo = OWNER?.Owner
   const [info, setInfo] = useState({});
   const [photo, setPhoto] = useState(null);
 
@@ -80,7 +81,7 @@ const uid = auth?.currentUser.uid
   
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen  flex flex-col items-start justify-start p-4">
       <motion.div
         className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
         initial={{ opacity: 0, y: -20 }}
@@ -88,9 +89,10 @@ const uid = auth?.currentUser.uid
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-2xl font-bold text-center mb-6">Update Profile</h1>
-<Button onPress={()=>{setUpConntectedAccount()}} className="my-4 font-semibold">Connect Stripe</Button>
-        <div className="mb-4 center-col gap-2">
-          <Input
+<Button isDisabled ={OWNER?.stripeAccountID ? true : false} onPress={()=>{setUpConntectedAccount()}} className={`my-4 w-full md:w-1/4 font-semibold ${OWNER?.stripeAccountID ? 'bg-green-300 text-white' : 'bg-slate-300'}`}>{OWNER?.stripeAccountID ? `${OWNER?.stripeAccountID}`:'Connect Stripe'}</Button>
+        <div className="mb-4 z-0 center-col gap-2">
+          <Input 
+          className="z-0"
             label="User Name"
             placeholder={ownerInfo?.userName || 'Chigoox'}
             fullWidth
@@ -100,6 +102,7 @@ const uid = auth?.currentUser.uid
           />
 
           <Input
+          className="z-0"
             label="Email"
             placeholder={ownerInfo?.email || 'cool@gh.com'}
             fullWidth
@@ -109,6 +112,7 @@ const uid = auth?.currentUser.uid
           />
 
             <Input
+            className="z-0"
             label="First Name"
             placeholder={ownerInfo?.firstName || 'John'}
             fullWidth
@@ -120,6 +124,7 @@ const uid = auth?.currentUser.uid
             />
 
             <Input
+            className="z-0"
             label="Last Name"
             placeholder={ownerInfo?.lastName || 'Pope'}
             fullWidth
@@ -131,6 +136,7 @@ const uid = auth?.currentUser.uid
             />
 
             <Input
+            className="z-0"
             label="Phone"
             placeholder={ownerInfo?.phone || '9087879823'}
             fullWidth
@@ -142,6 +148,7 @@ const uid = auth?.currentUser.uid
             />
 
             <Input
+            className="z-0"
             label="Site Name"
             placeholder={ownerInfo?.bookingSiteName || 'CrownedBL'}
             fullWidth

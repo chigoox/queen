@@ -10,7 +10,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { AUTH, DATABASE } from '@/Firebase'
 export const Admin = () => {
     const {push} = useRouter()
-    const [selectedMenu, setSelectedMenu] = useState('Products')
+    const [selectedMenu, setSelectedMenu] = useState('Home')
     const [owner, setOwner] = useState(null);
     const [ownerData, setOwnerData] = useState(null);
     const [loading, setLoading] = useState(false)

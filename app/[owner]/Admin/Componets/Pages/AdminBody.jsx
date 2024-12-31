@@ -20,18 +20,18 @@ const [WebsiteEditorData, setWebsiteEditorData] = useState({})
             <Card className="w-full max-h-full h-auto  p-1 mt-5  min-h-32">
                 {selectedMenu == menu[0] && <AdminHome OWNER={ownerData} SITEINFO={ownerData?.siteInfo} />}
                 {selectedMenu == menu[1].name && <AdminOrders />}
-                {selectedMenu == menu[1].menus[0] && <AdminHome />}
+                {selectedMenu == menu[1].menus[0] && <div>Comming Soon</div>}
                 {selectedMenu == menu[1].menus[1] && <AdminHome />}
                 {selectedMenu == menu[2].name && <AdminProduct SITEINFO={ownerData?.siteInfo}   />}
-                {selectedMenu == menu[2].menus[0] && <AdminHome />}
-                {selectedMenu == menu[2].menus[1] && <AdminHome />}
-                {selectedMenu == menu[2].menus[2] && <AdminHome />}
-                {selectedMenu == menu[2].menus[3] && <AdminHome />}
-                {selectedMenu == menu[3].name && <AdminHome />}
-                {selectedMenu == menu[3].menus[0] && <AdminHome />}
+                {selectedMenu == menu[2].menus[0] && <div>Comming Soon</div>}
+                {selectedMenu == menu[2].menus[1] &&<div>Comming Soon</div>}
+                {selectedMenu == menu[2].menus[2] && <div>Comming Soon</div>}
+                {selectedMenu == menu[2].menus[3] && <div>Comming Soon</div>}
+                {selectedMenu == menu[3].name && <div>Comming Soon</div>}
+                {selectedMenu == menu[3].menus[0] && <div>Comming Soon</div>}
                 {selectedMenu == menu[4] && <WebsiteEditor SITEINFO={ownerData?.siteInfo} />}
-                {selectedMenu == menu[5] && <AdminHome />}
-                {selectedMenu == menu[6] && <AdminSettings ownerInfo={ownerData?.Owner} />}
+                {selectedMenu == menu[5] && <div>Comming Soon</div>}
+                {selectedMenu == menu[6] && <AdminSettings  OWNER={ownerData} />}
 
             </Card>
         </div>

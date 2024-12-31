@@ -8,13 +8,13 @@ const AdminMenuItem = ({ showMenu, menuItem, setSelectedMenu, selectedMenu }) =>
     const mainMenuName = menuItem.name || menuItem
     const [mainMenuOpened, setMainMenuOpened] = useState(false)
     const menuIcon = {
-        Home: <AiFillHome />,
-        Booking: <AiOutlineContainer />,
-        Services: <BookAIcon />,
-        Customers: <AiOutlineUser />,
-        WebsiteEditor: <Edit2Icon />,
-        Discount: <AiOutlineDollar />,
-        Settings: <Settings/>,
+        Home: <AiFillHome size={24} />,
+        Booking: <AiOutlineContainer size={24} />,
+        Services: <BookAIcon size={24} />,
+        Customers: <AiOutlineUser size={24} />,
+        WebsiteEditor: <Edit2Icon size={24} />,
+        Discount: <AiOutlineDollar size={24} />,
+        Settings: <Settings size={24}/>,
 
     }
     const SubMenu = ({ menuItem }) => {

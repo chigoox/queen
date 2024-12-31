@@ -24,11 +24,11 @@ export const AdminMenu = ({ setSelectedMenu, selectedMenu, ownerData }) => {
             </Button>
 
             <Button onPress={async () => {  push(`/${ownerData?.userName}/Booking`) }} className={` text-gray-600 font-semibold hover:bg-gray-200 bg-white relative top-20 ${showMenu ? 'p-4' : 'p-1'} w-full   flex justify-start  mt-2 h-7  group rounded-xl`}>
-                <EyeIcon size={22}  className='w-23 h-24' />
+                <EyeIcon className=' flex-shrink-0' size={24}  scale={24} />
                 Website
             </Button>
             <Button onPress={async () => { await signOut(AUTH); push('/') }} className={` text-gray-600 font-semibold hover:bg-gray-200 bg-white relative top-20 ${showMenu ? 'p-4' : 'p-1'} w-full   flex justify-start  mt-2 h-7  group rounded-xl`}>
-                <LogOutIcon  className='w-23 h-24' />
+                <LogOutIcon className=' flex-shrink-0' scale={24}    />
                 Logout
             </Button>
         </div>

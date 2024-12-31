@@ -16,7 +16,7 @@ const AdminSettings = ({ownerInfo}) => {
   const [info, setInfo] = useState({});
   const [photo, setPhoto] = useState(null);
 
-
+const uid = auth?.currentUser.uid
 
 
 
@@ -68,7 +68,7 @@ const AdminSettings = ({ownerInfo}) => {
       },
       body: JSON.stringify({
         userName: ownerInfo?.userName,
-        state: 'state',
+        uid: uid,
       }),
     })
 
@@ -76,21 +76,7 @@ const AdminSettings = ({ownerInfo}) => {
        // await addToDoc('Temp', bookID, apointment)
         window.location.href = URL
 
-    await fetch('/api/CreateConnectedAccount', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userName: ownerInfo?.userName,
-        email:ownerInfo?.Owner.email,
-        uid:ownerInfo.uid,
-        stripeAccountID: ownerInfo?.stripeAccountID,
-        state: 'state',
-      }),
-    })
   }
-
   
 
   return (

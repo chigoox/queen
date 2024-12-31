@@ -199,7 +199,7 @@ const bookID = getRandTN(10)
         const apointmentID = `AP_${getRandTN(10)}`
         
         
-        const data = await fetch('/api/Checkout', {
+        const data = await fetch('/api/CheckoutConnected', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
              redirect: 'follow',
@@ -219,6 +219,7 @@ const bookID = getRandTN(10)
                 apointmentID: apointmentID || null,
                 siteName: OWNER?.siteInfo?.name || null,
                 siteDeposit: OWNER?.siteInfo?.depositFee || null,
+                stripeAccountID: OWNER?.stripeAccountID || null
             })
         })
         

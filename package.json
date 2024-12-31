@@ -9,8 +9,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.3.0",
+    "@mui/x-charts": "^7.23.2",
     "@nextui-org/react": "^2.4.8",
     "@react-email/components": "0.0.31",
+    "@stripe/connect-js": "^3.3.17-beta-1",
+    "@stripe/react-connect-js": "^3.3.20-beta-2",
     "@tinymce/tinymce-react": "^5.0.0",
     "antd": "^5.10.0",
     "antd-img-crop": "^4.23.0",
@@ -36,7 +42,7 @@
     "react-responsive-masonry": "^2.3.0",
     "react-spinners": "^0.13.8",
     "resend": "^4.0.1",
-    "stripe": "^17.4.0",
+    "stripe": "^17.5.0",
     "tinymce": "^7.0.0"
   },
   "devDependencies": {

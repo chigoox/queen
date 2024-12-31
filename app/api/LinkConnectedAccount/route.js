@@ -9,7 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 export async function POST(request) {
   try {
     const { userName, email, uid, stripeAccountID } = await request.json();
-
+console.log(uid)
     const account = stripeAccountID ? {id: stripeAccountID} : await stripe.accounts.create({
       country: 'US',
       email: email,
@@ -24,6 +24,7 @@ export async function POST(request) {
           type: 'express',
         },
       },
+      idempotencyKey: uid,
     })
 
     
@@ -34,12 +35,11 @@ export async function POST(request) {
       type: 'account_onboarding',
     });
     
-    
-    const loginLink = await stripe.accounts.createLoginLink(account.id);
-    
+    //const loginLink = await stripe.accounts.createLoginLink(account.id);
+    console.log(account.id)
     await addToDoc('Owners', uid, {
       stripeAccountID: account.id,
-      stripeDashboard:loginLink.url
+      //stripeDashboard:loginLink.url
     });
 
 

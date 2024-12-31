@@ -208,7 +208,7 @@ const { token } = theme.useToken();
         <Input
         placeholder="Appointment Interval"
         value={siteInfo?.apointmentInterveral}
-        onChange={(e) => handleInputChange('apointmentInterveral', e.target.value)}
+        onChange={(e) => handleInputChange('apointmentInterveral',Number( e.target.value))}
         style={{ marginBottom: '10px' }}
       />
       </div>

@@ -44,9 +44,8 @@ const {
 
 
 const ownerUID = OWNER?.uid
-const userID = getAuth()?.currentUser
+const userID = getAuth()?.currentUser?.uid
 const isAdmin = ownerUID === userID
-
 //
 useEffect(() => {
   const getData = async () => {
@@ -64,7 +63,6 @@ getData()
   useEffect(() => {
     const getData = async () => {
       let FIREBS_PRODUCTS
-console.log('first', OWNER)
       await useFetchDocsPresist('Services', 'owner', '==', OWNER?.uid, 'created', (data) => {
         FIREBS_PRODUCTS = data.map(i => {
           const miliseconds = i.created.seconds * 1000 + i.created.nanoseconds / 1000000
@@ -96,10 +94,10 @@ console.log('first', OWNER)
         {/* LOGO SECTION */}
         <div className=' w-full h-96'>
           <div className='center-col'>
-            <Button  onPress={() => { push(`/${pageOwnerUserName}/Admin`) }} className='absolute z-50 bg-opacity-0 top-4 right-4 bg-[color:var(--AccentColor)] text-[color:var(--TextColor)]'>
+            {isAdmin && <Button  onPress={() => { push(`/${pageOwnerUserName}/Admin`) }} className='absolute z-50 bg-opacity-0 top-4 right-4 bg-[color:var(--AccentColor)] text-[color:var(--TextColor)]'>
 
-            <Settings2  size={'48'} className=""/>
-            </Button>
+            <Settings2  size={'32'} className=""/>
+            </Button>}
             <Logo url={logo} />
           </div>
           <div className='mt-4 center-col'>

@@ -37,9 +37,11 @@ import { serverTimestamp } from "firebase/firestore"
 
 
 
-const Bookings = ({OWNER, bookingInfo, setBookingInfo, d}) => {
+const Bookings = ({OWNER, bookingInfo, setBookingInfo}) => {
     const [adminDATA, setAdminDATA] = useState({})
     const reservations = adminDATA?.allRes ? adminDATA?.allRes : []
+
+    const apointmentInterveral = OWNER?.siteInfo?.apointmentInterveral || 60
 
     const [reload, setReload] = useState(false)
     // display div of availables times
@@ -87,7 +89,7 @@ const Bookings = ({OWNER, bookingInfo, setBookingInfo, d}) => {
                 start: startHour,
                 end: endHour
             },
-            { step: apointmentInterveral || 60 }
+            { step: apointmentInterveral }
         )
 
         // filter the available hours
@@ -115,7 +117,7 @@ const Bookings = ({OWNER, bookingInfo, setBookingInfo, d}) => {
                     start: startHour,
                     end: endHour
                 },
-                { step: apointmentInterveral || 60 }
+                { step: apointmentInterveral }
             )
             // filter the available hours
             let freeTimes = hoursInDay.filter(

@@ -19,7 +19,7 @@ const [WebsiteEditorData, setWebsiteEditorData] = useState({})
             <h1 className="font-bold  sm:left-0 lg:left-0 md:left-2 relative font-2xl text-black">{selectedMenu}</h1>
             <Card className="w-full max-h-full h-auto  p-1 mt-5  min-h-32">
                 {selectedMenu == menu[0] && <AdminHome OWNER={ownerData} SITEINFO={ownerData?.siteInfo} />}
-                {selectedMenu == menu[1].name && <AdminOrders />}
+                {selectedMenu == menu[1].name && <AdminOrders OWNER={ownerData}/>}
                 {selectedMenu == menu[1].menus[0] && <div>Coming Soon</div>}
                 {selectedMenu == menu[1].menus[1] && <AdminHome />}
                 {selectedMenu == menu[2].name && <AdminProduct SITEINFO={ownerData?.siteInfo}   />}

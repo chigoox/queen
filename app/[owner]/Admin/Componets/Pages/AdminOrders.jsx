@@ -1,11 +1,24 @@
+import { useFetchDocsPresist } from '@/app/myCodes/Database';
 import { Card, Button, Text, ModalHeader, ModalBody, ModalFooter } from '@nextui-org/react';
 import { Modal } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export const AdminOrders = () => {
+export const AdminOrders = ({OWNER}) => {
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const bookings = [1, 1, 1, 1, 1];
+    const [bookings, setBookings] = useState([])
+    console.log(bookings)
+    
+useEffect(() => {
+    async function fetchBookings() {
+        if (!OWNER) return
+            console.log('OWNER', OWNER)
+            await useFetchDocsPresist('Apointment', 'ownerID', '==', OWNER?.uid, 'apointmentDate' ,setBookings);
+           
+           
+        }
+        fetchBookings()
+    },[OWNER])
 
 
 console.log(isModalOpen)
@@ -33,7 +46,7 @@ console.log(isModalOpen)
     return (
         <div className='center-col p-2'>
             <Card className='w-full p-4'>
-                <h1>Orders</h1>
+                <h1>Appointments</h1>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                     {bookings.map((item, index) => (
@@ -44,14 +57,14 @@ console.log(isModalOpen)
                                     <h1>Customer</h1>
                                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                                         <div>
-                                            <h1>Name:</h1>
-                                            <h1>Email:</h1>
-                                            <h1>Phone:</h1>
+                                            <h1>{item?.customerName}</h1>
+                                            <h1>{item?.customerEmail}</h1>
+                                            <h1>{item?.customerPhone}</h1>
                                         </div>
                                         <div>
                                             <h1>John Doe</h1>
                                             <h1>john.doe@example.com</h1>
-                                            <h1>+1234567890</h1>
+                                            <h1>{item.apointmentID}</h1>
                                         </div>
                                     </div>
                                     <Button onPress={() => handleOpenOrder(item)}>View</Button>

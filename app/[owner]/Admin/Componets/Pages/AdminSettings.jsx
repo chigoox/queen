@@ -17,7 +17,7 @@ const AdminSettings = ({OWNER}) => {
   const [info, setInfo] = useState({});
   const [photo, setPhoto] = useState(null);
 
-const uid = auth?.currentUser.uid
+const uid = auth?.currentUser?.uid
 
 
 
@@ -81,7 +81,7 @@ const uid = auth?.currentUser.uid
   
 
   return (
-    <div className="min-h-screen  flex flex-col items-start justify-start p-4">
+    <div className="min-h-screen  flex flex-col items-start justify-start   md:items-center  md:justify-center  p-4">
       <motion.div
         className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
         initial={{ opacity: 0, y: -20 }}
@@ -89,7 +89,7 @@ const uid = auth?.currentUser.uid
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-2xl font-bold text-center mb-6">Update Profile</h1>
-<Button isDisabled ={OWNER?.stripeAccountID ? true : false} onPress={()=>{setUpConntectedAccount()}} className={`my-4 w-full md:w-1/4 font-semibold ${OWNER?.stripeAccountID ? 'bg-green-300 text-white' : 'bg-slate-300'}`}>{OWNER?.stripeAccountID ? `${OWNER?.stripeAccountID}`:'Connect Stripe'}</Button>
+<Button isDisabled ={OWNER?.stripeAccountID ? true : false} onPress={()=>{setUpConntectedAccount()}} className={`my-4 w-full font-semibold ${OWNER?.stripeAccountID ? 'bg-green-300 text-white' : 'bg-slate-300'}`}>{OWNER?.stripeAccountID ? `${OWNER?.stripeAccountID}`:'Connect Stripe'}</Button>
         <div className="mb-4 z-0 center-col gap-2">
           <Input 
           className="z-0"

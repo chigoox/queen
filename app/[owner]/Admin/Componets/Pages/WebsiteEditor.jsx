@@ -361,7 +361,7 @@ const { token } = theme.useToken();
           </div>
 
       </div>
-<div className='flex flex-col  items-center gap-4 p-6 bg-gray-100 rounded-lg shadow-md'>
+<div className='flex flex-col text-sm  items-center gap-4 p-6 bg-gray-100 rounded-lg shadow-md'>
   <h1 className='font-bold text-xl text-gray-800'>Website Link</h1>
   <ClickToCopy 
     textToCopy={`https://crownedbl.vercel.app/${pageOwnerUserName}/Booking`} 

@@ -17,6 +17,10 @@ export const AdminHome = ({ SITEINFO, OWNER }) => {
   const color = SITEINFO?.colors?.accent || "#625afa"; // Default color fallback
   const [stripeConnectInstance, setStripeConnectInstance] = useState(null);
   useEffect(() => {
+    if(!OWNER?.stripeAccountID) {
+      console.error("No Stripe Account ID found for this user.");
+      return;
+    }
     const fetchClientSecret = async () => {
       try {
         const response = await fetch("/api/AccountSession", {

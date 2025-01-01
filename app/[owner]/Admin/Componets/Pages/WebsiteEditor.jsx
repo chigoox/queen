@@ -57,12 +57,12 @@ const pageOwnerUserName = pathname.replace('/Admin','').replace('/','')
 //submitt button
 const submit = async () =>{
 
-  const imageLogo = await useUploader(siteInfo?.logo, `${user?.currentUser.uid}/Logo`)
+  const imageLogo = (typeof( siteInfo?.logo) == 'string') ? siteInfo?.logo  : await useUploader(siteInfo?.logo, `${user?.currentUser.uid}/Logo`)
   
   let imageCategories = []
   for (let index = 0; index < siteInfo.categories.length; index++) {
           const file = siteInfo.categories[index].image;
-          const url = await useUploader(file, 'OwnerName/Categories')
+          const url = typeof(file) == 'string'? file : await useUploader(file, 'OwnerName/Categories')
           imageCategories.push({name: siteInfo.categories[index].name,image:url})
       }
 

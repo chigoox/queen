@@ -5,7 +5,7 @@ import ImgCrop from 'antd-img-crop';
 import { useEffect, useState } from 'react';
 import ClickToCopy from '@/app/General/ClickToCopy.jsx'
 import { usePathname, useRouter } from "next/navigation"
-
+import { RWebShare } from "react-web-share";
 
 
 import { CollapsibleSection, CollapsibleSectionMain } from '@/app/HomePage/BookingInfo';
@@ -363,9 +363,16 @@ const { token } = theme.useToken();
       </div>
 <div className='flex flex-col text-sm  items-center gap-4 p-6 bg-gray-100 rounded-lg shadow-md'>
   <h1 className='font-bold text-xl text-gray-800'>Website Link</h1>
-  <ClickToCopy 
-    textToCopy={`https://crownedbl.vercel.app/${pageOwnerUserName}/Booking`} 
-  />
+  <RWebShare
+        data={{
+          text: `/${pageOwnerUserName}/Booking`,
+          url: `https://booxy.vercel.app/${pageOwnerUserName}/Booking`,
+          title: "Website Link",
+        }}
+        onClick={() => console.log("shared successfully!")}
+      >
+        <button>Share 🔗</button>
+      </RWebShare>
 </div>
       <Button className='w-full my-10 h-10' onClick={submit}>SAVE</Button>
 

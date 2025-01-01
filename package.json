@@ -41,6 +41,7 @@
     "react-icons": "^4.12.0",
     "react-responsive-masonry": "^2.3.0",
     "react-spinners": "^0.13.8",
+    "react-web-share": "^2.0.2",
     "resend": "^4.0.1",
     "stripe": "^17.5.0",
     "tinymce": "^7.0.0"

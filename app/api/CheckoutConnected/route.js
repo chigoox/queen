@@ -46,8 +46,8 @@ console.log(customer)
                 },
               },
             mode: 'payment',
-            success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Success/${ownerID}`,
-            cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Cancelled/${ownerID}`,
+            success_url: `https://${!isDev() ? 'booxy.vercel.app' : 'localhost:3000'}/Checkout/Success/${ownerID}`,
+            cancel_url: `https://${!isDev() ? 'booxy.vercel.app' : 'localhost:3000'}/Checkout/Cancelled/${ownerID}`,
             metadata: {
                 customerID: customer,
                 customerName: name,
@@ -91,8 +91,8 @@ console.log(customer)
                 },
               },
             mode: 'payment',
-            success_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Success/${ownerID}`,
-            cancel_url: `https://${!isDev() ? 'crownedbl.vercel.app' : 'localhost:3000'}/Checkout/Cancelled/${ownerID}`,
+            success_url:  `${request.headers.get('origin')}/Checkout/Success/${ownerID}`,
+            cancel_url: `${request.headers.get('origin')}/Checkout/Cancelled/${ownerID}`,
             metadata: {
                 siteName: siteName,
                 siteDeposit: siteName,

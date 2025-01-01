@@ -10,7 +10,7 @@ import { AUTH } from '@/Firebase';
 import { message } from 'antd';
 import { sendEmailVerification , updateProfile } from "firebase/auth";
 import { useRouter } from 'next/navigation'
-import { addToDoc } from '../myCodes/Database';
+import { addToDoc, fetchDocument } from '../myCodes/Database';
 import  PasswordValidator  from '@/app/Signup/Componets/PasswordValidator'
 import {generateRandomUsername} from '@/app/myCodes/Util'
 import { addUniqueUsername } from '@/app/myCodes/DatabaseUtils';
@@ -98,7 +98,7 @@ const SignupPage = () => {
 
 
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(AUTH, provider).then((result) => {
+      await signInWithPopup(AUTH, provider).then( async (result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
@@ -106,8 +106,9 @@ const SignupPage = () => {
         const user = result.user;
        //update userInfo if new user
       const { isNewUser } = getAdditionalUserInfo(result)   
-       
-       if(isNewUser){
+       const data = await fetchDocument('Onwers',user.uid)
+console.log(data)
+       if(!data?.uid){
         addToDoc('Owners',user.uid,{siteInfo:{
           name: formData?.bookingSiteName || '',
           heading: '',

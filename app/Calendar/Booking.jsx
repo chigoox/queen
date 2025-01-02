@@ -41,7 +41,7 @@ const Bookings = ({OWNER, bookingInfo, setBookingInfo}) => {
     const [adminDATA, setAdminDATA] = useState({})
     const reservations = adminDATA?.allRes ? adminDATA?.allRes : []
 
-    const apointmentInterveral = OWNER?.siteInfo?.apointmentInterveral || 60
+    const apointmentInterveral = Number(OWNER?.siteInfo?.apointmentInterveral )|| 60
 
     const [reload, setReload] = useState(false)
     // display div of availables times

@@ -23,7 +23,6 @@ export async function POST(request) {
         stripeAccountID = '',
         siteDeposit= 0,
     } = data;
-console.log(customer)
     if (customer === null) {
         const session = await stripe.checkout.sessions.create({
             line_items: [

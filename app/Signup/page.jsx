@@ -105,9 +105,7 @@ const SignupPage = () => {
         // The signed-in user info.
         const user = result.user;
        //update userInfo if new user
-      const { isNewUser } = getAdditionalUserInfo(result)   
        const data = await fetchDocument('Onwers',user.uid)
-console.log(data)
        if(!data?.uid){
         addToDoc('Owners',user.uid,{siteInfo:{
           name: formData?.bookingSiteName || '',

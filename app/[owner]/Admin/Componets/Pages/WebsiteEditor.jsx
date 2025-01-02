@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import ClickToCopy from '@/app/General/ClickToCopy.jsx'
 import { usePathname, useRouter } from "next/navigation"
 import { RWebShare } from "react-web-share";
+import CategoryUploader from '@/app/[owner]/Admin/Componets/Support/CategoryUploader.jsx';      
 
 
 import { CollapsibleSection, CollapsibleSectionMain } from '@/app/HomePage/BookingInfo';
@@ -208,7 +209,7 @@ const { token } = theme.useToken();
         <Input
         placeholder="Appointment Interval"
         value={siteInfo?.apointmentInterveral}
-        onChange={(e) => handleInputChange('apointmentInterveral',Number( e.target.value))}
+        onChange={(e) => handleInputChange('apointmentInterveral', e.target.value)}
         style={{ marginBottom: '10px' }}
       />
       </div>
@@ -313,6 +314,7 @@ const { token } = theme.useToken();
         </Button>
       </div>
 
+      <CategoryUploader/>
 {/* Color Pickers */}
 <h3 className='font-bold text-3xl text-center'>Theme</h3>
       <div className='m-auto p-1 center-col overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>

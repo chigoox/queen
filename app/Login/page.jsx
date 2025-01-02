@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button, Input } from '@nextui-org/react';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getAuth, updateProfile } from 'firebase/auth';
 import { AUTH } from '@/Firebase';
 import { useRouter } from 'next/navigation'
+import { generateRandomUsername } from '../myCodes/Util';
+import { addToDoc, fetchDocument } from '../myCodes/Database';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -53,6 +55,43 @@ export default function Login() {
     try {
       await signInWithPopup(AUTH, provider);
   const user = getAuth().currentUser
+
+
+
+  const data = await fetchDocument('Onwers',user.uid)
+  const randUserName =  generateRandomUsername()
+  if(!data?.uid){
+   addToDoc('Owners',user.uid,{siteInfo:{
+     name:  '',
+     heading: '',
+     subHeading: '',
+     colors: {
+       background: '#ffffff',
+       accent: '#000000',
+       text: '#333333',
+       text2: '#333333',
+       text3: '#333333',
+     },
+     terms: [{ title: '', body: [''] }],
+     categories: [{ name: '', image: null }],
+     logo: null,
+     depositFee: 25
+   },
+     userName:randUserName,
+     uid:user.uid,
+     Owner:{
+      userName:randUserName
+     }
+   })
+
+    
+       //Update userInfo
+       updateProfile(user, {
+         displayName: randUserName
+       })
+     
+  }
+
 
   push(`/${user.displayName}/Admin`)
 

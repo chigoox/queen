@@ -6,13 +6,18 @@ import { useEffect, useState } from 'react';
 import ClickToCopy from '@/app/General/ClickToCopy.jsx'
 import { usePathname, useRouter } from "next/navigation"
 import { RWebShare } from "react-web-share";
-import CategoryUploader from '@/app/[owner]/Admin/Componets/Support/CategoryUploader.jsx';      
+import CategoryUploader from '@/app/[owner]/Admin/Componets/Support/CategoryUploader';      
+
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import {  collection, addDoc } from 'firebase/firestore';
+import { DATABASE, STORAGE,  } from '../../../../../Firebase';
 
 
 import { CollapsibleSection, CollapsibleSectionMain } from '@/app/HomePage/BookingInfo';
 import { useUploader } from '@/app/Hooks/useUploader';
 import { addToDoc } from '@/app/myCodes/Database';
 import { getAuth } from 'firebase/auth';
+import { Share2 } from 'lucide-react';
 
 const genPresets = (presets = presetPalettes) =>
   Object.entries(presets).map(([label, colors]) => ({
@@ -27,6 +32,7 @@ const WebsiteEditor = ({SITEINFO}) => {
     name: '',
     heading: '',
     subHeading: '',
+    portfolio:[],
     colors: {
       background: '#ffffff',
       accent: '#000000',
@@ -40,6 +46,8 @@ const WebsiteEditor = ({SITEINFO}) => {
     depositFee: 25,
     apointmentInterveral: 30
   });
+
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setSiteInfo(SITEINFO)
@@ -57,9 +65,8 @@ const pageOwnerUserName = pathname.replace('/Admin','').replace('/','')
   
 //submitt button
 const submit = async () =>{
-
+const portfolioUrl = await handleUploadToFirebase(siteInfo.portfolio, setLoading)
   const imageLogo = (typeof( siteInfo?.logo) == 'string') ? siteInfo?.logo  : await useUploader(siteInfo?.logo, `${user?.currentUser.uid}/Logo`)
-  
   let imageCategories = []
   for (let index = 0; index < siteInfo.categories.length; index++) {
           const file = siteInfo.categories[index].image;
@@ -70,7 +77,7 @@ const submit = async () =>{
   setSiteInfo(()=>{return({...siteInfo, categories:imageCategories, logo: imageLogo})})
   
  
-  await addToDoc('Owners', user?.currentUser.uid, {siteInfo:{...siteInfo, categories:imageCategories, logo: imageLogo}})
+  await addToDoc('Owners', user?.currentUser.uid, {siteInfo:{...siteInfo, categories:imageCategories, logo: imageLogo, portfolio:portfolioUrl}})
   setSaved(true)
   return('')
 }
@@ -158,7 +165,49 @@ const { token } = theme.useToken();
     setSiteInfo({ ...siteInfo, categories: updatedCategories });
   };
 
- 
+
+  const handleUploadToFirebase = async (portfolio, setLoading) => {
+    setLoading(true);
+    const portUrl = []
+    try {
+      const uploadPromises = portfolio.map(async (category) => {
+        const imageUrls = await Promise.all(
+          category.images.map(async (file) => {
+            if (typeof(file) == 'string') return file
+            const storageRef = ref(STORAGE, `categories/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file.originFileObj);
+            await new Promise((resolve, reject) => {
+              uploadTask.on(
+                'state_changed',
+                null,
+                reject,
+                async () => {
+                  resolve();
+                }
+              );
+            });
+            return getDownloadURL(storageRef);
+          })
+        );
+
+        const categoryData = {
+          name: category.name,
+          images: imageUrls,
+        };
+        portUrl.push(categoryData)
+       // await addDoc(collection(DATABASE, 'categories'), categoryData);
+      });
+
+      await Promise.all(uploadPromises);
+      setSiteInfo({ ...siteInfo, portfolio: portUrl });
+    } catch (error) {
+      console.error('Error uploading categories:', error);
+    } finally {
+      setLoading(false);
+    }
+
+    return portUrl;
+  };
 
   const previewStyle = {
     backgroundColor: siteInfo?.colors.background,
@@ -175,6 +224,14 @@ const { token } = theme.useToken();
         <Upload
           name="logo"
           listType="picture"
+          defaultFileList={
+            [{
+              uid: '1',
+              name: 'logo',
+              status: 'done',
+              url: siteInfo?.logo,
+            },]
+          }
           maxCount={1}
           onChange={handleLogoUpload}
           beforeUpload={(file) => {
@@ -182,7 +239,7 @@ const { token } = theme.useToken();
             return false;
           }}
         >
-          <Button>Upload Logo</Button>
+          <Button>Upload Site Logo</Button>
         </Upload>
       </ImgCrop>
 
@@ -300,7 +357,7 @@ const { token } = theme.useToken();
                   return false;
                 }}
               >
-                <Button>Upload Image</Button>
+                <Button>Upload Selection Image</Button>
               </Upload>
             </ImgCrop>
             <Button onClick={() => removeCategory(index)} danger>
@@ -314,7 +371,7 @@ const { token } = theme.useToken();
         </Button>
       </div>
 
-      <CategoryUploader/>
+      <CategoryUploader siteInfo={siteInfo} handleUploadToFirebase={handleUploadToFirebase}  setSiteInfo={setSiteInfo}/>
 {/* Color Pickers */}
 <h3 className='font-bold text-3xl text-center'>Theme</h3>
       <div className='m-auto p-1 center-col overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>
@@ -373,10 +430,10 @@ const { token } = theme.useToken();
         }}
         onClick={() => console.log("shared successfully!")}
       >
-        <button>Share 🔗</button>
+        <button><Share2/></button>
       </RWebShare>
 </div>
-      <Button className='w-full my-10 h-10' onClick={submit}>SAVE</Button>
+      <Button color='primary' className='w-full my-10 h-10' onClick={submit}>SAVE</Button>
 
     </div>
   );

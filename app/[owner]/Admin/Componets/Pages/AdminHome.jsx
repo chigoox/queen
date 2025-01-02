@@ -50,7 +50,7 @@ export const AdminHome = ({ SITEINFO, OWNER }) => {
 
       if (clientSecret) {
         const instance = loadConnectAndInitialize({
-          publishableKey: process.env.STRIPE_PUBLIC_KEY_LIVE || "pk_test_51QcJHJAw2TrHFjVplnRUQpe3F8YsYzxmWWIUTMMhcgDH3sBNlW6XOeva7fQhGeahXoYg2HUbwZrccnwBYc4NG2qc00JQpZHGqm",
+          publishableKey: process.env.STRIPE_PUBLIC_KEY_LIVE || "pk_test_51QcJHSBIsn8fMQRTqU07qC3MBQT690ROkSjhYn6KfCfOy4jB0sWJQc7pKoJmrfvSlViwXCuV7eHIZEAMrLm2BcHH00dGkCgxG1",
           fetchClientSecret: () => clientSecret,
           appearance: {
             overlays: "dialog",

@@ -3,14 +3,14 @@
 
 
 
-export const siteName = 'Crowned Brows & Lashes'
+export const siteName = 'Boox'
 export const siteTag = ''
-export const siteEmail = 'Crowned Brows & Lashes'
-export const siteURL = 'https://crownedbl.vercel.app/'
+export const siteEmail = 'Boox'
+export const siteURL = 'https://booxy.vercel.app/'
 
 
 export const NavBarVideoURL = 'hLDQ88vAhIs'
-export const orderNumberPrefix = 'CBL'
+export const orderNumberPrefix = 'BX'
 export const category = ['Lashes', 'Brows', 'Addon']
 
 

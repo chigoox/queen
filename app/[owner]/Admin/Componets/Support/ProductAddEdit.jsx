@@ -140,7 +140,7 @@ console.log(SITEINFO)
                                                     <h1>Category</h1>
                                                     <Select selectedKeys={[product.metadata.category]} onSelectionChange={(v) => { setTextMeta(Object.values(v)[0], 'category') }}>
 
-                                                        {category.map(category => {
+                                                        {[...category,"Addon"].map(category => {
                                                             return (
                                                                 <SelectItem value={category} key={category
 

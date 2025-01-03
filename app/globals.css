@@ -10,8 +10,10 @@
 --TextColor: rgb(0, 0, 0);
 --TextColor2: rgb(0, 0, 0);
 --TextColorM: rgb(255, 255, 255);
---AccentColorLight: color-mix(in srgb, var(--AccentColor), white);
---AccentColorDark:color-mix(in srgb, var(--AccentColor), black);
+--AccentColorLight: color-mix(in srgb, var(--AccentColor) 60%, white);
+--AccentColorLight2: color-mix(in srgb, var(--AccentColor) 70%, white);
+--AccentColorDark:color-mix(in srgb, var(--AccentColor) 60%, black);
+--AccentColorDark2:color-mix(in srgb, var(--AccentColor), black 90%);
 }
 
 /* width */

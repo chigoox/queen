@@ -307,17 +307,17 @@ const bookID = getRandTN(10)
                                                     setSelectedDay(day)
                                                 }}
                                                 className={cn(
-                                                    "w-12 h-12 md:h-24 md:w-24 flex flex-col p-2 justify-center items-center rounded-xl gap-0 group bg-gray-900 relative group",
+                                                    "w-12 h-12 md:h-24 md:w-24 flex flex-col p-2 justify-center items-center rounded-xl gap-0 group bg-[color:var(--AccentColor)] relative group",
                                                     isEqual(day, selectedDay) &&
-                                                    "bg-[color:var(--AccentColor)] text-[color:var(--TextColor)] text-lg",
+                                                    "bg-[color:var(--AccentColorLight)] text-[color:var(--TextColor)] text-lg",
                                                     isEqual(today, day) && "text-[color:var(--TextColor)] bg-[color:var(--AccentColorLight)]",
                                                     isBefore(day, today) &&
-                                                    "text-[color:var(--AccentColorDark)] bg-gray-700 cursor-not-allowed",
-                                                    isEqual(today, day) && "text-[color:var(--TextColorM)] bg-[color:var(--AccentColorDark)]",
+                                                    "bg-[color:var(--AccentColorDark2)]  cursor-not-allowed",
+                                                    isEqual(today, day) && "text-[color:var(--TextColorM)] bg-[color:var(--AccentColorLight2)]",
                                                     isBefore(day, today) && "cursor-not-allowed",
                                                     isEqual(day, selectedDay) &&
                                                     isToday(day) &&
-                                                    "text-[color:var(--AccentColorLight)]",
+                                                    "text-[color:var(--TextColor)]",
                                                     !isEqual(day, selectedDay) &&
                                                     !isToday(day) &&
                                                     !isSameMonth(day, firstDayCurrentMonth) &&
@@ -385,11 +385,11 @@ const bookID = getRandTN(10)
 
             }
             {bookingInfo?.apointment && <div id="checkout" className=' mb-96  center flex-col text-[color:var(--TextColorM)] p-2'>
-                <h1 className='text-xl text-center'>{`Your reservation is on:`}</h1>
-                <h1 className="font-bold text-2xl">{bookingInfo?.apointment}</h1>
+                <h1 className='text-xl text-center text-[color:var(--TextColor)]'>{`Your reservation is on:`}</h1>
+                <h1 className="font-bold text-2xl text-[color:var(--TextColor)]">{bookingInfo?.apointment}</h1>
                 <h1 className='text-center text-[color:var(--AccentColor)]'>depoit $25 to comfirm booking</h1>
                 <div className=" flex md:flex-row flex-col items-start justify-center gap-4 mb-8">
-                    <h1 className="font-bold mt-4 text-[color:var(--TextColorM)]">Contact Info:</h1>
+                    <h1 className="font-bold mt-4  text-[color:var(--TextColorM)]">Contact Info:</h1>
                     <input className="h-10 mb-2 p-2 rounded-lg text-black" placeholder="Full name" type="text" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, name: target.value} }) }) }} />
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Email" type="email" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, email: target.value} }) }) }} />
                     <input className="h-10 my-2 p-2 rounded-lg text-black" placeholder="Phone" type="tel" onChange={({ target }) => { setBookingInfo(old => { return ({ ...old, customer:{...old.customer, phone: target.value} })}) }} />
@@ -397,8 +397,8 @@ const bookID = getRandTN(10)
 
 
 
-                {!canBook() && <button disabled className={`h-12 w-32 cursor-not-allowed rounded-full ${canBook() ? ' bg-[color:var(--AccentColor)]' : 'bg-gray-500'} `}>Book Now</button>}
-                {canBook() && <button onClick={bookNow} className={`h-12 w-32 rounded-full ${canBook() ? 'text-[color:var(--TextColor)] bg-[color:var(--AccentColor)]' : 'bg-gray-500'} `}>Book Now</button>}
+                {!canBook() && <button disabled className={`h-12 w-32 cursor-not-allowed rounded-full ${canBook() ? ' bg-[color:var(--AccentColor)]' : 'bg-[color:var(--AccentColorDark2)] text-[color:var(--TextColorM)]'} `}>Book Now</button>}
+                {canBook() && <button onClick={bookNow} className={`h-12 w-32 rounded-full ${canBook() ? 'text-[color:var(--TextColorM)] bg-[color:var(--AccentColor)]' : 'bg-[color:var(--AccentColorDark2)] text-[color:var(--TextColorM)]'} `}>Book Now</button>}
             </div>}
 
         </div>

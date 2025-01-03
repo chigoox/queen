@@ -544,9 +544,9 @@ const { token } = theme.useToken();
                   </Button>
                 </RWebShare>
               </div>
-              <p className="mt-2 text-sm text-gray-600">
+              <p className="mt-2 text-sm text-gray-600 w-1/2 md:w-auto">
                 Your website is available at:{' '}
-                <code className="bg-gray-100 px-2 py-1 rounded">
+                <code className="bg-gray-100 px-2 py-1 rounded ">
                   booxy.vercel.app/{pageOwnerUserName}/Booking
                 </code>
               </p>
@@ -606,6 +606,7 @@ const { token } = theme.useToken();
 {/* Terms */}
 <div style={{ marginBottom: '20px' }}>
         <h3 className="font-bold">Terms & Conditions</h3>
+        <p className=' font-light text-xs'>Tell customers your rules.</p>
         {((siteInfo?.terms || [])).map((term, termIndex) => (
           <div key={termIndex} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
             <Input
@@ -617,7 +618,7 @@ const { token } = theme.useToken();
             {(term?.body || []).map((body, bodyIndex) => (
               <div key={bodyIndex} style={{ marginBottom: '10px' }}>
                 <Input.TextArea
-                  placeholder={`Body ${bodyIndex + 1}`}
+                  placeholder={`Term Body ex. No refunds after 24 hours`}
                   value={body}
                   onChange={(e) => handleTermChange(termIndex, bodyIndex, e.target.value)}
                   rows={4}
@@ -647,6 +648,7 @@ const { token } = theme.useToken();
       {/* Categories */}
       <div className='border-dashed border-2 p-2' style={{ marginBottom: '20px' }}>
         <h3 className='font-bold text-lg'>Categories</h3>
+        <p clcssName=' font-extralight text-xs'>of servics you offer.</p>
         <div className=''>
         {siteInfo?.categories.map((category, index) => (
           <div key={index} style={{ marginBottom: '10px' }}>

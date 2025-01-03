@@ -51,10 +51,10 @@ const AvailableHours = memo(({ freeTimes, setBookingInfo, setReload, reload }) =
                             <button
                                 type="button"
                                 className={cn(
-                                    "bg-gray-800 trans-slow rounded-lg px-2 text-[color:var(--AccentColor)] relative hover:border hover:border-[color:var(--TextColor)] w-[64px] h-[64px]",
+                                    "bg-[color:var(--AccentColorLight)] trans-slow rounded-lg px-2 text-[color:var(--AccentColorDark2)] relative hover:border hover:border-[color:var(--TextColor)] w-[64px] h-[64px]",
                                     selectedTime &&
                                     isSameMinute(selectedTime, hour) &&
-                                    "bg-[color:var(--AccentColor)] text-gray-800"
+                                    "bg-[color:var(--AccentColor)] text-[color:var(--AccentColorDark2)]"
                                 )}
                                 onClick={() => { setSelectedTime(hour); setReload(!reload) }}
                             >

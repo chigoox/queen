@@ -27,7 +27,7 @@ const TimesBar = memo(({ times }) => {
         <div
             className={cn(
                 `w-[42px]`,
-                "flex justify-center rounded-md overflow-hidden"
+                "flex justify-center rounded-xl overflow-hidden"
             )}
         >
             <div className="flex rounded-md">
@@ -37,9 +37,9 @@ const TimesBar = memo(({ times }) => {
                             key={i}
                             className={cn(
                                 times.some(time => isSameMinute(hour, time)) &&
-                                "h-[4px] w-[.5px] bg-pink-400",
+                                "h-[4px] w-[.5px] bg-[color:var(--AccentColorDark2)]",
                                 !times.some(time => isSameMinute(hour, time)) &&
-                                "h-[4px] w-[1px] bg-gray-100"
+                                "h-[4px] w-[1px] bg-[color:var(--AccentColorDark)]"
                             )}
                         />
                     )

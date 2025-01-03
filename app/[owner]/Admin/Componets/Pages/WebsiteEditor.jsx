@@ -496,7 +496,7 @@ const { token } = theme.useToken();
                       className="w-full"
                       presets={presets}
                       showText={(color) => <span>Text Color</span>}
-                      value={siteInfo?.colors.text1}
+                      value={siteInfo?.colors.text}
                       onChange={(color) => handleColorChange('text', color)}
                     />
                     <ColorPicker

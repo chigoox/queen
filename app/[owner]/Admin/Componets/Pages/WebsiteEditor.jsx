@@ -168,7 +168,17 @@ const WebsiteEditor = ({SITEINFO}) => {
   siteInfo?.font == 'Source Code Pro' ? source_Code_Pro : 
   siteInfo?.font == 'Slabo 27px' ? slabo_27px : 
   siteInfo?.font == 'Raleway' ? raleway : 
-  siteInfo?.font == 'PT Sans' ? pt_Sans : merriweather
+  siteInfo?.font == 'PT Sans' ? pt_Sans : 
+  siteInfo?.font == 'Merriweather' ? merriweather :
+  siteInfo?.font == 'Poppins' ? poppins :
+  siteInfo?.font == 'Inter' ? inter :
+  siteInfo?.font == 'Quicksand' ? quicksand :
+  siteInfo?.font == 'Rubik' ? rubik :
+  siteInfo?.font == 'Josefin Sans' ? josefin_Sans :
+  siteInfo?.font == 'Bebas Neue' ? bebas_Neue :
+  siteInfo?.font == 'Space Mono' ? space_Mono :
+  siteInfo?.font == 'Syne Mono' ? syne_Mono : roboto
+  
 
   //check for changes and set saved to false if a change is made
   const [saved, setSaved] = useState(false)

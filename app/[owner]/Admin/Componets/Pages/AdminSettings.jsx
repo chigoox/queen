@@ -81,7 +81,7 @@ const uid = auth?.currentUser?.uid
   
 
   return (
-    <div className="min-h-screen  flex flex-col items-start justify-start   md:items-center  md:justify-center  p-4">
+    <div className="min-h-screen overflow-y-scroll hidescroll  flex flex-col items-start justify-start   md:items-center  md:justify-center  p-4">
       <motion.div
         className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
         initial={{ opacity: 0, y: -20 }}

@@ -16,7 +16,7 @@ const AdminSettings = ({OWNER}) => {
   const ownerInfo = OWNER?.Owner
   const [info, setInfo] = useState({});
   const [photo, setPhoto] = useState(null);
-
+  const [loading, setLoading] = useState(false)
 const uid = auth?.currentUser?.uid
 
 
@@ -179,12 +179,13 @@ const uid = auth?.currentUser?.uid
           </ImgCrop>
         </div>
 
-        <Button
+        <ButtonA
+        loading={loading}
           className="w-full bg-blue-500 text-white"
           onClick={handleUpdateProfile}
         >
           Save Changes
-        </Button>
+        </ButtonA>
       </motion.div>
 
      

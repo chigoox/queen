@@ -3,6 +3,9 @@
 import Bookings from "@/app/Calendar/Booking"
 import { setCSSVariables } from "@/app/myCodes/Util"
 import { Button } from '@nextui-org/react'
+import { getAuth } from "firebase/auth"
+import { Settings2 } from "lucide-react"
+import { Bebas_Neue, Inter, Josefin_Sans, Lato, Merriweather, Montserrat, Open_Sans, Oswald, Poppins, PT_Sans, Quicksand, Raleway, Roboto, Rubik, Slabo_27px, Source_Code_Pro, Space_Mono, Syne_Mono } from "next/font/google"
 import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import Logo from "../../General/Logo"
@@ -11,8 +14,99 @@ import { useFetchDocsPresist } from "../../myCodes/Database"
 import NavBar from "../../NavBar/NavBar"
 import Addons from "./BookingOptions/Addons"
 import BookingOptions from "./BookingOptions/BookingOptions"
-import { getAuth } from "firebase/auth"
-import { Settings2 } from "lucide-react"
+
+
+
+[
+  'Roboto',
+  'Open Sans',
+  'Lato',
+  'Montserrat',
+  'Oswald',
+  'Source Sans Pro',
+  'Slabo 27px',
+  'Raleway',
+  'PT Sans',
+  'Merriweather'
+];
+
+
+//FONTS 
+const syne_Mono = Syne_Mono({
+  weight: '400',
+  subsets: ['latin'],
+})
+const space_Mono = Space_Mono({
+  weight: '400',
+  subsets: ['latin'],
+})
+const bebas_Neue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+})
+const josefin_Sans = Josefin_Sans({
+  weight: '400',
+  subsets: ['latin'],
+})
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+})
+const open_Sans = Open_Sans({
+  weight: '400',
+  subsets: ['latin'],
+})
+const lato = Lato({
+  weight: '400',
+  subsets: ['latin'],
+})
+const montserrat = Montserrat({
+  weight: '400',
+  subsets: ['latin'],
+})
+const oswald = Oswald({
+  weight: '400',
+  subsets: ['latin'],
+})
+const source_Code_Pro = Source_Code_Pro({
+  weight: '400',
+  subsets: ['latin'],
+})
+const slabo_27px = Slabo_27px({
+  weight: '400',
+  subsets: ['latin'],
+})
+const raleway = Raleway({
+  weight: '400',
+  subsets: ['latin'],
+})
+const pt_Sans = PT_Sans({
+  weight: '400',
+  subsets: ['latin'],
+})
+const merriweather = Merriweather({
+  weight: '400',
+  subsets: ['latin'],
+})
+const poppins = Poppins({
+  weight: '400',
+  subsets: ['latin'],
+})
+const inter = Inter({
+  weight: '400',
+  subsets: ['latin'],
+})
+const quicksand = Quicksand({
+  weight: '400',
+  subsets: ['latin'],
+})
+const rubik = Rubik({
+  weight: '400',
+  subsets: ['latin'],
+})
+//END FONTS
+
+
 
 
 
@@ -22,26 +116,46 @@ export default function Home() {
   const [selectDate, setSelectDate] = useState(false)
   const [ownerData, setOwnerData] = useState([])
   const OWNER = ownerData[0]
-const pathname = usePathname()
-const pageOwnerUserName = pathname.replace('/Booking','').replace('/','')
-const {
-  name= '',
-  heading= '',
-  subHeading= '',
-  colors = {
-    background: '#ffffff',
-    accent: '#000000',
-    text: '#333333',
-    text2: '#333333',
-    text3: '#333333',
-  },
-  terms= [{ title: '', body: '' }],
-  categories= [{ name: '', image: null }],
-  logo= null,
-  depositFee= 25
-} = OWNER?.siteInfo || {} 
+  const pathname = usePathname()
+  const pageOwnerUserName = pathname.replace('/Booking','').replace('/','')
+  const {
+    name= '',
+    heading= '',
+    subHeading= '',
+    colors = {
+      background: '#ffffff',
+      accent: '#000000',
+      text: '#333333',
+      text2: '#333333',
+      text3: '#333333',
+    },
+    terms= [{ title: '', body: '' }],
+    font = '',
+    categories= [{ name: '', image: null }],
+    logo= null,
+    depositFee= 25
+  } = OWNER?.siteInfo || {} 
 
+  const siteInfo = OWNER?.siteInfo
 
+  const pageFont = siteInfo?.font == 'Roboto' ? roboto :
+  siteInfo?.font == 'Open Sans' ? open_Sans :
+  siteInfo?.font == 'Lato' ? lato : 
+  siteInfo?.font == 'Montserrat' ? montserrat : 
+  siteInfo?.font == 'Oswald' ? oswald : 
+  siteInfo?.font == 'Source Code Pro' ? source_Code_Pro : 
+  siteInfo?.font == 'Slabo 27px' ? slabo_27px : 
+  siteInfo?.font == 'Raleway' ? raleway : 
+  siteInfo?.font == 'PT Sans' ? pt_Sans : 
+  siteInfo?.font == 'Merriweather' ? merriweather :
+  siteInfo?.font == 'Poppins' ? poppins :
+  siteInfo?.font == 'Inter' ? inter :
+  siteInfo?.font == 'Quicksand' ? quicksand :
+  siteInfo?.font == 'Rubik' ? rubik :
+  siteInfo?.font == 'Bebas Neue' ? bebas_Neue :
+  siteInfo?.font == 'Josefin Sans' ? josefin_Sans :
+  siteInfo?.font == 'Syne Mono' ? syne_Mono : space_Mono
+  console.log(pageFont.className)
 
 const ownerUID = OWNER?.uid
 const userID = getAuth()?.currentUser?.uid
@@ -87,7 +201,7 @@ getData()
 
   const {push} = useRouter()
   return (
-    <div className=" border-[color:var(--AccentColor)] border  min-h-screen bg-[color:var(--BGColor)] w-full overflow-hidden pb-10 md:px-40 font-[family-name:var(--font-geist-sans)]">
+    <div className={`${pageFont.className} border-[color:var(--AccentColor)] border  min-h-screen bg-[color:var(--BGColor)] w-full overflow-hidden pb-10 md:px-40 `}>
       <main className="flex flex-col  p-2">
         <NavBar bookingInfo={bookingInfo} />
 

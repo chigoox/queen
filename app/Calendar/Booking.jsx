@@ -132,7 +132,7 @@ const Bookings = ({OWNER, bookingInfo, setBookingInfo}) => {
     }, [currentMonth])
     const bookingOptions = [
         'Yes',
-        'No', //
+        'No', //bg-[color:var(--BGColor)]
 
 
 
@@ -232,11 +232,11 @@ const bookID = getRandTN(10)
     }
 
     return (
-        <div className='z-30 bg-black mt-8  m-auto w-full text-[color:var(--TextColorM)] h-full hidescroll overflow-scroll'>
+        <div className='z-30 bg-[color:var(--BGColor)] mt-8  m-auto w-full text-[color:var(--TextColorM)] h-full hidescroll overflow-scroll'>
             {loading && <Loading />}
 
             {
-                <div className={`mt-10  trans flex flex-col  md:flex-row   md:items-start  lg:justify-center    bg-black mb-10 md:mb-24`}>
+                <div className={`mt-10  trans flex flex-col  md:flex-row   md:items-start  lg:justify-center   bg-[color:var(--BGColor)] mb-10 md:mb-24`}>
 
 
                     {/* calendar implementation */}

@@ -193,7 +193,6 @@ const pathname = usePathname()
 const pageOwnerUserName = pathname.replace('/Admin','').replace('/','')
 
 
-console.log(siteInfo)
 
 const menu = (
   <Menu onClick={(e) => { setSiteInfo({ ...siteInfo, font: e.key })}}>
@@ -361,69 +360,91 @@ const { token } = theme.useToken();
   return (
     <div className='h-full w-full md:w-[60%]  m-auto border p-4 overflow-hidden overflow-y-scroll hidescroll ' >
      
-     <div className='center-col gap-2'>
-       {/* Logo Upload */}
-       <ImgCrop rotate>
-        <Upload
-          name="logo"
-          listType="picture"
-          defaultFileList={
-            [{
-              uid: '1',
-              name: 'logo',
-              status: 'done',
-              url: siteInfo?.logo,
-            },]
-          }
-          maxCount={1}
-          onChange={handleLogoUpload}
-          beforeUpload={(file) => {
-            handleLogoUpload(file );
-            return false;
-          }}
-        >
-          <Button>Upload Site Logo</Button>
-        </Upload>
-      </ImgCrop>
+     <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Website Settings</h1>
+          <p className="mt-2 text-gray-600">Customize your booking website's appearance and functionality</p>
+        </div>
 
-      {/* Website Name */}
-      <Input
-        placeholder="Website Name"
-        value={siteInfo?.name}
-        onChange={(e) => handleInputChange('name', e.target.value)}
-        style={{ marginBottom: '10px' }}
-      />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+    {/* Settings Form */}
+    <div className="bg-white rounded-lg shadow-sm p-6 space-y-8">
+ {/* Basic Information */}
+ <section>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Basic Information</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Website Logo</label>
+                  <ImgCrop rotate>
+                    <Upload
+                      name="logo"
+                      listType="picture"
+                      defaultFileList={[{
+                        uid: '1',
+                        name: 'logo',
+                        status: 'done',
+                        url: siteInfo?.logo,
+                      }]}
+                      maxCount={1}
+                      onChange={handleLogoUpload}
+                      beforeUpload={(file) => {
+                        handleLogoUpload(file);
+                        return false;
+                      }}
+                    >
+                      <Button className="bg-blue-50 text-blue-600 hover:bg-blue-100">Upload Logo</Button>
+                    </Upload>
+                  </ImgCrop>
+                </div>
 
-      <div className='border border-dashed my-4 p-2'>
-        <lable>Booking Deposit</lable>
-        <Input
-        placeholder="Deposit Fee"
-        value={siteInfo?.depositFee}
-        onChange={(e) => handleInputChange('depositFee', e.target.value)}
-        style={{ marginBottom: '10px' }}
-      />
-      </div>
-      
-      <div className='border border-dashed md:w-1/3 w-3/4 my-4 p-2'>
-        <lable>appointment Interval</lable>
-        <Input
-        placeholder="Appointments every X minutes"
-        value={siteInfo?.apointmentInterveral}
-        onChange={(e) => handleInputChange('apointmentInterveral', e.target.value)}
-        style={{ marginBottom: '10px' }}
-      />
-      <lable>Time in between</lable>
-        <Input
-        placeholder="minutes between appointments"
-        value={siteInfo?.apointmentRestTime}
-        onChange={(e) => handleInputChange('apointmentRestTime', e.target.value)}
-        style={{ marginBottom: '10px' }}
-      />
-      </div>
-      
-      
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Website Name</label>
+                  <Input
+                    className="w-full"
+                    placeholder="Enter your website name"
+                    value={siteInfo?.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                  />
+                </div>
+              </div>
+            </section>
 
-      {/* Heading */}
+             {/* Booking Settings */}
+             <section className="border-t pt-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Booking Configuration</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Deposit Amount</label>
+                  <Input
+                    placeholder="Enter deposit fee"
+                    value={siteInfo?.depositFee}
+                    onChange={(e) => handleInputChange('depositFee', e.target.value)}
+                    prefix="$"
+                  />
+                </div>
+                
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Appointment Settings</label>
+                  <div className="space-y-3">
+                    <Input
+                      placeholder="Duration (minutes)"
+                      value={siteInfo?.apointmentInterveral}
+                      onChange={(e) => handleInputChange('apointmentInterveral', e.target.value)}
+                    />
+                    <Input
+                      placeholder="Break time (minutes)"
+                      value={siteInfo?.apointmentRestTime}
+                      onChange={(e) => handleInputChange('apointmentRestTime', e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+             {/* Theme Settings */}
+             <section className="border-t pt-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Theme Settings</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Heading */}
      <div>
      <h1 className='font-bold'>Site Heading</h1>
       <Input
@@ -440,11 +461,148 @@ const { token } = theme.useToken();
         onChange={(e) => handleInputChange('subHeading', e.target.value)}
         style={{ marginBottom: '10px' }}
       />
+     
      </div>
-     </div>
+
+                <div>
+                  <h3 className="text-sm font-medium text-gray-700 mb-3">Colors</h3>
+                  <div className="space-y-3">
+                    <ColorPicker
+                      className="w-full"
+                      presets={presets}
+                      showText={(color) => <span>Background Color</span>}
+                      value={siteInfo?.colors.background}
+                      onChange={(color) => handleColorChange('background', color)}
+                    />
+                    <ColorPicker
+                      className="w-full"
+                      presets={presets}
+                      showText={(color) => <span>Accent Color</span>}
+                      value={siteInfo?.colors.accent}
+                      onChange={(color) => handleColorChange('accent', color)}
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-sm font-medium text-gray-700 mb-3">Typography</h3>
+                  <div className="space-y-3">
+                    <Dropdown overlay={menu}>
+                      <Button className="w-full">
+                        {siteInfo?.font || 'Select Font Family'}
+                      </Button>
+                    </Dropdown>
+                    <ColorPicker
+                      className="w-full"
+                      presets={presets}
+                      showText={(color) => <span>Text Color</span>}
+                      value={siteInfo?.colors.text1}
+                      onChange={(color) => handleColorChange('text', color)}
+                    />
+                    <ColorPicker
+                      className="w-full"
+                      presets={presets}
+                      showText={(color) => <span>Text Color</span>}
+                      value={siteInfo?.colors.text2}
+                      onChange={(color) => handleColorChange('text2', color)}
+                    />
+                    <ColorPicker
+                      className="w-full"
+                      presets={presets}
+                      showText={(color) => <span>Text Color</span>}
+                      value={siteInfo?.colors.text3}
+                      onChange={(color) => handleColorChange('text3', color)}
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        
 
 
 
+
+          <div className="lg:sticky lg:top-4">
+                {/* Share Section */}
+ <div className="mt-6 bg-white rounded-lg shadow-sm p-6">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-900">Share Your Website</h3>
+                <RWebShare
+                  data={{
+                    text: `/${pageOwnerUserName}/Booking`,
+                    url: `https://booxy.vercel.app/${pageOwnerUserName}/Booking`,
+                    title: "Website Link",
+                  }}
+                >
+                  <Button
+                    icon={<Share2 className="w-4 h-4" />}
+                    className="flex items-center gap-2"
+                  >
+                    Share
+                  </Button>
+                </RWebShare>
+              </div>
+              <p className="mt-2 text-sm text-gray-600">
+                Your website is available at:{' '}
+                <code className="bg-gray-100 px-2 py-1 rounded">
+                  booxy.vercel.app/{pageOwnerUserName}/Booking
+                </code>
+              </p>
+            </div>
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Live Preview</h2>
+              <div className={`${pageFont.className} border rounded-lg overflow-hidden`}>
+                <div className="p-6 space-y-4" style={{ backgroundColor: siteInfo?.colors.background }}>
+                  {siteInfo?.logo && (
+                    <div className="flex justify-center">
+                      <Image
+                        className="h-20 w-20 rounded-full bg-black"
+                        src={siteInfo?.logo}
+                        alt="Website Logo"
+                      />
+                    </div>
+                  )}
+                  <h2 className="text-2xl font-bold text-center" style={{ color: siteInfo?.colors.accent }}>
+                    {siteInfo?.heading || 'Your Website Heading'}
+                  </h2>
+                  <p className="text-center" style={{ color: siteInfo?.colors.text }}>
+                    {siteInfo?.subHeading || 'Your website subheading will appear here'}
+                  </p>
+
+                  <CollapsibleSectionMain title={'Read Terms'}>
+                <CollapsibleSection title="Deposit">
+                    <ul className="space-y-4">
+                        <li style={{color: siteInfo?.colors.text}}>$20 deposit is required to book, and it is non-refundable.</li>
+                        
+                    </ul>
+                </CollapsibleSection>
+          </CollapsibleSectionMain>
+                  
+                  <div className="mt-8">
+                    <ButtonNext
+                      style={{
+                        color: siteInfo?.colors.text2,
+                        backgroundColor: siteInfo?.colors.accent
+                      }}
+                      className="w-full py-3 rounded-lg font-bold text-center"
+                    >
+                      Book Now
+                    </ButtonNext>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+        <Button  loading={loading} color='primary' className='w-full col bg-blue-500 text-white my-10 h-10 fixed md:relative left-0 bottom-0 z-50' onClick={submit}>SAVE</Button>
+          </div>
+      
+    
+           
+
+<div>
+  
 {/* Terms */}
 <div style={{ marginBottom: '20px' }}>
         <h3 className="font-bold">Terms & Conditions</h3>
@@ -523,82 +681,16 @@ const { token } = theme.useToken();
 
       <CategoryUploader siteInfo={siteInfo} handleUploadToFirebase={handleUploadToFirebase}  setSiteInfo={setSiteInfo}/>
 
-      
-         {/* Color Pickers */}
-          <h3 className='font-bold text-3xl text-center'>Theme</h3>
-          <div className='m-auto p-1 center-col overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>
-            <div className='grid grid-cols-1   md:w-[80%] m-auto'>
-              <div className='m-auto'>
-                <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Background Color</div>)} value={siteInfo?.colors.background} onChange={(color) => handleColorChange('background', color)} />
-              </div>
-              <div className='m-auto'>
-                <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Accent Color</div>)} value={siteInfo?.colors.accent} onChange={(color) => handleColorChange('accent', color)} />
-              </div>
-              <div className='p-1 m-auto center-col border w-40'>
-                <div className='text-center'>Text Color</div>
-                <div className='w-full flex flex-col justify-star items-start'>
-                <ColorPicker showText={(color)=>(<div>Text Main</div>)} className=' w-32 justify-start' presets={presets}  value={siteInfo?.colors.text} onChange={(color) => handleColorChange('text', color)} />
-                <ColorPicker showText={(color)=>(<div>Text Accent</div>)} className='w-32 justify-start'  presets={presets}  value={siteInfo?.colors.text2} onChange={(color) => handleColorChange('text2', color)} />
-                <ColorPicker showText={(color)=>(<div>Text Etc</div>)} className='w-32 justify-start'  presets={presets}  value={siteInfo?.colors.text3} onChange={(color) => handleColorChange('text3', color)} />
-                </div>
-              </div>
-              <div className='m-auto'>
-              </div>
-            </div>
-          </div>
-          {/* Font Picker */}
-          <div className='m-auto p-1 center-col' style={{ marginBottom: '20px' }}>
-            <p>Select Font:</p>
-            <Dropdown overlay={menu}>
-              <Button>
-                {siteInfo.font || 'Choose a font'}
-              </Button>
-            </Dropdown>
-          </div>
 
-      
-      {/* Preview */}
-      <div className={`center-col rounded-xl overflow-hidden ${pageFont.className}`} style={{ ...previewStyle, padding: '20px', border: '1px solid' }}>
-        <Image className='bg-black h-20 w-20 rounded-full' src={siteInfo?.logo} />
-        <h2 className='font-bold' style={{color: siteInfo?.colors.accent}}>{siteInfo?.heading}</h2>
-        <p style={{color: siteInfo?.colors.text}}>{siteInfo?.subHeading}</p>
 
-        <CollapsibleSectionMain title={'Read Terms'}>
-                <CollapsibleSection title="Deposit">
-                    <ul className="space-y-4">
-                        <li style={{color: siteInfo?.colors.text}}>$20 deposit is required to book, and it is non-refundable.</li>
-                        
-                    </ul>
-                </CollapsibleSection>
-          </CollapsibleSectionMain>
-
-          <ButtonNext style={{color: siteInfo?.colors.text2, backgroundColor: siteInfo?.colors.accent}} className='center p-2 font-bold text-xl '>Continue</ButtonNext>
-          
-          <div style={{backgroundColor: siteInfo?.colors.background}} className='rounded w-3/4  center p-2 my-4 h-20 m-auto'>
-            <div style={{backgroundColor: siteInfo?.colors.accent}} className='h-20 w-20 center font-bold rounded-lg'>
-              <h1 className='center' style={{ color: siteInfo?.colors.text2}}>5</h1>
-            </div>
-          </div>
-
-      </div>
-<div className='flex flex-col text-sm  items-center gap-4 p-6 bg-gray-100 rounded-lg rounded-t-none shadow-md'>
-  <h1 className='font-bold text-xl text-gray-800'>Website Link</h1>
-  <RWebShare
-        data={{
-          text: `/${pageOwnerUserName}/Booking`,
-          url: `https://booxy.vercel.app/${pageOwnerUserName}/Booking`,
-          title: "Website Link",
-        }}
-        onClick={() => console.log("shared successfully!")}
-      >
-        <button><Share2/></button>
-      </RWebShare>
 </div>
-      <Button  loading={loading} color='primary' className='w-full bg-blue-500 text-white my-10 h-10' onClick={submit}>SAVE</Button>
 
-    </div>
-  );
-};
+ 
+
+
+        </div>
+ 
+    </div>)};
 
 export default WebsiteEditor;
 

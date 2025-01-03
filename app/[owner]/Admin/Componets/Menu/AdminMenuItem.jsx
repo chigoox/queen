@@ -6,7 +6,6 @@ import { ImPriceTag } from "react-icons/im"
 
 const AdminMenuItem = ({ showMenu, menuItem, setSelectedMenu, selectedMenu, setShowMenu, onMobile }) => {
     
-    console.log(showMenu, onMobile)
 
     
     const mainMenuName = menuItem.name || menuItem

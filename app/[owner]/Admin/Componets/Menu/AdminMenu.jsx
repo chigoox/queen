@@ -25,6 +25,7 @@ export const AdminMenu = ({ setSelectedMenu, selectedMenu, ownerData }) => {
     const {push} = useRouter()
     return (
         <div className={`Navigator ${showMenu ? 'w-[22rem] lg:w-64' : 'w-11 overflow-hidden'}  z-10 px-2  lg:relative absolute trans top-0 left-0 border-r bg-white h-screen`}>
+           <br className='mb-8'/>
             {menu.map((item) => {
                 return (
                     <AdminMenuItem key={item.name} setShowMenu={setShowMenu}  onMobile={onMobile} showMenu={showMenu} setSelectedMenu={setSelectedMenu} selectedMenu={selectedMenu} menuItem={item} />

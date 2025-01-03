@@ -81,13 +81,7 @@ useEffect(() => {
       <Button onClick={addCategory} type="dashed" className="mb-4">
         Add Category
       </Button>
-      <Button
-        type="primary"
-        loading={loading}
-        onClick={()=>{handleUploadToFirebase(portfolio, setLoading)}}
-      >
-        Save Portfolio
-      </Button>
+      
     </motion.div>
   );
 };

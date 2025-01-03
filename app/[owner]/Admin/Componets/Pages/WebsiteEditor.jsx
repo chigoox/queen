@@ -1,6 +1,6 @@
 import { generate, green, presetPalettes, red } from '@ant-design/colors';
 import { Button as ButtonNext, Image } from '@nextui-org/react';
-import { Button, ColorPicker, Input, Upload, theme } from 'antd';
+import { Button, ColorPicker, Dropdown, Input, Menu, Upload, theme } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import { useEffect, useState } from 'react';
 import ClickToCopy from '@/app/General/ClickToCopy.jsx'
@@ -19,15 +19,127 @@ import { addToDoc } from '@/app/myCodes/Database';
 import { getAuth } from 'firebase/auth';
 import { Share2 } from 'lucide-react';
 
+import { Roboto, Open_Sans, Lato, Montserrat, Oswald, Source_Code_Pro, Slabo_27px, Raleway, PT_Sans, Merriweather, Rubik, Poppins, Inter,Quicksand, Josefin_Sans, Bebas_Neue, Space_Mono, Syne_Mono  } from "next/font/google"
+
+
+
+
+//FONTS 
+const syne_Mono = Syne_Mono({
+  weight: '400',
+  subsets: ['latin'],
+})
+const space_Mono = Space_Mono({
+  weight: '400',
+  subsets: ['latin'],
+})
+const bebas_Neue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+})
+const josefin_Sans = Josefin_Sans({
+  weight: '400',
+  subsets: ['latin'],
+})
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+})
+const open_Sans = Open_Sans({
+  weight: '400',
+  subsets: ['latin'],
+})
+const lato = Lato({
+  weight: '400',
+  subsets: ['latin'],
+})
+const montserrat = Montserrat({
+  weight: '400',
+  subsets: ['latin'],
+})
+const oswald = Oswald({
+  weight: '400',
+  subsets: ['latin'],
+})
+const source_Code_Pro = Source_Code_Pro({
+  weight: '400',
+  subsets: ['latin'],
+})
+const slabo_27px = Slabo_27px({
+  weight: '400',
+  subsets: ['latin'],
+})
+const raleway = Raleway({
+  weight: '400',
+  subsets: ['latin'],
+})
+const pt_Sans = PT_Sans({
+  weight: '400',
+  subsets: ['latin'],
+})
+const merriweather = Merriweather({
+  weight: '400',
+  subsets: ['latin'],
+})
+const poppins = Poppins({
+  weight: '400',
+  subsets: ['latin'],
+})
+const inter = Inter({
+  weight: '400',
+  subsets: ['latin'],
+})
+const quicksand = Quicksand({
+  weight: '400',
+  subsets: ['latin'],
+})
+const rubik = Rubik({
+  weight: '400',
+  subsets: ['latin'],
+})
+//END FONTS
+
+
+ 
+
 const genPresets = (presets = presetPalettes) =>
   Object.entries(presets).map(([label, colors]) => ({
     label,
     colors,
   }));
 
+const pageFonts = [
+    'Roboto',
+    'Open Sans',
+    'Lato',
+    'Montserrat',
+    'Oswald',
+    'Source Sans Pro',
+    'Slabo 27px',
+    'Raleway',
+    'PT Sans',
+    'Merriweather',
+    'Poppins',
+    'Inter',
+    'Quicksand',
+    'Rubik',
+    'Josefin Sans',
+    'Bebas Neue',
+    'Space Mono',
+    'Syne Mono',
+  ];
+
+
+
 const user = getAuth()
 
+
+
+
+
 const WebsiteEditor = ({SITEINFO}) => {
+  const [loading, setLoading] = useState(false)
+
   const [siteInfo, setSiteInfo] = useState(SITEINFO ||{
     name: '',
     heading: '',
@@ -47,7 +159,20 @@ const WebsiteEditor = ({SITEINFO}) => {
     apointmentInterveral: 30
   });
 
-  const [loading, setLoading] = useState(false)
+
+  const pageFont = siteInfo?.font == 'Roboto' ? roboto :
+  siteInfo?.font == 'Open Sans' ? open_Sans :
+  siteInfo?.font == 'Lato' ? lato : 
+  siteInfo?.font == 'Montserrat' ? montserrat : 
+  siteInfo?.font == 'Oswald' ? oswald : 
+  siteInfo?.font == 'Source Code Pro' ? source_Code_Pro : 
+  siteInfo?.font == 'Slabo 27px' ? slabo_27px : 
+  siteInfo?.font == 'Raleway' ? raleway : 
+  siteInfo?.font == 'PT Sans' ? pt_Sans : merriweather
+
+  //check for changes and set saved to false if a change is made
+  const [saved, setSaved] = useState(false)
+  useEffect(() => {setSaved(false)}, [siteInfo])
 
   useEffect(() => {
     setSiteInfo(SITEINFO)
@@ -58,10 +183,18 @@ const pathname = usePathname()
 const pageOwnerUserName = pathname.replace('/Admin','').replace('/','')
 
 
+console.log(siteInfo)
 
-  //check for changes and set saved to false if a change is made
-  const [saved, setSaved] = useState(false)
-  useEffect(() => {setSaved(false)}, [siteInfo])
+const menu = (
+  <Menu onClick={(e) => { setSiteInfo({ ...siteInfo, font: e.key })}}>
+    {pageFonts.map((font) => (
+      <Menu.Item key={font}>
+        {font}
+      </Menu.Item>
+    ))}
+  </Menu>
+);
+
   
 //submitt button
 const submit = async () =>{
@@ -261,12 +394,19 @@ const { token } = theme.useToken();
       />
       </div>
       
-      <div className='border border-dashed my-4 p-2'>
+      <div className='border border-dashed md:w-1/3 w-3/4 my-4 p-2'>
         <lable>appointment Interval</lable>
         <Input
-        placeholder="Appointment Interval"
+        placeholder="Appointments every X minutes"
         value={siteInfo?.apointmentInterveral}
         onChange={(e) => handleInputChange('apointmentInterveral', e.target.value)}
+        style={{ marginBottom: '10px' }}
+      />
+      <lable>Time in between</lable>
+        <Input
+        placeholder="minutes between appointments"
+        value={siteInfo?.apointmentRestTime}
+        onChange={(e) => handleInputChange('apointmentRestTime', e.target.value)}
         style={{ marginBottom: '10px' }}
       />
       </div>
@@ -301,7 +441,7 @@ const { token } = theme.useToken();
         {((siteInfo?.terms || [])).map((term, termIndex) => (
           <div key={termIndex} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
             <Input
-              placeholder="Term Title"
+              placeholder="Term Title ex. Cancellation Policy"
               value={term.title}
               onChange={(e) => handleTitleChange(termIndex, e.target.value)}
               style={{ marginBottom: '10px' }}
@@ -372,32 +512,43 @@ const { token } = theme.useToken();
       </div>
 
       <CategoryUploader siteInfo={siteInfo} handleUploadToFirebase={handleUploadToFirebase}  setSiteInfo={setSiteInfo}/>
-{/* Color Pickers */}
-<h3 className='font-bold text-3xl text-center'>Theme</h3>
-      <div className='m-auto p-1 center-col overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>
-        <div className='grid grid-cols-1   md:w-[80%] m-auto'>
-          <div className='m-auto'>
-            <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Background Color</div>)} value={siteInfo?.colors.background} onChange={(color) => handleColorChange('background', color)} />
-          </div>
-          <div className='m-auto'>
-            <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Accent Color</div>)} value={siteInfo?.colors.accent} onChange={(color) => handleColorChange('accent', color)} />
-          </div>
-          <div className='p-1 m-auto center-col border w-40'>
-            <div className='text-center'>Text Color</div>
-            <div className='w-full flex flex-col justify-star items-start'>
-            <ColorPicker showText={(color)=>(<div>Text Main</div>)} className=' w-32 justify-start' presets={presets}  value={siteInfo?.colors.text} onChange={(color) => handleColorChange('text', color)} />
-            <ColorPicker showText={(color)=>(<div>Text Accent</div>)} className='w-32 justify-start'  presets={presets}  value={siteInfo?.colors.text2} onChange={(color) => handleColorChange('text2', color)} />
-            <ColorPicker showText={(color)=>(<div>Text Etc</div>)} className='w-32 justify-start'  presets={presets}  value={siteInfo?.colors.text3} onChange={(color) => handleColorChange('text3', color)} />
+
+      
+         {/* Color Pickers */}
+          <h3 className='font-bold text-3xl text-center'>Theme</h3>
+          <div className='m-auto p-1 center-col overflow-x-scroll hidescroll' style={{ marginBottom: '20px' }}>
+            <div className='grid grid-cols-1   md:w-[80%] m-auto'>
+              <div className='m-auto'>
+                <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Background Color</div>)} value={siteInfo?.colors.background} onChange={(color) => handleColorChange('background', color)} />
+              </div>
+              <div className='m-auto'>
+                <ColorPicker className='w-40 justify-start' presets={presets} showText={(color)=>(<div>Accent Color</div>)} value={siteInfo?.colors.accent} onChange={(color) => handleColorChange('accent', color)} />
+              </div>
+              <div className='p-1 m-auto center-col border w-40'>
+                <div className='text-center'>Text Color</div>
+                <div className='w-full flex flex-col justify-star items-start'>
+                <ColorPicker showText={(color)=>(<div>Text Main</div>)} className=' w-32 justify-start' presets={presets}  value={siteInfo?.colors.text} onChange={(color) => handleColorChange('text', color)} />
+                <ColorPicker showText={(color)=>(<div>Text Accent</div>)} className='w-32 justify-start'  presets={presets}  value={siteInfo?.colors.text2} onChange={(color) => handleColorChange('text2', color)} />
+                <ColorPicker showText={(color)=>(<div>Text Etc</div>)} className='w-32 justify-start'  presets={presets}  value={siteInfo?.colors.text3} onChange={(color) => handleColorChange('text3', color)} />
+                </div>
+              </div>
+              <div className='m-auto'>
+              </div>
             </div>
           </div>
-          <div className='m-auto'>
+          {/* Font Picker */}
+          <div className='m-auto p-1 center-col' style={{ marginBottom: '20px' }}>
+            <p>Select Font:</p>
+            <Dropdown overlay={menu}>
+              <Button>
+                {siteInfo.font || 'Choose a font'}
+              </Button>
+            </Dropdown>
           </div>
-        </div>
-      </div>
 
       
       {/* Preview */}
-      <div className='center-col rounded-xl overflow-hidden' style={{ ...previewStyle, padding: '20px', border: '1px solid' }}>
+      <div className={`center-col rounded-xl overflow-hidden ${pageFont.className}`} style={{ ...previewStyle, padding: '20px', border: '1px solid' }}>
         <Image className='bg-black h-20 w-20 rounded-full' src={siteInfo?.logo} />
         <h2 className='font-bold' style={{color: siteInfo?.colors.accent}}>{siteInfo?.heading}</h2>
         <p style={{color: siteInfo?.colors.text}}>{siteInfo?.subHeading}</p>
@@ -420,7 +571,7 @@ const { token } = theme.useToken();
           </div>
 
       </div>
-<div className='flex flex-col text-sm  items-center gap-4 p-6 bg-gray-100 rounded-lg shadow-md'>
+<div className='flex flex-col text-sm  items-center gap-4 p-6 bg-gray-100 rounded-lg rounded-t-none shadow-md'>
   <h1 className='font-bold text-xl text-gray-800'>Website Link</h1>
   <RWebShare
         data={{
@@ -433,7 +584,7 @@ const { token } = theme.useToken();
         <button><Share2/></button>
       </RWebShare>
 </div>
-      <Button color='primary' className='w-full my-10 h-10' onClick={submit}>SAVE</Button>
+      <Button  loading={loading} color='primary' className='w-full bg-blue-500 text-white my-10 h-10' onClick={submit}>SAVE</Button>
 
     </div>
   );

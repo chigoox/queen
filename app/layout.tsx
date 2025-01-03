@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
+import { Quicksand } from 'next/font/google';
 import localFont from "next/font/local";
 import "./globals.css";
-import  Navbar  from "@/app/NavBar/NavBar";
-import { Quicksand } from 'next/font/google'
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -22,8 +21,8 @@ const quicksand = Quicksand({
 
 
 export const metadata: Metadata = {
-  title: "CrownedBrows&Lashes",
-  description: "Lashed",
+  title: "Boox",
+  description: "Free online appointment scheduling",
 };
 
 export default function RootLayout({

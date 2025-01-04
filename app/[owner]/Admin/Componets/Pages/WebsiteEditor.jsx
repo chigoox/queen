@@ -368,6 +368,7 @@ const WebsiteEditor = ({ SITEINFO }) => {
       const uploadPromises = portfolio.map(async (category) => {
         const imageUrls = await Promise.all(
           category.images.map(async (file) => {
+            console.log(typeof file == "string")
             if (typeof file == "string") return file;
             const storageRef = ref(STORAGE, `categories/${file.name}`);
             const uploadTask = uploadBytesResumable(
@@ -407,7 +408,7 @@ const WebsiteEditor = ({ SITEINFO }) => {
     color: siteInfo?.colors.text,
     borderColor: siteInfo?.colors.accent,
   };
-console.log(SITEINFO?.logo)
+
   return (
     <div className="h-full w-full md:w-[60%]  m-auto border p-4 overflow-hidden overflow-y-scroll hidescroll ">
       <div className="mb-8">
@@ -439,7 +440,7 @@ console.log(SITEINFO?.logo)
                         uid: "1",
                         name: "logo",
                         status: "done",
-                        url: siteInfo?.logo,
+                        url: SITEINFO?.logo,
                       },
                     ]}
                     maxCount={1}
@@ -643,7 +644,7 @@ console.log(SITEINFO?.logo)
                 {siteInfo?.logo && (
                   <div className="flex justify-center">
                     <Image
-                      className="h-20 w-20 rounded-full bg-black"
+                      className="h-20 w-20 z-0 rounded-full bg-black"
                       src={siteInfo?.logo}
                       alt="Website Logo"
                     />
@@ -692,7 +693,7 @@ console.log(SITEINFO?.logo)
           <Button
             loading={loading}
             color="primary"
-            className="w-full col bg-blue-500 text-white my-10 h-10 fixed md:relative left-0 bottom-0 z-50"
+            className="w-3/4 col bg-blue-500 text-white my-10 h-10 fixed md:relative md:left-0 left-16 bottom-0  z-[5]"
             onClick={submit}
           >
             SAVE
@@ -777,13 +778,13 @@ console.log(SITEINFO?.logo)
                     }
                     style={{ marginBottom: "5px" }}
                   />
-                  {console.log(category)}
+              
                   <ImgCrop rotate>
                     <Upload
                       listType="picture"
                       defaultFileList={[
                         {
-                          uid: `-${index}`,
+                          uid: `${index}`,
                           name: "image",
                           status: "done",
                           url: category.image,
@@ -811,6 +812,7 @@ console.log(SITEINFO?.logo)
 
           <CategoryUploader
             siteInfo={siteInfo}
+            SITEINFO={SITEINFO}
             handleUploadToFirebase={handleUploadToFirebase}
             setSiteInfo={setSiteInfo}
           />

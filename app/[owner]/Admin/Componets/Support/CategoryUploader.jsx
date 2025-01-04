@@ -7,8 +7,8 @@ import { motion } from 'motion/react';
 
 
 
-const CategoryUploader = ({siteInfo,setSiteInfo, handleUploadToFirebase}) => {
-  const [portfolio, setPortfolio] = useState(siteInfo?.portfolio || [{ name: '', images: [] }]);
+const CategoryUploader = ({siteInfo,setSiteInfo,SITEINFO, handleUploadToFirebase}) => {
+  const [portfolio, setPortfolio] = useState(SITEINFO?.portfolio || [{ name: '', images: [] }]);
   const [loading, setLoading] = useState(false);
 
 
@@ -60,7 +60,14 @@ useEffect(() => {
           <ImgCrop rotate>
             <Upload
               listType="picture-card"
-              fileList={category.images}
+              defaultFileList={category?.images.map((img, index)=>{
+                return({
+                    uid: `${index}`,
+                    name: "image",
+                    status: "done",
+                    url: img || '',
+                  })
+              })}
               onChange={({ fileList }) => handleImageUpload(index, fileList)}
               beforeUpload={() => false}
               maxCount={5}

@@ -7,7 +7,8 @@ import axios from 'axios'
 import { message } from 'antd'
 import { getAuth } from 'firebase/auth'
 
-export const useCreateProductUtil = async (product, runFunAfter) => {
+export const useCreateProductUtil = async (product, runFunAfter, setLoading) => {
+    setLoading(true)
     const user = getAuth().currentUser
     //setup Products
     let PRODUCT = { ...product }
@@ -63,8 +64,11 @@ export const useCreateProductUtil = async (product, runFunAfter) => {
 
     }
 
+    setLoading(false)
+
 }
-export const useUpdateProductUtil = async (product, runFunAfter) => {
+export const useUpdateProductUtil = async (product, runFunAfter, setLoading) => {
+    setLoading(true)
     //setup Products
     let PRODUCT = { ...product }
     delete PRODUCT.PRICES
@@ -119,7 +123,7 @@ export const useUpdateProductUtil = async (product, runFunAfter) => {
         message.error(error.message)
 
     }
-
+    setLoading(false)
 }
 
 
@@ -128,6 +132,4 @@ export const updateBanner = (bannerData) => {
     if (bannerData.title) updateDatabaseItem('Admin', 'Banner', 'title', bannerData.title)
     if (bannerData.link) updateDatabaseItem('Admin', 'Banner', 'link', bannerData.link)
     if (bannerData.message) updateDatabaseItem('Admin', 'Banner', 'message', bannerData.message)
-
-
 }

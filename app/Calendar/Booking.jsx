@@ -106,7 +106,6 @@ const Bookings = ({OWNER, bookingInfo, setBookingInfo}) => {
         let thisMonthTimesEachDay = []
         days.map((day, dayIdx) => {
             // get times
-
             const StartOfToday = startOfDay(day)
             const endOfToday = endOfDay(day)
             // change your working hours here
@@ -140,9 +139,7 @@ const Bookings = ({OWNER, bookingInfo, setBookingInfo}) => {
 
     //total is booking price + all addons filter for true and multiply by 30
     let total = bookingInfo?.price + (Object.values(bookingInfo?.addOns || {}).map((item) => { if (item == true) return item }).length) * 30
-    console.log(total)
     total = (total * (bookingInfo?.bundle ? 1.0 : 0.50) * (bookingInfo?.bundle ? 4.0 : 1.0)) - (bookingInfo?.bundle ? 50 : 0), //if bundled( price * 4 - 50) else (price/2)
-        console.log(total)
     useEffect(() => {
         fetchDocument('Admin', 'reservations', setAdminDATA)
 

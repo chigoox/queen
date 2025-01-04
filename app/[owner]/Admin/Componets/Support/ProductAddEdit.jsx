@@ -3,7 +3,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { Upload } from 'antd';
 import { Uploader } from './Uploader';
 //import Masonry from 'masonry-layout';
-import { createArray } from '@/app/myCodes/Util';
+import { createArray, filterNullFromArray } from '@/app/myCodes/Util';
 import dynamic from "next/dynamic";
 import { useCreateProductUtil, useUpdateProductUtil } from '../../AdminUtil';
 const TextEditor = dynamic(() => import("./BundledEditor"), {
@@ -17,7 +17,7 @@ const Masonry = dynamic(() => import("masonry-layout"), {
 
 export const ProductAddEdit = ({SITEINFO, openType, setWindow, defualt }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-const category = ([...SITEINFO?.categories, 'Addon'] || []).map((item)=>{return(item.name)})
+const category = (filterNullFromArray([...SITEINFO?.categories, 'Addon']) || []).map((item)=>{return(item.name)})
     useEffect(() => {
         var grid = document.querySelector('.grid');
         var msnry = new Masonry(grid, {

@@ -15,6 +15,7 @@ import ClickToCopy from "@/app/General/ClickToCopy.jsx";
 import { usePathname, useRouter } from "next/navigation";
 import { RWebShare } from "react-web-share";
 import CategoryUploader from "@/app/[owner]/Admin/Componets/Support/CategoryUploader";
+import AvailabilitySelector from '@/app/[owner]/Admin/Componets/Support/AvailabilitySelector'
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
@@ -49,6 +50,7 @@ import {
   Space_Mono,
   Syne_Mono,
 } from "next/font/google";
+import { availableMemory } from "process";
 
 //FONTS
 const syne_Mono = Syne_Mono({
@@ -174,9 +176,10 @@ const WebsiteEditor = ({ SITEINFO }) => {
       logo: null,
       depositFee: 25,
       apointmentInterveral: 30,
+      availability: [],
     }
   );
-
+console.log(siteInfo)
   const pageFont =
     siteInfo?.font == "Roboto"
       ? roboto
@@ -475,6 +478,7 @@ const WebsiteEditor = ({ SITEINFO }) => {
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Booking Configuration
             </h2>
+            <AvailabilitySelector setData={setSiteInfo} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-4 bg-blue-50 rounded-lg">
                 <label className="block text-sm font-medium text-gray-700 mb-2">

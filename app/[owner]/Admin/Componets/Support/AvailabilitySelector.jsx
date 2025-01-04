@@ -32,7 +32,7 @@ const AvailabilitySelector = ({ setData }) => {
         transition={{ duration: 0.5 }}
       >
         <CollapsibleSection title="Set Your Availability">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
             {daysOfWeek.map((day) => (
               <Card key={day} className="w-full">
                 <motion.div
@@ -43,7 +43,7 @@ const AvailabilitySelector = ({ setData }) => {
                   <CardHeader className="font-bold">{day}</CardHeader>
                   <CardBody>
                     <div className="grid grid-cols-2 gap-2">
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col grid-cols-2 gap-2">
                         <TimeInput
                         granularity="hour"
                           type="time"

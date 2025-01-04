@@ -356,7 +356,7 @@ const { token } = theme.useToken();
     color: siteInfo?.colors.text,
     borderColor: siteInfo?.colors.accent,
   };
-
+console.log(SITEINFO?.logo)
   return (
     <div className='h-full w-full md:w-[60%]  m-auto border p-4 overflow-hidden overflow-y-scroll hidescroll ' >
      
@@ -379,10 +379,10 @@ const { token } = theme.useToken();
                       name="logo"
                       listType="picture"
                       defaultFileList={[{
-                        uid: '1',
+                        uid: '-1',
                         name: 'logo',
                         status: 'done',
-                        url: siteInfo?.logo,
+                        url: SITEINFO?.logo,
                       }]}
                       maxCount={1}
                       onChange={handleLogoUpload}
@@ -595,7 +595,7 @@ const { token } = theme.useToken();
               </div>
             </div>
         
-        <Button  loading={loading} color='primary' className='w-full col bg-blue-500 text-white my-10 h-10 fixed md:relative left-0 bottom-0 z-50' onClick={submit}>SAVE</Button>
+        <Button  loading={loading} color='primary' className='w-full col bg-blue-500 text-white my-10 h-10 fixed md:relative left-0 bottom-0 z-30' onClick={submit}>SAVE</Button>
           </div>
       
     

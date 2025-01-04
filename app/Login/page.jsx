@@ -58,7 +58,8 @@ export default function Login() {
 
 
 
-  const data = await fetchDocument('Onwers',user.uid)
+  const data = await fetchDocument('Owners',user.uid)
+  console.log(user.uid,data)
   const randUserName =  generateRandomUsername()
   if(!data?.uid){
    addToDoc('Owners',user.uid,{siteInfo:{

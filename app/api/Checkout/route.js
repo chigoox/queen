@@ -21,7 +21,6 @@ export async function POST(request) {
         siteName= '',
         siteDeposit= 0,
     } = data;
-console.log(customer)
     if (customer === null) {
         const session = await stripe.checkout.sessions.create({
             line_items: [
@@ -56,7 +55,6 @@ console.log(customer)
     
         })
 
-        console.log(session.url)
         return NextResponse.json(session.url)
         
     }else{
@@ -96,7 +94,6 @@ console.log(customer)
     
         })
 
-        console.log(session.url)
         return NextResponse.json(session.url)
     }
    

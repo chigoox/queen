@@ -38,7 +38,7 @@ export const Admin = () => {
       });
   
       return () => unsubscribe();
-    }, [router]);
+    }, [router, selectedMenu]);
     return (
         <AuthWrapper>
         <main className="flex" >

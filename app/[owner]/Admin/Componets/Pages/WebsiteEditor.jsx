@@ -156,7 +156,6 @@ const user = getAuth();
 
 const WebsiteEditor = ({ SITEINFO }) => {
   const [loading, setLoading] = useState(false);
-
   const [siteInfo, setSiteInfo] = useState(
     SITEINFO || {
       name: "",
@@ -368,8 +367,8 @@ const WebsiteEditor = ({ SITEINFO }) => {
       const uploadPromises = portfolio.map(async (category) => {
         const imageUrls = await Promise.all(
           category.images.map(async (file) => {
-            console.log(typeof file == "string")
             if (typeof file == "string") return file;
+            if (typeof file.url == 'string') return file.url
             const storageRef = ref(STORAGE, `categories/${file.name}`);
             const uploadTask = uploadBytesResumable(
               storageRef,

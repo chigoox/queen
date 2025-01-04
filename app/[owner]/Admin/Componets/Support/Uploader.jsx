@@ -29,7 +29,6 @@ export const Uploader = ({ setFiles, defualt }) => {
     }, [])
 
     const handlePreview = async (file) => {
-        console.log(file)
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
         }
@@ -61,7 +60,6 @@ export const Uploader = ({ setFiles, defualt }) => {
             </div>
         </button>
     );
-    console.log(defualt)
     return (
         <div className='rounded border-dotted p-2 border-2'>
             <h1 className='text-center font- text-xs'>Accepts images, videos, or 3D models</h1>

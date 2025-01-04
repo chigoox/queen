@@ -155,7 +155,6 @@ export default function Home() {
   siteInfo?.font == 'Bebas Neue' ? bebas_Neue :
   siteInfo?.font == 'Josefin Sans' ? josefin_Sans :
   siteInfo?.font == 'Syne Mono' ? syne_Mono : space_Mono
-  console.log(pageFont.className)
 
 const ownerUID = OWNER?.uid
 const userID = getAuth()?.currentUser?.uid

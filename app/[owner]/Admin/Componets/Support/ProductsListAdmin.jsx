@@ -21,7 +21,6 @@ function ProductsListAdmin({ sortBy, window, setWidow, setSelectedProductData })
                         const miliseconds = i.created.seconds * 1000 + i.created.nanoseconds / 1000000
                         return ({ ...i, created: miliseconds })
                     })
-                    console.log(FIREBS_PRODUCTS)
                     setProducts([...FIREBS_PRODUCTS])
                 })
             }

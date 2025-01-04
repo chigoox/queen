@@ -21,10 +21,7 @@ export const useCreateProductUtil = async (product, runFunAfter, setLoading) => 
     for (let index = 0; index < product.images.length; index++) {
         const file = product.images[index];
         const url = await useUploader(file, product.name)
-        console.log(url)
         PRODUCT.images.push(url)
-        console.log('images uploaded')
-        console.log(PRODUCT.images)
 
     }
     //setup Prices
@@ -78,12 +75,8 @@ export const useUpdateProductUtil = async (product, runFunAfter, setLoading) => 
 
     for (let index = 0; index < product.images.length; index++) {
         const file = product.images[index];
-        console.log(product.images[index])
         const url = typeof file === 'string' ? file : await useUploader(file, product.name)
-        console.log(url)
         PRODUCT.images.push(url)
-        console.log('images uploaded')
-        console.log(PRODUCT.images)
 
     }
     //setup Prices
@@ -112,7 +105,6 @@ export const useUpdateProductUtil = async (product, runFunAfter, setLoading) => 
         return (data)
 
     }
-    console.log(product.images.length == PRODUCT.images.length)
 
     if (product.images.length == PRODUCT.images.length || !product.images) try {
         await sendData()

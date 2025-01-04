@@ -18,7 +18,6 @@ const Masonry = dynamic(() => import("masonry-layout"), {
 export const ProductAddEdit = ({SITEINFO, openType, setWindow, defualt }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 const category = ([...SITEINFO?.categories, 'Addon'] || []).map((item)=>{return(item.name)})
-console.log(SITEINFO)
     useEffect(() => {
         var grid = document.querySelector('.grid');
         var msnry = new Masonry(grid, {

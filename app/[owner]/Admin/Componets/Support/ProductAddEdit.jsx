@@ -42,6 +42,8 @@ console.log(SITEINFO)
     })
 
 
+    const [loading, setLoading] = useState(false)
+
     useEffect(() => {
         if (openType == "openNew") onOpen()
         if (openType == "openEdit") onOpen()
@@ -177,10 +179,10 @@ console.log(SITEINFO)
                                 <Button color="danger" variant="light" onPress={() => { setWindow(false) }}>
                                     Close
                                 </Button>
-                                <Button color="primary" onPress={() => {
+                                <Button isLoading={loading}  color="primary" onPress={() => {
                                     (openType == "openNew") ?
-                                        useCreateProductUtil(product, setWindow) :
-                                        useUpdateProductUtil(product, setWindow)
+                                        useCreateProductUtil(product, setWindow,setLoading) :
+                                        useUpdateProductUtil(product, setWindow, setLoading)
 
                                 }}>
                                     {openType == 'openNew' ? 'Create' : 'Update'}
@@ -189,7 +191,7 @@ console.log(SITEINFO)
                         </>
                     )}
                 </ModalContent>
-            </Modal >
+            </Modal>
         </>
     )
 }

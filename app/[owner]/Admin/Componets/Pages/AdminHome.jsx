@@ -1,16 +1,12 @@
 'use client';
-import Script from "next/script";
-import React, { useState, useEffect } from "react";
 import { loadConnectAndInitialize } from "@stripe/connect-js/pure";
 import {
-  ConnectPayments,
-  ConnectComponentsProvider,
   ConnectBalances,
-  ConnectPayouts,
-  ConnectPayoutsList,
-  ConnectPaymentDetails,
+  ConnectComponentsProvider,
   ConnectNotificationBanner,
+  ConnectPayments
 } from "@stripe/react-connect-js";
+import { useEffect, useState } from "react";
 import TinyLineChart from "../Support/TinyLineChart";
 
 export const AdminHome = ({ SITEINFO, OWNER }) => {

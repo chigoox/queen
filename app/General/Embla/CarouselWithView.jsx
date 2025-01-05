@@ -8,16 +8,15 @@ import {getRand} from '@/app/myCodes/Util'
 const CarouselWithView = ({ options, slides }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
-console.log(slides)
   return (
-    <section className="mt-20 h-52  w-full p-2">
-      <h1 className='text-4xl my-4 text-center text-[color:var(--TextColorM)]'>{slides?.name}</h1>
+    <section className="mt-10 h-52 overflow-hidden w-full p-2">
+      <h1 className='text-2xl  font-font text-[color:var(--TextColorM)]'>{slides?.name?.toUpperCase()}</h1>
       <div className="" ref={emblaRef}>
-        <div className="flex  items-start gap-10">
-          {slides?.images.map((item,index) => (
-            <div className=" flex-shrink-0 relative center w-full h-40" key={index}>
+        <div className="flex  items-start gap-4">
+          {(slides?.images || []).map((item,index) => (
+            <div className=" flex-shrink-0 relative center w-72 h-40" key={index}>
             
-              <Image className='w-full  h-40 m-auto object-cover' src={item} alt='as'/>
+              <Image className='w-72  h-40 m-auto object-cover' src={item} alt='as'/>
           
            
           

@@ -8,7 +8,6 @@ import { addToDatabase } from "@/UTIL/Database"
 const AvailableHours = memo(({ freeTimes, setBookingInfo, setReload, reload }) => {
     const [selectedTime, setSelectedTime] = useState()
     const user = ((typeof window !== 'undefined') ? { uid: localStorage.getItem('LOCAL_UID') } : '') // useContext(UserContext)[0] ||
-    console.log(startOfDay(selectedTime))
 
     const bookTime = () => {
         document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth' })

@@ -12,12 +12,9 @@ import Logo from "../../General/Logo"
 import BookingInfo from "../../HomePage/BookingInfo"
 import { useFetchDocsPresist } from "../../myCodes/Database"
 import NavBar from "../../NavBar/NavBar"
-import Addons from "./BookingOptions/Addons"
-import BookingOptions from "./BookingOptions/BookingOptions"
-import CarouselWithView from '@/app/General/Embla/CarouselWithView'
-import CollapsePanel from "antd/es/collapse/CollapsePanel"
-import { CollapsibleSection } from "@/app/General/CollapsibleSection"
-
+import Addons from "./BookingComponet/Addons"
+import BookingOptions from "./BookingComponet/BookingOptions"
+import Examples from './BookingComponet/Examples'
 
 [
   'Roboto',
@@ -250,8 +247,7 @@ getData()
         {selectDate && <Bookings OWNER={OWNER} bookingInfo={bookingInfo} setBookingInfo={setBookingInfo} />}
       
       
-       <CarouselWithView slides={portfolio[0]}  />
-        <CarouselWithView slides={portfolio[1]}  />
+       <Examples portfolio={portfolio} />
        
 
       </main>

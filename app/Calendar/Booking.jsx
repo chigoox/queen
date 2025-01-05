@@ -207,8 +207,7 @@ const Bookings = ({ OWNER, bookingInfo, setBookingInfo }) => {
       );
       // filter the available hours
       let freeTimes = hoursInDay.filter(
-        (hour) =>
-            (hour) =>  !reservations.includes(hour.toString())
+            (hour) => !reservations.includes(hour.toString())
 
       );
       if (typeof EndinggHr == "undefined" && typeof StartingHr == "undefined")

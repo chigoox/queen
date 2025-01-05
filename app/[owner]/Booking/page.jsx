@@ -248,6 +248,11 @@ getData()
       
       
        <Examples portfolio={portfolio} />
+
+
+       <div className=" my-4">
+        <h1 className="center">Powered by Boox</h1>
+       </div>
        
 
       </main>

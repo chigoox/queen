@@ -14,7 +14,9 @@ import { useFetchDocsPresist } from "../../myCodes/Database"
 import NavBar from "../../NavBar/NavBar"
 import Addons from "./BookingOptions/Addons"
 import BookingOptions from "./BookingOptions/BookingOptions"
-
+import CarouselWithView from '@/app/General/Embla/CarouselWithView'
+import CollapsePanel from "antd/es/collapse/CollapsePanel"
+import { CollapsibleSection } from "@/app/General/CollapsibleSection"
 
 
 [
@@ -133,7 +135,8 @@ export default function Home() {
     font = '',
     categories= [{ name: '', image: null }],
     logo= null,
-    depositFee= 25
+    depositFee= 25,
+    portfolio = []
   } = OWNER?.siteInfo || {} 
 
   const siteInfo = OWNER?.siteInfo
@@ -201,7 +204,7 @@ getData()
   const {push} = useRouter()
   return (
     <div className={`${pageFont.className} border-[color:var(--AccentColor)] border  min-h-screen bg-[color:var(--BGColor)] w-full overflow-hidden pb-10 md:px-40 `}>
-      <main className="flex flex-col  p-2">
+      <main className="flex flex-col mb-20 p-2">
         <NavBar bookingInfo={bookingInfo} />
 
         {/* LOGO SECTION */}
@@ -245,6 +248,12 @@ getData()
         <Addons setBookingInfo={setBookingInfo} options={options} contintue={setSelectDate} setIsOpened={setPickAddon} opened={pickAddon} />
 
         {selectDate && <Bookings OWNER={OWNER} bookingInfo={bookingInfo} setBookingInfo={setBookingInfo} />}
+      
+      
+       <CarouselWithView slides={portfolio[0]}  />
+        <CarouselWithView slides={portfolio[1]}  />
+       
+
       </main>
 
     </div>

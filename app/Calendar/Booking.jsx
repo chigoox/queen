@@ -1,4 +1,7 @@
-import { FetchTheseDocs, addToDatabase } from "@/app/myCodes/Database";
+import { fetchDocument } from '@/UTIL/Database';
+import Loading from "@/app/Loading";
+import { FetchTheseDocs } from "@/app/myCodes/Database";
+import { getRandTN } from '@/app/myCodes/Util';
 import {
     add,
     eachDayOfInterval,
@@ -21,19 +24,12 @@ import {
     startOfToday,
     startOfWeek,
     startOfYesterday
-} from "date-fns"
-import { CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react"
-import { useEffect, useMemo, useState } from 'react'
-import { cn, dayNames } from "../../lib/utils"
-import AvailableHours from "./AvailableHours"
-import TimesBar from './TimesBar'
-import { fetchDocument } from '@/UTIL/Database'
-import Loading from "@/app/Loading"
-import { Form, Input } from "@nextui-org/react"
-import {getRandTN} from '@/app/myCodes/Util'
-import {addToDoc} from '@/app/myCodes/Database'
-import { serverTimestamp } from "firebase/firestore"
-
+} from "date-fns";
+import { CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useMemo, useState } from 'react';
+import { cn, dayNames } from "../../lib/utils";
+import AvailableHours from "./AvailableHours";
+import TimesBar from './TimesBar';
 
 
 
@@ -397,6 +393,9 @@ const bookID = getRandTN(10)
                 {!canBook() && <button disabled className={`h-12 w-32 cursor-not-allowed rounded-full ${canBook() ? ' bg-[color:var(--AccentColor)]' : 'bg-[color:var(--AccentColorDark2)] text-[color:var(--TextColorM)]'} `}>Book Now</button>}
                 {canBook() && <button onClick={bookNow} className={`h-12 w-32 rounded-full ${canBook() ? 'text-[color:var(--TextColorM)] bg-[color:var(--AccentColor)]' : 'bg-[color:var(--AccentColorDark2)] text-[color:var(--TextColorM)]'} `}>Book Now</button>}
             </div>}
+
+
+           
 
         </div>
     )

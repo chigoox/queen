@@ -364,6 +364,7 @@ const SignupPage = () => {
   
                   <Button
                     onClick={handleGoogleSignup}
+                    isLoading={loading}
                     variant="bordered"
                     className="w-full"
                     startContent={

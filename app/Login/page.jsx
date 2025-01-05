@@ -167,7 +167,7 @@ export default function Login() {
         <motion.div variants={itemVariants} className="mt-6 space-y-3">
           <Button
             onClick={handleEmailLogin}
-            disabled={isLoading}
+            isLoading={isLoading}
             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
           >
             {isLoading ? (
@@ -182,7 +182,9 @@ export default function Login() {
           </Button>
 
           <Button
+            
             onClick={handleGoogleLogin}
+            isLoading={isLoading}
             variant="outline"
             className="w-full border border-gray-300 p-3 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] hover:bg-gray-50"
           >

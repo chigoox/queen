@@ -89,7 +89,7 @@ const uid = auth?.currentUser?.uid
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-2xl font-bold text-center mb-6">Update Profile</h1>
-<Button isDisabled ={OWNER?.stripeAccountID ? true : false} onPress={()=>{setUpConntectedAccount()}} className={`my-4 w-full font-semibold ${OWNER?.stripeAccountID ? 'bg-green-300 text-white' : 'bg-slate-300'}`}>{OWNER?.stripeAccountID ? `${OWNER?.stripeAccountID}`:'Connect Stripe'}</Button>
+<Button isLoading={loading} isDisabled ={OWNER?.stripeAccountID ? true : false} onPress={()=>{setUpConntectedAccount()}} className={`my-4 w-full font-semibold ${OWNER?.stripeAccountID ? 'bg-green-300 text-white' : 'bg-slate-300'}`}>{OWNER?.stripeAccountID ? `${OWNER?.stripeAccountID}`:'Connect Stripe'}</Button>
         <div className="mb-4 z-0 center-col gap-2">
           <Input 
           className="z-0"
